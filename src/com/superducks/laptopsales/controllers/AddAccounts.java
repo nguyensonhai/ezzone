@@ -57,7 +57,7 @@ public class AddAccounts {
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         String rePassword = txtRetypePassword.getText();
-        String position = cbxPosition.getValue().toString().toLowerCase();
+        String position = cbxPosition.getValue().toLowerCase();
         String email = "", fullname = "", birthday = "", address = "", phone = "";
         birthday = dtpBirthday.getValue().toString();
         if (!txtEmail.getText().equals(""))
@@ -101,7 +101,7 @@ public class AddAccounts {
     //Close
     public void btnClose_Click(MouseEvent mouseEvent) {
         if (AlertMessage.showAlertYesNo()) {
-            addAccountsStage.close();;
+            addAccountsStage.close();
         }
     }
 
@@ -120,11 +120,12 @@ public class AddAccounts {
     }
 
     public void textChanged(KeyEvent inputMethodEvent) {
-        if(!txtUsername.getText().equals("") && !txtPassword.getText().equals("") && txtPassword.getText().equals(txtRetypePassword.getText()) && !txtUsername.getText().contains(" ") && !txtPassword.getText().contains(" ")) {
+        String reUsername = "^[a-z0-9_-]{3,15}$";
+        String rePassword = "^.*(?=.{4,})(?=.*\\d)(?=.*[a-zA-Z])|(?=.{4,})(?=.*\\d)(?=.*[!@#$%^&])|(?=.{4,})(?=.*[a-zA-Z])(?=.*[!@#$%^&]).*$";
+        if (txtUsername.getText().matches(reUsername) && txtPassword.getText().matches(rePassword) && txtPassword.getText().equals(txtRetypePassword.getText())) {
             btnAdd.setVisible(true);
             btnNonAdd.setVisible(false);
-        }
-        else {
+        } else {
             btnAdd.setVisible(false);
             btnNonAdd.setVisible(true);
         }
