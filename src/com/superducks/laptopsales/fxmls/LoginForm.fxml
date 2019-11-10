@@ -22,9 +22,9 @@
                         <Image url="@../icons/main_icons/laptop.png" />
                      </image>
                   </ImageView>
-                  <Label text="LAPTOP SALES">
+                  <Label text="EzZone">
                      <font>
-                        <Font name="Candara Light" size="40.0" />
+                        <Font name="Candara Light" size="58.0" />
                      </font>
                   </Label>
                </children>
