@@ -161,6 +161,18 @@ public class MainForm {
     }
 
     public void btnSales_Click(MouseEvent mouseEvent) {
+        Parent root;
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(LoginForm.class.getClassLoader().getResource("com/superducks/laptopsales/fxmls/Sales.fxml")));
+            EditAccounts.editAccountsStage.setTitle("Sales");
+            EditAccounts.editAccountsStage.setScene(new Scene(root));
+            Image icon = new Image("/com/superducks/laptopsales/icons/main_icons/laptop-icon.png");
+            EditAccounts.editAccountsStage.getIcons().add(icon);
+            EditAccounts.editAccountsStage.setResizable(false);
+            EditAccounts.editAccountsStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void btnInfo_Click(MouseEvent mouseEvent) {

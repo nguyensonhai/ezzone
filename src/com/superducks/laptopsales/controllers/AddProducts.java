@@ -23,6 +23,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AddProducts {
+    static String category;
     static Boolean changed = false;
     public TextField txtNameProduct;
     public TextField txtNSX;
@@ -42,9 +43,9 @@ public class AddProducts {
 
    public void initialize(){
        data = new ArrayList<String>();
-       String sql="SELECT * FROM `categories`";
        Connection conn=ConnectDatabase.Connect();
        try {
+           String sql="SELECT * FROM `categories`";
            ResultSet rs=conn.createStatement().executeQuery(sql);
            while(rs.next()){
                cbocategory.getItems().add(rs.getString(1));
@@ -53,8 +54,15 @@ public class AddProducts {
                } catch (SQLException e) {
            e.printStackTrace();
        }
-       cbocategory.getSelectionModel().selectFirst();
-       txtCategoryName.setText(data.get(0));
+       cbocategory.getSelectionModel().select(category);
+       try {
+           String sql="SELECT * FROM categories where id='"+category+"';";
+           ResultSet rs=conn.createStatement().executeQuery(sql);
+           if(rs.next())
+               txtCategoryName.setText(rs.getString("name"));
+       } catch (SQLException e) {
+           e.printStackTrace();
+       }
    }
 
     public void btnAdd_Click(MouseEvent mouseEvent) {

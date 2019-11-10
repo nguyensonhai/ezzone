@@ -1,10 +1,10 @@
 package com.superducks.laptopsales.Class;
 
-public class Category {
+public class Categories {
     private String CategoryID;
     private String CategoryName;
 
-    public Category(String categoryID, String categoryName) {
+    public Categories(String categoryID, String categoryName) {
         CategoryID = categoryID;
         CategoryName = categoryName;
     }

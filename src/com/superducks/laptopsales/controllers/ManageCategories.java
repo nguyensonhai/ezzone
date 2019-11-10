@@ -1,12 +1,11 @@
 package com.superducks.laptopsales.controllers;
 
 import com.superducks.laptopsales.Class.AlertMessage;
-import com.superducks.laptopsales.Class.Category;
+import com.superducks.laptopsales.Class.Categories;
 import com.superducks.laptopsales.Class.ConnectDatabase;
 import com.superducks.laptopsales.Class.Products;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -28,7 +27,6 @@ import java.util.Objects;
 
 public class ManageCategories {
 
-    public ComboBox cboCategory;
     public TableView<Products> tblProducts;
     public TableColumn clmCategoryID;
     public ImageView btnAdd;
@@ -38,10 +36,9 @@ public class ManageCategories {
     public AnchorPane ap;
     public ImageView btnEdit;
     public ImageView btnDelete;
-    static ArrayList<String> categoryid;
     public TableColumn clmCateID;
     public TableColumn clmCategoryName;
-    public TableView<Category> tblCategory;
+    public TableView<Categories> tblCategory;
     public ImageView btnCatedelete;
     public ImageView btnCateEdit;
     public ImageView btnAddCategory;
@@ -57,15 +54,15 @@ public class ManageCategories {
 
     public  void showDatatableCategory() {
         String sql="select *from `categories`";
-        ObservableList<Category> data = FXCollections.observableArrayList();
+        ObservableList<Categories> data = FXCollections.observableArrayList();
         try {
             ResultSet rs = ConnectDatabase.Connect().createStatement().executeQuery(sql);
             while (rs.next()){
-                Category c=new Category(rs.getString(1),rs.getString(2));
+                Categories c=new Categories(rs.getString(1),rs.getString(2));
                 data.add(c);
             }
-            clmCateID.setCellValueFactory(new PropertyValueFactory<Category,String>("CategoryID"));
-            clmCategoryName.setCellValueFactory(new PropertyValueFactory<Category,String>("CategoryName"));
+            clmCateID.setCellValueFactory(new PropertyValueFactory<Categories,String>("CategoryID"));
+            clmCategoryName.setCellValueFactory(new PropertyValueFactory<Categories,String>("CategoryName"));
             tblCategory.getItems().clear();
             tblCategory.setItems(data);
             tblCategory.getSelectionModel().selectFirst();
@@ -75,7 +72,7 @@ public class ManageCategories {
     }
 
     public void showdataTableProduct(){
-        Category c=tblCategory.getSelectionModel().getSelectedItem();
+        Categories c=tblCategory.getSelectionModel().getSelectedItem();
         String sql = "SELECT * FROM products where category_id='" + c.getCategoryID() + "'";
         ObservableList<Products> data = FXCollections.observableArrayList();
         try {
@@ -124,6 +121,8 @@ public class ManageCategories {
         }
     }
     public void btnAddclick(MouseEvent mouseEvent) {
+        Categories c = tblCategory.getSelectionModel().getSelectedItem();
+        AddProducts.category = c.getCategoryID();
         Parent root;
         try {
             root = FXMLLoader.load(Objects.requireNonNull(LoginForm.class.getClassLoader().getResource("com/superducks/laptopsales/fxmls/AddProducts.fxml")));
@@ -191,18 +190,18 @@ public class ManageCategories {
     }
 
     public void btnAddCategory(MouseEvent mouseEvent) {
-        EditCategory.chage = 0;
+        EditCategories.chage = 0;
         Parent root;
         try {
-            root = FXMLLoader.load(Objects.requireNonNull(LoginForm.class.getClassLoader().getResource("com/superducks/laptopsales/fxmls/EditCategory.fxml")));
-            EditCategory.mainStage = new Stage();
-            EditCategory.mainStage.setTitle("Add Categories");
+            root = FXMLLoader.load(Objects.requireNonNull(LoginForm.class.getClassLoader().getResource("com/superducks/laptopsales/fxmls/EditCategories.fxml")));
+            EditCategories.mainStage = new Stage();
+            EditCategories.mainStage.setTitle("Add Categories");
             Image icon = new Image("/com/superducks/laptopsales/icons/web_ui_color/plus.png");
-            EditCategory.mainStage.getIcons().add(icon);
-            EditCategory.mainStage.setScene(new Scene(root));
-            EditCategory.mainStage.setResizable(false);
-            EditCategory.mainStage.showAndWait();
-            if(EditCategory.changed) {
+            EditCategories.mainStage.getIcons().add(icon);
+            EditCategories.mainStage.setScene(new Scene(root));
+            EditCategories.mainStage.setResizable(false);
+            EditCategories.mainStage.showAndWait();
+            if(EditCategories.changed) {
                 showDatatableCategory();
                 showdataTableProduct();
             }
@@ -215,7 +214,7 @@ public class ManageCategories {
     public void tblCategoryClicked(MouseEvent mouseEvent) {
         btnCateEdit.setVisible(true);
         btnCatedelete.setVisible(true);
-        Category c=tblCategory.getSelectionModel().getSelectedItem();
+        Categories c=tblCategory.getSelectionModel().getSelectedItem();
         String sql = "SELECT * FROM products where category_id='" + c.getCategoryID() + "'";
         ObservableList<Products> data = FXCollections.observableArrayList();
         try {
@@ -250,23 +249,23 @@ public class ManageCategories {
     }
 
     public void btnCateEditClick(MouseEvent mouseEvent) {
-        Category c=tblCategory.getSelectionModel().getSelectedItem();
-        EditCategory.categoryID = c.getCategoryID();
-        EditCategory.categoryName = c.getCategoryName();
-        EditCategory.chage = 1;
+        Categories c = tblCategory.getSelectionModel().getSelectedItem();
+        EditCategories.categoryID = c.getCategoryID();
+        EditCategories.categoryName = c.getCategoryName();
+        EditCategories.chage = 1;
         Parent root;
         try {
-            root = FXMLLoader.load(Objects.requireNonNull(LoginForm.class.getClassLoader().getResource("com/superducks/laptopsales/fxmls/EditCategory.fxml")));
-            EditCategory.mainStage = new Stage();
-            EditCategory.mainStage.setTitle("Edit Categories");
+            root = FXMLLoader.load(Objects.requireNonNull(LoginForm.class.getClassLoader().getResource("com/superducks/laptopsales/fxmls/EditCategories.fxml")));
+            EditCategories.mainStage = new Stage();
+            EditCategories.mainStage.setTitle("Edit Categories");
             Image icon = new Image("/com/superducks/laptopsales/icons/web_ui_color/compose.png");
-            EditCategory.mainStage.getIcons().add(icon);
-            EditCategory.mainStage.setScene(new Scene(root));
-            EditCategory.mainStage.setResizable(false);
-            EditCategory.mainStage.showAndWait();
-            EditCategory.categoryID = "";
-            EditCategory.categoryName = "";
-            if(EditCategory.changed) {
+            EditCategories.mainStage.getIcons().add(icon);
+            EditCategories.mainStage.setScene(new Scene(root));
+            EditCategories.mainStage.setResizable(false);
+            EditCategories.mainStage.showAndWait();
+            EditCategories.categoryID = "";
+            EditCategories.categoryName = "";
+            if(EditCategories.changed) {
                 showDatatableCategory();
                 showdataTableProduct();
             }
@@ -277,7 +276,7 @@ public class ManageCategories {
     }
 
     public void btnCateDeleteClick(MouseEvent mouseEvent) {
-        Category c=tblCategory.getSelectionModel().getSelectedItem();
+        Categories c = tblCategory.getSelectionModel().getSelectedItem();
         if (AlertMessage.showAlertYesNo()){
         String sql="DELETE FROM categories WHERE id = '"+c.getCategoryID()+"'";
             try {

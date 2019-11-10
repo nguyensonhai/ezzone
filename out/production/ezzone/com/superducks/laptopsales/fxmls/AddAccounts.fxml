@@ -48,7 +48,7 @@
         </ImageView>
       <ImageView fx:id="imgAvatar" fitHeight="350.0" fitWidth="350.0" layoutX="31.0" layoutY="31.0" pickOnBounds="true">
          <image>
-            <Image url="@../images/noImg.jpg" />
+            <Image url="@../images/backgounds/white.jpg" />
          </image>
       </ImageView>
       <Button fx:id="btnImage" layoutX="131.0" layoutY="405.0" mnemonicParsing="false" onMouseClicked="#btnImage_Click" prefHeight="25.0" prefWidth="150.0" text="Choose Image" />

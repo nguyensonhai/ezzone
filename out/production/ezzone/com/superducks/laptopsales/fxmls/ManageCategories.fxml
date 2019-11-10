@@ -6,7 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="ap" prefHeight="487.0" prefWidth="1020.0" styleClass="bg1" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.superducks.laptopsales.controllers.ManageCategories">
+<AnchorPane fx:id="ap" prefHeight="542.0" prefWidth="991.0" styleClass="bg1" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.superducks.laptopsales.controllers.ManageCategories">
     <children>
         <TableView fx:id="tblProducts" layoutX="329.0" layoutY="14.0" onMouseClicked="#mouseclick" prefHeight="462.0" prefWidth="631.0" styleClass="table-style" stylesheets="@../css/styles.css" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="329.0" AnchorPane.rightAnchor="77.0" AnchorPane.topAnchor="14.0">
             <columns>
