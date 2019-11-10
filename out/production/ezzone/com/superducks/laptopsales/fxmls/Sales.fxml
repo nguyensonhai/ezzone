@@ -29,7 +29,7 @@
             <ComboBox fx:id="cbxProducts" layoutX="94.0" layoutY="422.0" prefHeight="25.0" prefWidth="258.0" style="=: CENTER;" />
             <Label layoutX="29.0" layoutY="484.0" text="Amount" textFill="WHITE" />
             <TextField fx:id="txtAmount" layoutX="94.0" layoutY="480.0" prefHeight="25.0" prefWidth="146.0" style="-fx-alignment: CENTER;" />
-            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="258.0" layoutY="464.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btnRemove" fitHeight="40.0" fitWidth="40.0" layoutX="258.0" layoutY="464.0" onMouseClicked="#mainStage_Click" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/web_ui_color/delete.png" />
                </image>

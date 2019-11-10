@@ -29,6 +29,7 @@ public class Sales {
     public TableColumn clmAmount;
     public TableColumn clmPrice;
     public TextField txtAmount;
+    public ImageView btnRemove;
     ObservableList<ClassSales> dataTable = FXCollections.observableArrayList();
 
 
@@ -81,6 +82,13 @@ public class Sales {
     }
 
     public void btnAdd_Click(MouseEvent mouseEvent) {
+        addTableRow();
+    }
+
+    public void mainStage_Click(MouseEvent mouseEvent) {
+        removeTableRow();
+    }
+    private void addTableRow() {
         String type, products;
         Integer amount, price = 0;
         type = cbxCategories.getValue().toString();
@@ -103,7 +111,12 @@ public class Sales {
         clmPrice.setCellValueFactory(new PropertyValueFactory<ClassSales, Integer>("Price"));
         mainTable.setItems(dataTable);
     }
-
+    void removeTableRow() {
+        ClassSales s = (ClassSales) mainTable.getSelectionModel().getSelectedItem();
+        s.getProducts();
+        dataTable.remove(s);
+        mainTable.setItems(dataTable);
+    }
     public class ClassSales {
         private final SimpleStringProperty Type;
         private final SimpleStringProperty Products;

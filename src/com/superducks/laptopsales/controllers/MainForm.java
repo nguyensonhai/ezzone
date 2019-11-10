@@ -176,6 +176,10 @@ public class MainForm {
     }
 
     public void btnInfo_Click(MouseEvent mouseEvent) {
+        openFormInfo();
+    }
+
+    private void openFormInfo() {
         EditAccounts.accountViewing = loggedAccount;
         EditAccounts.mainFormClick = true;
         Parent root;
@@ -197,19 +201,6 @@ public class MainForm {
     }
 
     public void btnInfoMenu_Click(ActionEvent actionEvent) {
-        EditAccounts.accountViewing = loggedAccount;
-        EditAccounts.mainFormClick = true;
-        Parent root;
-        try {
-            root = FXMLLoader.load(Objects.requireNonNull(LoginForm.class.getClassLoader().getResource("com/superducks/laptopsales/fxmls/EditAccounts.fxml")));
-            EditAccounts.editAccountsStage.setTitle("Edit Accounts");
-            EditAccounts.editAccountsStage.setScene(new Scene(root));
-            Image icon = new Image("/com/superducks/laptopsales/icons/web_ui_color/edit.png");
-            EditAccounts.editAccountsStage.getIcons().add(icon);
-            EditAccounts.editAccountsStage.setResizable(false);
-            EditAccounts.editAccountsStage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        openFormInfo();
     }
 }
