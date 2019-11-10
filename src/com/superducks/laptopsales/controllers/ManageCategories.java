@@ -9,7 +9,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -19,10 +18,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class ManageCategories {
@@ -42,7 +41,7 @@ public class ManageCategories {
     public ImageView btnCatedelete;
     public ImageView btnCateEdit;
     public ImageView btnAddCategory;
-    public static Stage mainStage = new Stage();
+    private static Stage mainStage = new Stage();
 
     public ManageCategories() {
     }

@@ -26,9 +26,9 @@
             <Label layoutX="27.0" layoutY="371.0" text="Categories" textFill="WHITE" />
             <ComboBox fx:id="cbxCategories" layoutX="94.0" layoutY="367.0" onAction="#cbxCategories_Action" prefHeight="25.0" prefWidth="258.0" />
             <Label layoutX="27.0" layoutY="426.0" text="Products" textFill="WHITE" />
-            <ComboBox fx:id="cbxProducts" layoutX="94.0" layoutY="422.0" prefHeight="25.0" prefWidth="258.0" />
+            <ComboBox fx:id="cbxProducts" layoutX="94.0" layoutY="422.0" prefHeight="25.0" prefWidth="258.0" style="=: CENTER;" />
             <Label layoutX="29.0" layoutY="484.0" text="Amount" textFill="WHITE" />
-            <TextField fx:id="txtAmount" layoutX="94.0" layoutY="480.0" prefHeight="25.0" prefWidth="146.0" />
+            <TextField fx:id="txtAmount" layoutX="94.0" layoutY="480.0" prefHeight="25.0" prefWidth="146.0" style="-fx-alignment: CENTER;" />
             <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="258.0" layoutY="464.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/web_ui_color/delete.png" />
@@ -40,9 +40,9 @@
                </image>
             </ImageView>
             <Label layoutX="25.0" layoutY="263.0" text="Customer" textFill="WHITE" />
-            <TextField layoutX="94.0" layoutY="259.0" prefHeight="25.0" prefWidth="258.0" />
+            <TextField layoutX="94.0" layoutY="259.0" prefHeight="25.0" prefWidth="258.0" style="-fx-alignment: CENTER;" />
             <Label layoutX="26.0" layoutY="318.0" text="Phone" textFill="WHITE" />
-            <TextField layoutX="95.0" layoutY="310.0" prefHeight="25.0" prefWidth="258.0" />
+            <TextField layoutX="95.0" layoutY="310.0" prefHeight="25.0" prefWidth="258.0" style="-fx-alignment: CENTER;" />
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="29.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/main_icons/laptop-icon.png" />

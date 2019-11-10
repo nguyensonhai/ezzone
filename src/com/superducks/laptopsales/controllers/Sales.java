@@ -13,11 +13,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Sales {
+    static Stage salesStage = new Stage();
     public TableView mainTable;
     public ComboBox cbxCategories;
     public ComboBox cbxProducts;
@@ -28,6 +30,7 @@ public class Sales {
     public TableColumn clmPrice;
     public TextField txtAmount;
     ObservableList<ClassSales> dataTable = FXCollections.observableArrayList();
+
 
     public void initialize() {
         getDataComboboxCategories();
@@ -79,11 +82,21 @@ public class Sales {
 
     public void btnAdd_Click(MouseEvent mouseEvent) {
         String type, products;
-        Integer amount, price;
+        Integer amount, price = 0;
         type = cbxCategories.getValue().toString();
         products = cbxProducts.getValue().toString();
         amount = Integer.parseInt(txtAmount.getText());
-        dataTable.add(new ClassSales(type, products, amount,0));
+
+        String sql = "select * from products where name = '" + products + "';";
+        try {
+            ResultSet rs = ConnectDatabase.Connect().createStatement().executeQuery(sql);
+            if(rs.next())
+                price = Integer.parseInt(rs.getString("price"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //add Row to Table
+        dataTable.add(new ClassSales(type, products, amount,amount*price));
         clmType.setCellValueFactory(new PropertyValueFactory<ClassSales, String>("Type"));
         clmProducts.setCellValueFactory(new PropertyValueFactory<ClassSales, String>("Products"));
         clmAmount.setCellValueFactory(new PropertyValueFactory<ClassSales, Integer>("Amount"));

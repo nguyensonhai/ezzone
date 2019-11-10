@@ -164,12 +164,12 @@ public class MainForm {
         Parent root;
         try {
             root = FXMLLoader.load(Objects.requireNonNull(LoginForm.class.getClassLoader().getResource("com/superducks/laptopsales/fxmls/Sales.fxml")));
-            EditAccounts.editAccountsStage.setTitle("Sales");
-            EditAccounts.editAccountsStage.setScene(new Scene(root));
+            Sales.salesStage.setTitle("Sales");
+            Sales.salesStage.setScene(new Scene(root));
             Image icon = new Image("/com/superducks/laptopsales/icons/main_icons/laptop-icon.png");
-            EditAccounts.editAccountsStage.getIcons().add(icon);
-            EditAccounts.editAccountsStage.setResizable(false);
-            EditAccounts.editAccountsStage.showAndWait();
+            Sales.salesStage.getIcons().add(icon);
+            Sales.salesStage.setResizable(false);
+            Sales.salesStage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -194,5 +194,22 @@ public class MainForm {
 
     public void btnCategories_MouseClicked(MouseEvent mouseEvent) {
         ManageCategories.showForm();
+    }
+
+    public void btnInfoMenu_Click(ActionEvent actionEvent) {
+        EditAccounts.accountViewing = loggedAccount;
+        EditAccounts.mainFormClick = true;
+        Parent root;
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(LoginForm.class.getClassLoader().getResource("com/superducks/laptopsales/fxmls/EditAccounts.fxml")));
+            EditAccounts.editAccountsStage.setTitle("Edit Accounts");
+            EditAccounts.editAccountsStage.setScene(new Scene(root));
+            Image icon = new Image("/com/superducks/laptopsales/icons/web_ui_color/edit.png");
+            EditAccounts.editAccountsStage.getIcons().add(icon);
+            EditAccounts.editAccountsStage.setResizable(false);
+            EditAccounts.editAccountsStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
