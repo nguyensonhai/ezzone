@@ -1,15 +1,13 @@
 package com.superducks.laptopsales.controllers;
 
+import com.superducks.laptopsales.Class.AlertMessage;
 import com.superducks.laptopsales.Class.ConnectDatabase;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -30,6 +28,7 @@ public class Sales {
     public TableColumn clmPrice;
     public TextField txtAmount;
     public ImageView btnRemove;
+    public Label lblTotalePrice;
     ObservableList<ClassSales> dataTable = FXCollections.observableArrayList();
 
 
@@ -85,8 +84,10 @@ public class Sales {
         addTableRow();
     }
 
-    public void mainStage_Click(MouseEvent mouseEvent) {
-        removeTableRow();
+    public void btnRemove_Click(MouseEvent mouseEvent) {
+        if(AlertMessage.showAlertYesNo()) {
+            removeTableRow();
+        }
     }
     private void addTableRow() {
         String type, products;
@@ -110,13 +111,26 @@ public class Sales {
         clmAmount.setCellValueFactory(new PropertyValueFactory<ClassSales, Integer>("Amount"));
         clmPrice.setCellValueFactory(new PropertyValueFactory<ClassSales, Integer>("Price"));
         mainTable.setItems(dataTable);
+        totalPrice();
     }
-    void removeTableRow() {
+
+    private void removeTableRow() {
         ClassSales s = (ClassSales) mainTable.getSelectionModel().getSelectedItem();
         s.getProducts();
         dataTable.remove(s);
         mainTable.setItems(dataTable);
+        totalPrice();
     }
+
+    private void totalPrice() {
+        int totalPice = 0;
+        int size = mainTable.getItems().size();
+        for(int i = 0; i < size; i ++) {
+            totalPice += dataTable.get(i).getPrice();
+        }
+        lblTotalePrice.setText("Total Price: "+totalPice+" vnd");
+    }
+
     public class ClassSales {
         private final SimpleStringProperty Type;
         private final SimpleStringProperty Products;
