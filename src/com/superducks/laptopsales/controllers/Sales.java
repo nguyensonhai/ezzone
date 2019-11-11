@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -18,23 +19,30 @@ import java.sql.SQLException;
 
 public class Sales {
     static Stage salesStage = new Stage();
-    public TableView mainTable;
-    public ComboBox cbxCategories;
-    public ComboBox cbxProducts;
+    public TableView<ClassSales> mainTable;
+    public ComboBox<String> cbxCategories;
+    public ComboBox<String> cbxProducts;
     public ImageView btnAdd;
-    public TableColumn clmType;
-    public TableColumn clmProducts;
-    public TableColumn clmAmount;
-    public TableColumn clmPrice;
+    public TableColumn<ClassSales, String> clmType;
+    public TableColumn<ClassSales, String> clmProducts;
+    public TableColumn<ClassSales, Integer> clmAmount;
+    public TableColumn<ClassSales, Integer> clmPrice;
     public TextField txtAmount;
     public ImageView btnRemove;
     public Label lblTotalePrice;
+    public TextField txtCustomer;
+    public TextField txtPhone;
+    public Button btnConfirm;
+    public Button btnClearAll;
+    public ImageView btnNonAdd;
+    public ImageView btnNonRemove;
     ObservableList<ClassSales> dataTable = FXCollections.observableArrayList();
 
 
     public void initialize() {
         getDataComboboxCategories();
         getDataComboboxProducts();
+        check();
     }
 
     void getDataComboboxCategories() {
@@ -74,11 +82,6 @@ public class Sales {
         cbxProducts.getSelectionModel().selectFirst();
     }
 
-    public void cbxCategories_Action(ActionEvent actionEvent) {
-        if(cbxProducts.getItems().size() > 0)
-            cbxProducts.getItems().clear();
-        getDataComboboxProducts();
-    }
 
     public void btnAdd_Click(MouseEvent mouseEvent) {
         addTableRow();
@@ -89,6 +92,7 @@ public class Sales {
             removeTableRow();
         }
     }
+
     private void addTableRow() {
         String type, products;
         Integer amount, price = 0;
@@ -105,21 +109,46 @@ public class Sales {
             e.printStackTrace();
         }
         //add Row to Table
-        dataTable.add(new ClassSales(type, products, amount,amount*price));
+        int row = mainTable.getItems().size();
+        ClassSales cs;
+        for(int i = 0 ; i < row ; i ++) {
+            cs = dataTable.get(i);
+            if(cs.getType().equals(cbxCategories.getValue().toString()) && cs.getProducts().equals(cbxProducts.getValue().toString())) {
+                dataTable.remove(cs);
+                break;
+            }
+        }
+        dataTable.add(new ClassSales(type, products, amount, amount * price));
         clmType.setCellValueFactory(new PropertyValueFactory<ClassSales, String>("Type"));
         clmProducts.setCellValueFactory(new PropertyValueFactory<ClassSales, String>("Products"));
         clmAmount.setCellValueFactory(new PropertyValueFactory<ClassSales, Integer>("Amount"));
         clmPrice.setCellValueFactory(new PropertyValueFactory<ClassSales, Integer>("Price"));
         mainTable.setItems(dataTable);
+        mainTable.getSelectionModel().selectFirst();
+        check();
         totalPrice();
     }
 
     private void removeTableRow() {
-        ClassSales s = (ClassSales) mainTable.getSelectionModel().getSelectedItem();
+        ClassSales s = mainTable.getSelectionModel().getSelectedItem();
         s.getProducts();
         dataTable.remove(s);
         mainTable.setItems(dataTable);
+        mainTable.getSelectionModel().selectFirst();
+        check();
         totalPrice();
+    }
+
+    private void check() {
+        checkAdd();
+        checkRemove();
+    }
+
+    private void tableRow_Clicked () {
+        ClassSales s = mainTable.getSelectionModel().getSelectedItem();
+        cbxCategories.setValue(s.getType());
+        cbxProducts.setValue(s.getProducts());
+        txtAmount.setText(""+s.getAmount());
     }
 
     private void totalPrice() {
@@ -129,6 +158,64 @@ public class Sales {
             totalPice += dataTable.get(i).getPrice();
         }
         lblTotalePrice.setText("Total Price: "+totalPice+" vnd");
+    }
+
+    public void cbxValue_Changed(ActionEvent actionEvent) {
+        check();
+    }
+
+    private void checkAdd() {
+        if(isInteger(txtAmount.getText())) {
+
+            if (Integer.parseInt(txtAmount.getText()) > 0 && Integer.parseInt(txtAmount.getText()) <= 100 && cbxProducts.getItems().size() > 0) {
+                btnAdd.setVisible(true);
+                btnNonAdd.setVisible(false);
+            } else {
+                btnAdd.setVisible(false);
+                btnNonAdd.setVisible(true);
+            }
+        } else {
+            btnAdd.setVisible(false);
+            btnNonAdd.setVisible(true);
+        }
+    }
+
+    private boolean isInteger( String input ) {
+        try {
+            Integer.parseInt( input );
+            return true;
+        }
+        catch( Exception e ) {
+            return false;
+        }
+    }
+
+
+    public void cbxCategoriesValue_Changed(ActionEvent actionEvent) {
+        if(cbxProducts.getItems().size() > 0)
+            cbxProducts.getItems().clear();
+        getDataComboboxProducts();
+        check();
+    }
+
+    public void mainTable_MouseClicked(MouseEvent mouseEvent) {
+        tableRow_Clicked();
+        check();
+    }
+
+    private void checkRemove() {
+        if(mainTable.getItems().size() > 0) {
+            btnRemove.setVisible(true);
+            btnNonRemove.setVisible(false);
+        }
+        else {
+            btnRemove.setVisible(false);
+            btnNonRemove.setVisible(true);
+        }
+    }
+
+    public void txtAmount_textChanged(KeyEvent keyEvent) {
+        check();
     }
 
     public class ClassSales {
