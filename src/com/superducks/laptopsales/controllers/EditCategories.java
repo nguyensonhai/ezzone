@@ -2,21 +2,22 @@ package com.superducks.laptopsales.controllers;
 
 import com.superducks.laptopsales.Class.AlertMessage;
 import com.superducks.laptopsales.Class.ConnectDatabase;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class EditCategories {
     static boolean changed = false;
-    public static String categoryID;
-    public static String categoryName;
+    static String categoryID;
+    static String categoryName;
     static Stage mainStage = new Stage();
-    public static int chage;
+    static int chage;
     public TextField txtcategoryID;
     public TextField txtcategoryName;
     public ImageView btnAdd;
@@ -27,11 +28,11 @@ public class EditCategories {
 
     public void initialize(){
         if(chage==1){
-            btnAccept.setVisible(true);
+            btnNonAccept.setVisible(true);
             showDataWithEdit();
-        }else{
+        } else {
             txtcategoryID.setEditable(true);
-            btnAdd.setVisible(true);
+            btnNonAdd.setVisible(true);
         }
     }
 
@@ -42,27 +43,39 @@ public class EditCategories {
 
 
     public void btnAcceptClicked(MouseEvent mouseEvent) {
-        if(AlertMessage.showAlertYesNo()) {
-            String sql = "UPDATE categories SET name = '" + txtcategoryName.getText() + "' WHERE id = '" + txtcategoryID.getText() + "'";
-            try {
-                ConnectDatabase.Connect().prepareStatement(sql).executeUpdate();
-                AlertMessage.showAlert("Updated all information", "tick");
-                changed = true;
-            } catch (SQLException e) {
-                e.printStackTrace();
+        String sqlCheckName = "select * from categories where name ='" +txtcategoryName.getText() +"';";
+        try {
+            ResultSet rsName = Objects.requireNonNull(ConnectDatabase.Connect()).createStatement().executeQuery(sqlCheckName);
+            if(!rsName.next()) {
+                if(AlertMessage.showAlertYesNo()) {
+                    String sql = "UPDATE categories SET name = '" + txtcategoryName.getText() + "' WHERE id = '" + txtcategoryID.getText() + "'";
+                    try {
+                        Objects.requireNonNull(ConnectDatabase.Connect()).prepareStatement(sql).executeUpdate();
+                        AlertMessage.showAlert("Updated all information", "tick");
+                        changed = true;
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }  else {
+                AlertMessage.showAlert("This Category Name already existed, please choose another", "error");
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
     public void btnAddClicked(MouseEvent mouseEvent) {
         String sqlCheck = "select * from categories where id ='" +txtcategoryID.getText() +"';";
+        String sqlCheckName = "select * from categories where name ='" +txtcategoryName.getText() +"';";
         try {
             ResultSet rs = ConnectDatabase.Connect().createStatement().executeQuery(sqlCheck);
-            if(!rs.next()) {
+            ResultSet rsName = ConnectDatabase.Connect().createStatement().executeQuery(sqlCheckName);
+            if(!rs.next() && !rsName.next()) {
                 if(AlertMessage.showAlertYesNo()) {
                     String sql = "INSERT INTO categories(id,name) VALUES ('" + txtcategoryID.getText() + "', '" + txtcategoryName.getText() + "')";
                     try {
-                        ConnectDatabase.Connect().prepareStatement(sql).executeUpdate();
+                        Objects.requireNonNull(ConnectDatabase.Connect()).prepareStatement(sql).executeUpdate();
                         AlertMessage.showAlert("Added new category", "tick");
                         txtcategoryID.setText("");
                         txtcategoryName.setText("");
@@ -73,7 +86,7 @@ public class EditCategories {
                 }
             }
             else
-                AlertMessage.showAlert("This Category ID already existed, please choose another", "error");
+                AlertMessage.showAlert("This Category ID or Name already existed, please choose another", "error");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -82,5 +95,30 @@ public class EditCategories {
     public void btnOutClicked(MouseEvent mouseEvent) {
         mainStage.close();
     }
+
+    public void text_Changed(KeyEvent keyEvent) {
+        String reCategoryID = "^[a-z0-9_-]{2,10}$";
+        String reCategoryName = "^[a-zA-Z\\sÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ-]{2,50}$";
+        if(chage == 1) {
+            if(!categoryName.equals(txtcategoryName.getText()) && txtcategoryName.getText().matches(reCategoryName)) {
+                btnAccept.setVisible(true);
+                btnNonAccept.setVisible(false);
+            }
+            else {
+                btnAccept.setVisible(false);
+                btnNonAccept.setVisible(true);
+            }
+        }
+        else {
+            if(txtcategoryID.getText().matches(reCategoryID) && txtcategoryName.getText().matches(reCategoryName)) {
+                btnAdd.setVisible(true);
+                btnNonAdd.setVisible(false);
+            } else {
+                btnAdd.setVisible(false);
+                btnNonAdd.setVisible(true);
+            }
+        }
+    }
+
 }
 

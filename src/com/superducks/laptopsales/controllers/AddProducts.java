@@ -21,6 +21,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class AddProducts {
     static String category;
@@ -66,32 +67,42 @@ public class AddProducts {
    }
 
     public void btnAdd_Click(MouseEvent mouseEvent) {
+        String url = urlImage;
         String categoryID = cbocategory.getSelectionModel().getSelectedItem().toString();
         String name = txtNameProduct.getText();
         String nsx = txtNSX.getText();
-        String info=txtInfo.getText();
+        String info = txtInfo.getText();
         Double price = Double.parseDouble(txtPrice.getText());
-        String url = urlImage;
-            if(AlertMessage.showAlertYesNo()) {
-                String sql = "INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`) VALUES (?,?,?,?,?,?);";
-                Connection con = ConnectDatabase.Connect();
-                try {
-                    assert con != null;
-                    PreparedStatement pst = con.prepareStatement(sql);
-                    pst.setString(1, categoryID);
-                    pst.setString(2, name);
-                    pst.setString(3, nsx);
-                    pst.setString(4, info);
-                    pst.setString(5, url);
-                    pst.setDouble(6, price);
-                    int row =pst.executeUpdate();
-                    AlertMessage.showAlert("Added new product " +row, "tick");
-                    changed = true;
-                } catch (SQLException e) {
-                    e.printStackTrace();
+        String sqlCheckName = "select * from products where name ='" + name + "';";
+        try {
+            ResultSet rs = Objects.requireNonNull(ConnectDatabase.Connect()).createStatement().executeQuery(sqlCheckName);
+            if (!rs.next()) {
+                if (AlertMessage.showAlertYesNo()) {
+                    String sql = "INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`) VALUES (?,?,?,?,?,?);";
+                    Connection con = ConnectDatabase.Connect();
+                    try {
+                        assert con != null;
+                        PreparedStatement pst = con.prepareStatement(sql);
+                        pst.setString(1, categoryID);
+                        pst.setString(2, name);
+                        pst.setString(3, nsx);
+                        pst.setString(4, info);
+                        pst.setString(5, url);
+                        pst.setDouble(6, price);
+                        pst.executeUpdate();
+                        AlertMessage.showAlert("Added new product ", "tick");
+                        changed = true;
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                 }
+            } else {
+                AlertMessage.showAlert("Product's name is already existed, please choose another", "error");
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+    }
 
 
 

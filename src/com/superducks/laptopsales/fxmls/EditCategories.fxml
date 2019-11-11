@@ -19,8 +19,8 @@
                 <Font name="Times New Roman" size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="txtcategoryID" editable="false" layoutX="152.0" layoutY="29.0" prefHeight="25.0" prefWidth="226.0" style="-fx-alignment: CENTER;" />
-        <TextField fx:id="txtcategoryName" layoutX="152.0" layoutY="76.0" prefHeight="25.0" prefWidth="226.0" style="-fx-alignment: CENTER;" />
+        <TextField fx:id="txtcategoryID" editable="false" layoutX="152.0" layoutY="29.0" onKeyReleased="#text_Changed" prefHeight="25.0" prefWidth="226.0" style="-fx-alignment: CENTER;" />
+        <TextField fx:id="txtcategoryName" layoutX="152.0" layoutY="76.0" onKeyReleased="#text_Changed" prefHeight="25.0" prefWidth="226.0" style="-fx-alignment: CENTER;" />
         <ImageView fx:id="btnAdd" fitHeight="36.0" fitWidth="37.0" layoutX="392.0" layoutY="24.0" onMouseClicked="#btnAddClicked" pickOnBounds="true" preserveRatio="true" visible="false">
             <image>
                 <Image url="@../icons/web_ui_color/plus.png" />
@@ -36,12 +36,12 @@
                 <Image url="@../icons/web_ui_color/delete.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="btnNonAdd" fitHeight="36.0" fitWidth="37.0" layoutX="392.0" layoutY="24.0" onMouseClicked="#btnAddClicked" pickOnBounds="true" preserveRatio="true" visible="false">
+        <ImageView fx:id="btnNonAdd" fitHeight="36.0" fitWidth="37.0" layoutX="392.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" visible="false">
             <image>
                 <Image url="@../icons/web_ui_brown/plus.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="btnNonAccept" fitHeight="36.0" fitWidth="37.0" layoutX="392.0" layoutY="24.0" onMouseClicked="#btnAcceptClicked" pickOnBounds="true" preserveRatio="true" visible="false">
+        <ImageView fx:id="btnNonAccept" fitHeight="36.0" fitWidth="37.0" layoutX="392.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" visible="false">
             <image>
                 <Image url="@../icons/web_ui_brown/checkmark.png" />
             </image>

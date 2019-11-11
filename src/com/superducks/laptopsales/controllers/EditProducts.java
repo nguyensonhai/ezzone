@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class EditProducts {
     static Boolean changed = false;
@@ -61,14 +62,14 @@ public class EditProducts {
         }
     }
     private void showData() {
-       String sql = "SELECT * FROM products where id='"+ProductID+"'";
-       try {
-           ResultSet rs= ConnectDatabase.Connect().createStatement().executeQuery(sql);
-            while (rs.next()){
+        String sql = "SELECT * FROM products where id='" + ProductID + "'";
+        try {
+            ResultSet rs = ConnectDatabase.Connect().createStatement().executeQuery(sql);
+            while (rs.next()) {
                 txtNameProduct.setText(rs.getString(3));
                 txtNSX.setText(rs.getString(4));
                 txtInfo.setText(rs.getString(5));
-                if(!rs.getString(6).equals(""))
+                if (!rs.getString(6).equals(""))
                     imgProduct.setImage(new Image(rs.getString(6)));
                 txtPrice.setText(rs.getString(7));
 
@@ -81,12 +82,6 @@ public class EditProducts {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-    }
-
-
-    static void showForm(){
-
     }
 
     public void addImage(ActionEvent actionEvent) {
@@ -105,17 +100,27 @@ public class EditProducts {
     }
 
     public void btnUpdateClick(MouseEvent mouseEvent) {
-        if(AlertMessage.showAlertYesNo()) {
-            String sql="UPDATE products SET name = '"+txtNameProduct.getText()+"', producer = '"+txtNSX.getText()+"', info = '"+txtInfo.getText()+"', img = '"+imgProduct.getImage().getUrl().toString()+"', price = '"+Integer.parseInt(txtPrice.getText())+"' WHERE (id = '"+ProductID+"')";
-            try {
-                int row = ConnectDatabase.Connect().prepareStatement(sql).executeUpdate();
-                System.out.println(row);
-                AlertMessage.showAlert("Information has been updated", "tick");
-                changed = true;
-                showForm();
-            } catch (SQLException e) {
-                e.printStackTrace();
+        String name = txtNameProduct.getText();
+        String sqlCheckName = "select * from products where name ='" + name + "';";
+        try {
+            ResultSet rst = Objects.requireNonNull(ConnectDatabase.Connect()).createStatement().executeQuery(sqlCheckName);
+            if (!rst.next()) {
+                if (AlertMessage.showAlertYesNo()) {
+                    String sql = "UPDATE products SET name = '" + txtNameProduct.getText() + "', producer = '" + txtNSX.getText() + "', info = '" + txtInfo.getText() + "', img = '" + imgProduct.getImage().getUrl().toString() + "', price = '" + Integer.parseInt(txtPrice.getText()) + "' WHERE (id = '" + ProductID + "')";
+                    try {
+                        int row = Objects.requireNonNull(ConnectDatabase.Connect()).prepareStatement(sql).executeUpdate();
+                        System.out.println(row);
+                        AlertMessage.showAlert("Information has been updated", "tick");
+                        changed = true;
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }  else {
+                AlertMessage.showAlert("Product's name is already existed, please choose another", "error");
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
