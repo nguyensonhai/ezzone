@@ -35,22 +35,22 @@
                <children>
                   <Label layoutX="22.0" layoutY="26.0" text="Username:">
                      <font>
-                        <Font name="Centaur" size="16.0" />
+                        <Font name="Bell MT" size="16.0" />
                      </font>
                   </Label>
                   <TextField fx:id="txtUsername" layoutX="100.0" layoutY="26.0" onKeyPressed="#keyPressEnter" prefHeight="25.0" prefWidth="247.0" style="-fx-alignment: CENTER;">
                      <font>
-                        <Font name="Centaur" size="12.0" />
+                        <Font name="Bell MT" size="15.0" />
                      </font>
                   </TextField>
                   <PasswordField fx:id="txtPassword" layoutX="100.0" layoutY="77.0" onKeyPressed="#keyPressEnter" prefHeight="25.0" prefWidth="248.0" style="-fx-alignment: CENTER;">
                      <font>
-                        <Font name="Centaur" size="12.0" />
+                        <Font name="Bell MT" size="15.0" />
                      </font>
                   </PasswordField>
                   <Label layoutX="24.0" layoutY="79.0" text="Password:">
                      <font>
-                        <Font name="Centaur" size="16.0" />
+                        <Font name="Bell MT" size="16.0" />
                      </font>
                   </Label>
                   <ImageView fx:id="btnLogIn" fitHeight="35.0" fitWidth="35.0" layoutX="370.0" layoutY="21.0" onMouseClicked="#logIn" pickOnBounds="true" preserveRatio="true">

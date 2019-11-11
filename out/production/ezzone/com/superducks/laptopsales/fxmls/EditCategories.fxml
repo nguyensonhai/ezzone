@@ -19,8 +19,8 @@
                 <Font name="Times New Roman" size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="txtcategoryID" editable="false" layoutX="152.0" layoutY="29.0" prefHeight="25.0" prefWidth="226.0" />
-        <TextField fx:id="txtcategoryName" layoutX="152.0" layoutY="76.0" prefHeight="25.0" prefWidth="226.0" />
+        <TextField fx:id="txtcategoryID" editable="false" layoutX="152.0" layoutY="29.0" prefHeight="25.0" prefWidth="226.0" style="-fx-alignment: CENTER;" />
+        <TextField fx:id="txtcategoryName" layoutX="152.0" layoutY="76.0" prefHeight="25.0" prefWidth="226.0" style="-fx-alignment: CENTER;" />
         <ImageView fx:id="btnAdd" fitHeight="36.0" fitWidth="37.0" layoutX="392.0" layoutY="24.0" onMouseClicked="#btnAddClicked" pickOnBounds="true" preserveRatio="true" visible="false">
             <image>
                 <Image url="@../icons/web_ui_color/plus.png" />

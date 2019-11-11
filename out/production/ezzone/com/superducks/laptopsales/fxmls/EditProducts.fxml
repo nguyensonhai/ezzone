@@ -11,17 +11,17 @@
 <AnchorPane fx:id="ap" prefHeight="364.0" prefWidth="757.0" styleClass="bg1" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.superducks.laptopsales.controllers.EditProducts">
    <children>
       <Label layoutX="31.0" layoutY="31.0" text="Categories" />
-      <TextField fx:id="txtNameProduct" layoutX="483.0" layoutY="27.0" onKeyReleased="#textChanged" prefHeight="25.0" prefWidth="250.0" />
+      <TextField fx:id="txtNameProduct" layoutX="483.0" layoutY="27.0" onKeyReleased="#textChanged" prefHeight="25.0" prefWidth="250.0" style="-fx-alignment: CENTER;" />
       <Label layoutX="31.0" layoutY="66.0" text="Producer" />
       <Label layoutX="30.0" layoutY="137.0" text="Infomation" />
       <ImageView fx:id="imgProduct" fitHeight="250.0" fitWidth="250.0" layoutX="483.0" layoutY="94.0" pickOnBounds="true">
          <image>
             <Image url="@../images/backgounds/white.jpg" />
          </image></ImageView>
-      <TextField fx:id="txtPrice" layoutX="483.0" layoutY="59.0" onKeyReleased="#textChanged" prefHeight="25.0" prefWidth="250.0" />
+      <TextField fx:id="txtPrice" layoutX="483.0" layoutY="59.0" onKeyReleased="#textChanged" prefHeight="25.0" prefWidth="250.0" style="-fx-alignment: CENTER;" />
       <TextArea fx:id="txtInfo" layoutX="130.0" layoutY="99.0" onKeyReleased="#textChanged" prefHeight="147.0" prefWidth="247.0" />
-      <TextField fx:id="txtNSX" layoutX="130.0" layoutY="62.0" onKeyReleased="#textChanged" prefHeight="25.0" prefWidth="247.0" />
-      <TextField fx:id="txtCategoryName" editable="false" layoutX="130.0" layoutY="27.0" onKeyReleased="#textChanged" prefHeight="25.0" prefWidth="247.0" />
+      <TextField fx:id="txtNSX" layoutX="130.0" layoutY="62.0" onKeyReleased="#textChanged" prefHeight="25.0" prefWidth="247.0" style="-fx-alignment: CENTER;" />
+      <TextField fx:id="txtCategoryName" editable="false" layoutX="130.0" layoutY="27.0" onKeyReleased="#textChanged" prefHeight="25.0" prefWidth="247.0" style="-fx-alignment: CENTER;" />
       <Button fx:id="btnImage" layoutX="402.0" layoutY="112.0" mnemonicParsing="false" onAction="#addImage" style="-fx-background-color: white;" text="Image" />
       <Label layoutX="402.0" layoutY="34.0" text="Name" />
       <Label layoutX="405.0" layoutY="68.0" text="Price" />

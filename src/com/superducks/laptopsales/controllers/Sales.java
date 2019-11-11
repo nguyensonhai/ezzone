@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Locale;
+import java.util.Objects;
 
 public class Sales {
     static Stage salesStage = new Stage();
@@ -45,10 +47,10 @@ public class Sales {
         check();
     }
 
-    void getDataComboboxCategories() {
+    private void getDataComboboxCategories() {
         String sql = "select * from categories";
         try {
-            ResultSet rs = ConnectDatabase.Connect().createStatement().executeQuery(sql);
+            ResultSet rs = Objects.requireNonNull(ConnectDatabase.Connect()).createStatement().executeQuery(sql);
             while (rs.next()) {
                 cbxCategories.getItems().add(rs.getString("name"));
             }
@@ -58,12 +60,14 @@ public class Sales {
         cbxCategories.getSelectionModel().selectFirst();
     }
 
-    void getDataComboboxProducts() {
+    private void getDataComboboxProducts() {
+        if(cbxProducts.getItems().size()>0)
+            cbxProducts.getItems().clear();
         String category = cbxCategories.getValue().toString();
         String findCategogyID = "select * from categories where name ='"+category+"';";
         String categoryID = "";
         try {
-            ResultSet rst = ConnectDatabase.Connect().createStatement().executeQuery(findCategogyID);
+            ResultSet rst = Objects.requireNonNull(ConnectDatabase.Connect()).createStatement().executeQuery(findCategogyID);
             while (rst.next()) {
                 categoryID = rst.getString("id");
             }
@@ -72,7 +76,7 @@ public class Sales {
         }
         String sql = "select * from products where category_id ='"+categoryID+"';";
         try {
-            ResultSet rs = ConnectDatabase.Connect().createStatement().executeQuery(sql);
+            ResultSet rs = Objects.requireNonNull(ConnectDatabase.Connect()).createStatement().executeQuery(sql);
             while (rs.next()) {
                 cbxProducts.getItems().add(rs.getString("name"));
             }
@@ -102,7 +106,7 @@ public class Sales {
 
         String sql = "select * from products where name = '" + products + "';";
         try {
-            ResultSet rs = ConnectDatabase.Connect().createStatement().executeQuery(sql);
+            ResultSet rs = Objects.requireNonNull(ConnectDatabase.Connect()).createStatement().executeQuery(sql);
             if(rs.next())
                 price = Integer.parseInt(rs.getString("price"));
         } catch (SQLException e) {
@@ -118,7 +122,7 @@ public class Sales {
                 break;
             }
         }
-        dataTable.add(new ClassSales(type, products, amount, amount * price));
+        dataTable.add(new ClassSales(type, products, amount, getFormattedAmount(amount * price)));
         clmType.setCellValueFactory(new PropertyValueFactory<ClassSales, String>("Type"));
         clmProducts.setCellValueFactory(new PropertyValueFactory<ClassSales, String>("Products"));
         clmAmount.setCellValueFactory(new PropertyValueFactory<ClassSales, Integer>("Amount"));
@@ -155,9 +159,9 @@ public class Sales {
         int totalPice = 0;
         int size = mainTable.getItems().size();
         for(int i = 0; i < size; i ++) {
-            totalPice += dataTable.get(i).getPrice();
+            totalPice += getSplit(dataTable.get(i).getPrice());
         }
-        lblTotalePrice.setText("Total Price: "+totalPice+" vnd");
+        lblTotalePrice.setText("Total Price: "+getFormattedAmount(totalPice)+" VND");
     }
 
     public void cbxValue_Changed(ActionEvent actionEvent) {
@@ -214,21 +218,68 @@ public class Sales {
         }
     }
 
+    private static Integer getSplit (String input) {
+        StringBuilder output = new StringBuilder();
+        if(input.contains(".")) {
+            String [] inputSplit = input.split("\\.");
+            for (String s : inputSplit) {
+                output.append(s);
+            }
+            return Integer.parseInt(output.toString());
+        }
+        else
+            return 0;
+    }
+
+    private static String getFormattedAmount(int amount) {
+        StringBuilder formatted_value = new StringBuilder();
+        boolean isNavigate = amount < 0;
+        amount = Math.abs(amount);
+        while (amount > 999) {
+            int du = amount % 1000;
+            amount = amount / 1000;
+            formatted_value.insert(0, String.format(Locale.getDefault(), ".%,03d", du));
+        }
+        if(isNavigate){
+            formatted_value.insert(0, String.format(Locale.getDefault(), "-%,d", amount));
+        } else {
+            formatted_value.insert(0, String.format(Locale.getDefault(), "%,d", amount));
+        }
+        return String.format(Locale.getDefault(), "%s", formatted_value.toString());
+    }
+
     public void txtAmount_textChanged(KeyEvent keyEvent) {
         check();
     }
 
-    public class ClassSales {
+    public void btnClear_Clicked(MouseEvent mouseEvent) {
+        clearAll();
+    }
+    private void clearAll() {
+        if(AlertMessage.showAlertYesNo()) {
+            txtCustomer.setText("");
+            txtAmount.setText("1");
+            txtPhone.setText("");
+            lblTotalePrice.setText("Total Price: 0 VND");
+            //cbxCategories.getSelectionModel().selectFirst();
+            //getDataComboboxProducts();
+            dataTable.clear();
+            mainTable.getItems().clear();
+            check();
+        }
+    }
+
+    public static class ClassSales {
         private final SimpleStringProperty Type;
         private final SimpleStringProperty Products;
         private final SimpleIntegerProperty Amount;
-        private final SimpleIntegerProperty Price;
+        private final SimpleStringProperty Price;
 
-        private ClassSales(String Type, String Products, Integer Amount, Integer Price) {
+        private ClassSales(String Type, String Products, Integer Amount, String Price) {
             this.Type = new SimpleStringProperty(Type);
             this.Products = new SimpleStringProperty(Products);
             this.Amount = new SimpleIntegerProperty(Amount);
-            this.Price = new SimpleIntegerProperty(Price);
+            this.Price = new SimpleStringProperty(Price);
         }
 
         public String getType() {
@@ -267,16 +318,16 @@ public class Sales {
             this.Amount.set(amount);
         }
 
-        public int getPrice() {
+        public String getPrice() {
             return Price.get();
         }
 
-        public SimpleIntegerProperty priceProperty() {
+        public SimpleStringProperty priceProperty() {
             return Price;
         }
 
-        public void setPrice(int total) {
-            this.Price.set(total);
+        public void setPrice(String price) {
+            this.Price.set(price);
         }
     }
 }

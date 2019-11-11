@@ -63,11 +63,11 @@
                   <Font size="57.0" />
                </font>
             </Label>
-            <Button fx:id="btnConfirm" layoutX="241.0" layoutY="533.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Confirm" />
-            <Button fx:id="btnClearAll" layoutX="94.0" layoutY="533.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Clear All" />
+            <Button fx:id="btnConfirm" disable="true" layoutX="241.0" layoutY="533.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Confirm" />
+            <Button fx:id="btnClearAll" layoutX="94.0" layoutY="533.0" mnemonicParsing="false" onMouseClicked="#btnClear_Clicked" prefHeight="25.0" prefWidth="109.0" text="Clear All" />
          </children>
       </AnchorPane>
-      <Label fx:id="lblTotalePrice" alignment="CENTER_RIGHT" layoutX="418.0" layoutY="601.0" prefHeight="25.0" prefWidth="724.0" text="Total Price: 0 vnd" textFill="WHITE">
+      <Label fx:id="lblTotalePrice" alignment="CENTER_RIGHT" layoutX="418.0" layoutY="601.0" prefHeight="25.0" prefWidth="724.0" text="Total Price: 0 VND" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>

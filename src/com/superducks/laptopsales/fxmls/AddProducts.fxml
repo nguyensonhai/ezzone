@@ -13,7 +13,7 @@
    <children>
       <Label layoutX="20.0" layoutY="29.0" text="Categories" />
       <Label layoutX="393.0" layoutY="29.0" text="Name" />
-      <TextField fx:id="txtNameProduct" layoutX="472.0" layoutY="25.0" onKeyReleased="#Changed" prefHeight="25.0" prefWidth="250.0" />
+      <TextField fx:id="txtNameProduct" layoutX="472.0" layoutY="25.0" onKeyReleased="#Changed" prefHeight="25.0" prefWidth="250.0" style="-fx-alignment: CENTER;" />
       <Label layoutX="20.0" layoutY="106.0" text="Producer" />
       <Label layoutX="21.0" layoutY="179.0" text="Infomation" />
       <Label layoutX="393.0" layoutY="63.0" text="Price" />
@@ -36,10 +36,10 @@
          <image>
             <Image url="@../images/backgounds/white.jpg" />
          </image></ImageView>
-      <TextField fx:id="txtPrice" layoutX="472.0" layoutY="57.0" onKeyReleased="#Changed" prefHeight="25.0" prefWidth="250.0" />
+      <TextField fx:id="txtPrice" layoutX="472.0" layoutY="57.0" onKeyReleased="#Changed" prefHeight="25.0" prefWidth="250.0" style="-fx-alignment: CENTER;" />
       <TextArea fx:id="txtInfo" layoutX="119.0" layoutY="139.0" onKeyReleased="#Changed" prefHeight="147.0" prefWidth="247.0" />
-      <TextField fx:id="txtNSX" layoutX="119.0" layoutY="102.0" onKeyReleased="#Changed" prefHeight="25.0" prefWidth="247.0" />
-      <TextField fx:id="txtCategoryName" editable="false" layoutX="119.0" layoutY="59.0" prefHeight="25.0" prefWidth="247.0" />
+      <TextField fx:id="txtNSX" layoutX="119.0" layoutY="102.0" onKeyReleased="#Changed" prefHeight="25.0" prefWidth="247.0" style="-fx-alignment: CENTER;" />
+      <TextField fx:id="txtCategoryName" editable="false" layoutX="119.0" layoutY="59.0" prefHeight="25.0" prefWidth="247.0" style="-fx-alignment: CENTER;" />
       <ComboBox fx:id="cbocategory" layoutX="119.0" layoutY="25.0" onAction="#click" prefHeight="25.0" prefWidth="247.0" />
       <Button fx:id="btnImage" layoutX="393.0" layoutY="110.0" mnemonicParsing="false" onAction="#addImage" style="-fx-background-color: white;" text="Image" />
    </children>

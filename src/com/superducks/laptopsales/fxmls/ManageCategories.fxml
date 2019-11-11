@@ -10,10 +10,10 @@
     <children>
         <TableView fx:id="tblProducts" layoutX="329.0" layoutY="14.0" onMouseClicked="#mouseclick" prefHeight="462.0" prefWidth="631.0" styleClass="table-style" stylesheets="@../css/styles.css" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="329.0" AnchorPane.rightAnchor="77.0" AnchorPane.topAnchor="14.0">
             <columns>
-                <TableColumn fx:id="clmID" prefWidth="97.0" text="Product ID" />
-                <TableColumn fx:id="clmCategoryID" prefWidth="104.0" text="Category ID" />
-                <TableColumn fx:id="clmName" minWidth="0.0" prefWidth="281.0" text="Name" />
-                <TableColumn fx:id="clmPrice" prefWidth="148.0" text="Price" />
+                <TableColumn fx:id="clmID" prefWidth="97.0" style="-fx-alignment: CENTER;" text="Product ID" />
+                <TableColumn fx:id="clmCategoryID" prefWidth="104.0" style="-fx-alignment: CENTER;" text="Category ID" />
+                <TableColumn fx:id="clmName" minWidth="0.0" prefWidth="281.0" style="-fx-alignment: CENTER;" text="Name" />
+                <TableColumn fx:id="clmPrice" prefWidth="148.0" style="-fx-alignment: CENTER;" text="Price" />
             </columns>
         </TableView>
         <ImageView fx:id="btnAdd" fitHeight="30.0" fitWidth="30.0" layoutX="982.0" layoutY="34.0" onMouseClicked="#btnAddclick" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="25.0">
@@ -48,8 +48,8 @@
       </ImageView>
       <TableView fx:id="tblCategory" layoutX="14.0" layoutY="14.0" onMouseClicked="#tblCategoryClicked" prefHeight="462.0" prefWidth="249.0" styleClass="table-style" stylesheets="@../css/styles.css" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
         <columns>
-          <TableColumn fx:id="clmCateID" prefWidth="83.0" text="Category ID" />
-          <TableColumn fx:id="clmCategoryName" prefWidth="164.0" text="Category Name" />
+          <TableColumn fx:id="clmCateID" prefWidth="83.0" style="-fx-alignment: CENTER;" text="Category ID" />
+          <TableColumn fx:id="clmCategoryName" prefWidth="164.0" style="-fx-alignment: CENTER;" text="Category Name" />
         </columns>
       </TableView>
     </children>
