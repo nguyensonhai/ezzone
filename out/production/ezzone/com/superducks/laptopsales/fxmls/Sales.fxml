@@ -51,7 +51,7 @@
             </ImageView>
             <Label layoutX="25.0" layoutY="263.0" text="Customer" textFill="WHITE" />
             <TextField fx:id="txtCustomer" layoutX="109.0" layoutY="263.0" onKeyReleased="#textChanged" prefHeight="25.0" prefWidth="258.0" style="-fx-alignment: CENTER;" />
-            <Label layoutX="26.0" layoutY="318.0" text="Phone/Code" textFill="WHITE" />
+            <Label layoutX="26.0" layoutY="318.0" text="Phone" textFill="WHITE" />
             <TextField fx:id="txtPhone" layoutX="110.0" layoutY="314.0" onKeyReleased="#textChanged" prefHeight="25.0" prefWidth="258.0" style="-fx-alignment: CENTER;" />
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="29.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                <image>

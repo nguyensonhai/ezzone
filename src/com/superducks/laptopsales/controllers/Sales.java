@@ -187,7 +187,7 @@ public class Sales {
 
     private void checkConfirm() {
         String customerName = "^[a-zA-Z\\sÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ-]{2,50}$";
-        String phone = "^[0-9_-]{9,20}$";
+        String phone = "^[0-9_-]{10,11}$";
         if(mainTable.getItems().size() > 0 && txtCustomer.getText().matches(customerName) && txtPhone.getText().matches(phone)) {
             btnConfirm.setDisable(false);
         } else {
