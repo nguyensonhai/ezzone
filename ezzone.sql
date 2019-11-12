@@ -33,6 +33,12 @@ CREATE TABLE `categories` (
 	PRIMARY KEY (id)
 );
 
+INSERT INTO `laptop_sales`.`categories` (`id`, `name`) VALUES ('laptop', 'Laptop');
+INSERT INTO `laptop_sales`.`categories` (`id`, `name`) VALUES ('mouse', 'Chuột');
+INSERT INTO `laptop_sales`.`categories` (`id`, `name`) VALUES ('keyboard', 'Bàn Phím');
+INSERT INTO `laptop_sales`.`categories` (`id`, `name`) VALUES ('harddrive', 'Ổ đĩa cứng');
+INSERT INTO `laptop_sales`.`categories` (`id`, `name`) VALUES ('cpu', 'CPU');
+INSERT INTO `laptop_sales`.`categories` (`id`, `name`) VALUES ('gpu', 'Card đồ hoạ');
 
 
 CREATE TABLE `products` (
@@ -46,6 +52,32 @@ CREATE TABLE `products` (
 	PRIMARY KEY (`id`),
 	CONSTRAINT `FK_products_categories` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
 );
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+VALUES ('laptop', 'Razer Blade Stealth 13.3 (2019)', 'Razer', 'i7 8565U RAM 16GB SSD 256GB MX150 FHD IPS Touch', 'file:/C:/Users/nguye/Pictures/Products/Laptop/Razer_Blade_Stealth_13.3.jpg', '39990000');
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+VALUES ('laptop', 'Dell Alienware M15 R2', 'Dell', 'i7-9750H RAM 8GB SSD 256GB FHD IPS RTX 2060', 'file:/C:/Users/nguye/Pictures/Products/Laptop/m15_r2.jpg', '51990000');
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+VALUES ('laptop', 'ThinkPad P1', 'Lenovo', 'i7-8750H RAM 16GB SSD 512GB Quadro P1000 FHD IPS', 'file:/C:/Users/nguye/Pictures/Products/Laptop/p1.jpg', '45990000');
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+VALUES ('laptop', 'Asus ROG Strix G G731', 'Asus', 'Intel Core i7-9750H 2.6GHz up to 4.5GHz 12MB', 'file:/C:/Users/nguye/Pictures/Products/Laptop/g731.jpg', '41990000');
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+VALUES ('laptop', 'HP Spectre X360 13 (2019)', 'HP', 'i5-8265U SSD 256GB RAM 8GB FHD IPS TOUCH', 'file:/C:/Users/nguye/Pictures/Products/Laptop/hp_spectre_x360.jpg', '41990000');
+
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+VALUES ('cpu', 'Core i7 9700', 'Intel', '12M / 3.0GHz upto 4.70GHz / 8 nhân 8 luồng', 'file:/C:/Users/nguye/Pictures/Products/CPU/i7.jpg', '8990000');
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+VALUES ('cpu', 'Core i5 9500', 'Intel', '9M / 3.0GHz upto 4.40GHz / 6 nhân 6 luồng', 'file:/C:/Users/nguye/Pictures/Products/CPU/i5.jpg', '5690000');
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+VALUES ('cpu', 'Core i3 9100F', 'Intel', '6M / 3.6GHz upto 4.20GHz / 4 nhân 4 luồng', 'file:/C:/Users/nguye/Pictures/Products/CPU/i3.jpg', '2190000');
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+VALUES ('cpu', 'AMD Ryzen 9 3900x', 'AMD', '70MB /3.8GHz /12 nhân 24 luồng', 'file:/C:/Users/nguye/Pictures/Products/CPU/ryzen9.jpg', '13090000');
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+VALUES ('cpu', 'AMD Ryzen 7 3800x', 'AMD', '36MB /3.9GHz /8 nhân 16 luồng', 'file:/C:/Users/nguye/Pictures/Products/CPU/ryzen7.jpg', '10290000');
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+VALUES ('cpu', 'AMD Ryzen 5 3400G', 'AMD', '6MB /3.7GHz /4 nhân 8 luồng', 'file:/C:/Users/nguye/Pictures/Products/CPU/ryzen5.jpg', '13090000');
+
+
+
 
 CREATE TABLE `bill` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
@@ -80,5 +112,4 @@ CREATE TABLE `bill_info` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
     
-
 

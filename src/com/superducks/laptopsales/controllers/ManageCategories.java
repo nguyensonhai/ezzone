@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -22,6 +23,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.Objects;
 
 public class ManageCategories {
@@ -51,17 +53,17 @@ public class ManageCategories {
         showdataTableProduct();
     }
 
-    public  void showDatatableCategory() {
-        String sql="select *from `categories`";
+    public void showDatatableCategory() {
+        String sql = "select *from `categories`";
         ObservableList<Categories> data = FXCollections.observableArrayList();
         try {
             ResultSet rs = ConnectDatabase.Connect().createStatement().executeQuery(sql);
-            while (rs.next()){
-                Categories c=new Categories(rs.getString(1),rs.getString(2));
+            while (rs.next()) {
+                Categories c = new Categories(rs.getString(1), rs.getString(2));
                 data.add(c);
             }
-            clmCateID.setCellValueFactory(new PropertyValueFactory<Categories,String>("CategoryID"));
-            clmCategoryName.setCellValueFactory(new PropertyValueFactory<Categories,String>("CategoryName"));
+            clmCateID.setCellValueFactory(new PropertyValueFactory<Categories, String>("CategoryID"));
+            clmCategoryName.setCellValueFactory(new PropertyValueFactory<Categories, String>("CategoryName"));
             tblCategory.getItems().clear();
             tblCategory.setItems(data);
             tblCategory.getSelectionModel().selectFirst();
@@ -70,29 +72,29 @@ public class ManageCategories {
         }
     }
 
-    public void showdataTableProduct(){
-        Categories c=tblCategory.getSelectionModel().getSelectedItem();
+    public void showdataTableProduct() {
+        Categories c = tblCategory.getSelectionModel().getSelectedItem();
         String sql = "SELECT * FROM products where category_id='" + c.getCategoryID() + "'";
         ObservableList<Products> data = FXCollections.observableArrayList();
         try {
-            ResultSet rs=ConnectDatabase.Connect().createStatement().executeQuery(sql);
-            while(rs.next()) {
-                Products p= new Products(rs.getInt(1),
+            ResultSet rs = ConnectDatabase.Connect().createStatement().executeQuery(sql);
+            while (rs.next()) {
+                Products p = new Products(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                        rs.getInt(7));
+                        getFormattedAmount(rs.getInt(7)));
                 data.add(p);
 
             }
-            clmID.setCellValueFactory(new PropertyValueFactory<Products,String>("productId"));
-            clmCategoryID.setCellValueFactory(new PropertyValueFactory<Products,String>("categoryId"));
-            clmName.setCellValueFactory(new PropertyValueFactory<Products,String>("name"));
-            clmPrice.setCellValueFactory(new PropertyValueFactory<Products,String>("price"));
+            clmID.setCellValueFactory(new PropertyValueFactory<Products, String>("productId"));
+            clmCategoryID.setCellValueFactory(new PropertyValueFactory<Products, String>("categoryId"));
+            clmName.setCellValueFactory(new PropertyValueFactory<Products, String>("name"));
+            clmPrice.setCellValueFactory(new PropertyValueFactory<Products, String>("price"));
             clmCategoryID.setCellFactory(TextFieldTableCell.<Products>forTableColumn());
             tblProducts.setItems(data);
             tblProducts.getSelectionModel().selectFirst();
             int row = tblProducts.getItems().size();
-            if(row > 0) {
+            if (row > 0) {
                 btnEdit.setVisible(true);
                 btnDelete.setVisible(true);
             } else {
@@ -104,7 +106,7 @@ public class ManageCategories {
         }
     }
 
-    static void showForm(){
+    static void showForm() {
         Parent root;
         try {
             root = FXMLLoader.load(Objects.requireNonNull(LoginForm.class.getClassLoader().getResource("com/superducks/laptopsales/fxmls/ManageCategories.fxml")));
@@ -114,11 +116,11 @@ public class ManageCategories {
             mainStage.getIcons().add(icon);
             mainStage.setResizable(false);
             mainStage.show();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     public void btnAddclick(MouseEvent mouseEvent) {
         Categories c = tblCategory.getSelectionModel().getSelectedItem();
         AddProducts.category = c.getCategoryID();
@@ -131,22 +133,21 @@ public class ManageCategories {
             AddProducts.mainStage.getIcons().add(icon);
             AddProducts.mainStage.setResizable(false);
             AddProducts.mainStage.showAndWait();
-            if(AddProducts.changed) {
+            if (AddProducts.changed) {
                 AddProducts.changed = false;
                 showDatatableCategory();
                 showdataTableProduct();
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void btnEditClick(MouseEvent mouseEvent) {
 
-        Products p=tblProducts.getSelectionModel().getSelectedItem();
-        EditProducts.ProductID=p.getProductId();
-        EditProducts.CategoryID=p.getCategoryId();
+        Products p = tblProducts.getSelectionModel().getSelectedItem();
+        EditProducts.ProductID = p.getProductId();
+        EditProducts.CategoryID = p.getCategoryId();
         EditProducts.chage = 0;
         Parent root;
         try {
@@ -157,33 +158,32 @@ public class ManageCategories {
             EditProducts.mainStage.getIcons().add(icon);
             EditProducts.mainStage.setResizable(false);
             EditProducts.mainStage.showAndWait();
-            if(EditProducts.changed) {
+            if (EditProducts.changed) {
                 EditProducts.changed = false;
                 showDatatableCategory();
                 showdataTableProduct();
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     public void mouseclick(MouseEvent mouseEvent) {
         btnEdit.setVisible(true);
         btnDelete.setVisible(true);
     }
 
     public void btnDeleteClick(MouseEvent mouseEvent) {
-        Products p=tblProducts.getSelectionModel().getSelectedItem();
-        if(AlertMessage.showAlertYesNo()){
-            String sql="DELETE FROM products WHERE id ="+p.getProductId();
+        Products p = tblProducts.getSelectionModel().getSelectedItem();
+        if (AlertMessage.showAlertYesNo()) {
+            String sql = "DELETE FROM products WHERE id =" + p.getProductId();
             try {
                 ConnectDatabase.Connect().prepareStatement(sql).executeUpdate();
                 showdataTableProduct();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
-        else{
+        } else {
             System.out.println("no");
         }
     }
@@ -200,15 +200,32 @@ public class ManageCategories {
             EditCategories.mainStage.setScene(new Scene(root));
             EditCategories.mainStage.setResizable(false);
             EditCategories.mainStage.showAndWait();
-            if(EditCategories.changed) {
+            if (EditCategories.changed) {
                 showDatatableCategory();
                 showdataTableProduct();
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    private static String getFormattedAmount(int amount) {
+        StringBuilder formatted_value = new StringBuilder();
+        boolean isNavigate = amount < 0;
+        amount = Math.abs(amount);
+        while (amount > 999) {
+            int du = amount % 1000;
+            amount = amount / 1000;
+            formatted_value.insert(0, String.format(Locale.getDefault(), ".%,03d", du));
+        }
+        if (isNavigate) {
+            formatted_value.insert(0, String.format(Locale.getDefault(), "-%,d", amount));
+        } else {
+            formatted_value.insert(0, String.format(Locale.getDefault(), "%,d", amount));
+        }
+        return String.format(Locale.getDefault(), "%s", formatted_value.toString());
+    }
+
 
     public void tblCategoryClicked(MouseEvent mouseEvent) {
         btnCateEdit.setVisible(true);
@@ -219,12 +236,11 @@ public class ManageCategories {
         try {
             ResultSet rs=ConnectDatabase.Connect().createStatement().executeQuery(sql);
             while(rs.next()) {
-                Products p= new Products(rs.getInt(1),
+                Products p = new Products(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                        rs.getInt(7));
+                        getFormattedAmount(rs.getInt(7)));
                 data.add(p);
-
             }
             clmID.setCellValueFactory(new PropertyValueFactory<Products,String>("productId"));
             clmCategoryID.setCellValueFactory(new PropertyValueFactory<Products,String>("categoryId"));

@@ -26,8 +26,8 @@ public class EditCategories {
     public ImageView btnNonAdd;
     public ImageView btnNonAccept;
 
-    public void initialize(){
-        if(chage==1){
+    public void initialize() {
+        if (chage == 1) {
             btnNonAccept.setVisible(true);
             showDataWithEdit();
         } else {
@@ -43,21 +43,23 @@ public class EditCategories {
 
 
     public void btnAcceptClicked(MouseEvent mouseEvent) {
-        String sqlCheckName = "select * from categories where name ='" +txtcategoryName.getText() +"';";
+        String sqlCheckName = "select * from categories where name ='" + txtcategoryName.getText() + "';";
         try {
             ResultSet rsName = Objects.requireNonNull(ConnectDatabase.Connect()).createStatement().executeQuery(sqlCheckName);
-            if(!rsName.next()) {
-                if(AlertMessage.showAlertYesNo()) {
+            if (!rsName.next()) {
+                if (AlertMessage.showAlertYesNo()) {
                     String sql = "UPDATE categories SET name = '" + txtcategoryName.getText() + "' WHERE id = '" + txtcategoryID.getText() + "'";
                     try {
                         Objects.requireNonNull(ConnectDatabase.Connect()).prepareStatement(sql).executeUpdate();
                         AlertMessage.showAlert("Updated all information", "tick");
+                        categoryName = txtcategoryName.getText();
+                        check();
                         changed = true;
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
                 }
-            }  else {
+            } else {
                 AlertMessage.showAlert("This Category Name already existed, please choose another", "error");
             }
         } catch (SQLException e) {
@@ -66,26 +68,26 @@ public class EditCategories {
     }
 
     public void btnAddClicked(MouseEvent mouseEvent) {
-        String sqlCheck = "select * from categories where id ='" +txtcategoryID.getText() +"';";
-        String sqlCheckName = "select * from categories where name ='" +txtcategoryName.getText() +"';";
+        String sqlCheck = "select * from categories where id ='" + txtcategoryID.getText() + "';";
+        String sqlCheckName = "select * from categories where name ='" + txtcategoryName.getText() + "';";
         try {
             ResultSet rs = ConnectDatabase.Connect().createStatement().executeQuery(sqlCheck);
             ResultSet rsName = ConnectDatabase.Connect().createStatement().executeQuery(sqlCheckName);
-            if(!rs.next() && !rsName.next()) {
-                if(AlertMessage.showAlertYesNo()) {
+            if (!rs.next() && !rsName.next()) {
+                if (AlertMessage.showAlertYesNo()) {
                     String sql = "INSERT INTO categories(id,name) VALUES ('" + txtcategoryID.getText() + "', '" + txtcategoryName.getText() + "')";
                     try {
                         Objects.requireNonNull(ConnectDatabase.Connect()).prepareStatement(sql).executeUpdate();
                         AlertMessage.showAlert("Added new category", "tick");
                         txtcategoryID.setText("");
                         txtcategoryName.setText("");
+                        check();
                         changed = true;
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
                 }
-            }
-            else
+            } else
                 AlertMessage.showAlert("This Category ID or Name already existed, please choose another", "error");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -97,6 +99,10 @@ public class EditCategories {
     }
 
     public void text_Changed(KeyEvent keyEvent) {
+        check();
+    }
+
+    private void check() {
         String reCategoryID = "^[a-z0-9_-]{2,10}$";
         String reCategoryName = "^[a-zA-Z\\sÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ-]{2,50}$";
         if(chage == 1) {
@@ -119,6 +125,5 @@ public class EditCategories {
             }
         }
     }
-
 }
 

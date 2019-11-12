@@ -104,7 +104,7 @@ public class EditProducts {
         String sqlCheckName = "select * from products where name ='" + name + "';";
         try {
             ResultSet rst = Objects.requireNonNull(ConnectDatabase.Connect()).createStatement().executeQuery(sqlCheckName);
-            if (!rst.next()) {
+            if (!rst.next() || txtNameProduct.getText().equals(nameProduct)) {
                 if (AlertMessage.showAlertYesNo()) {
                     String sql = "UPDATE products SET name = '" + txtNameProduct.getText() + "', producer = '" + txtNSX.getText() + "', info = '" + txtInfo.getText() + "', img = '" + imgProduct.getImage().getUrl().toString() + "', price = '" + Integer.parseInt(txtPrice.getText()) + "' WHERE (id = '" + ProductID + "')";
                     try {
@@ -112,6 +112,8 @@ public class EditProducts {
                         System.out.println(row);
                         AlertMessage.showAlert("Information has been updated", "tick");
                         changed = true;
+                        showData();
+                        check();
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -129,13 +131,17 @@ public class EditProducts {
     }
 
     public void textChanged(KeyEvent keyEvent) {
+        check();
+    }
+
+    void check() {
         if(!nameProduct.equals(txtNameProduct.getText()) || !nsx.equals(txtNSX.getText()) || !info.equals(txtInfo.getText()) || !price.equals(txtPrice.getText()))
             if(!txtNameProduct.getText().equals("") && !txtInfo.getText().equals("") && !txtNSX.getText().equals("") && !txtPrice.getText().equals("")) {
                 btnUpdate.setVisible(true);
-                            }
+            }
             else{
                 btnUpdate.setVisible(false);
-                            }
+            }
         else{
             btnUpdate.setVisible(false);
         }
