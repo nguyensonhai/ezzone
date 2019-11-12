@@ -18,7 +18,7 @@
           <TableColumn fx:id="clmFullname" prefWidth="185.0" style="-fx-alignment: CENTER;" text="Fullname" />
         </columns>
       </TableView>
-      <TableView fx:id="tblBills" layoutX="22.0" layoutY="330.0" prefHeight="330.0" prefWidth="892.0">
+      <TableView fx:id="tblBills" layoutX="22.0" layoutY="330.0" prefHeight="330.0" prefWidth="891.0">
          <columns>
             <TableColumn fx:id="clmBillID" prefWidth="83.0" style="-fx-alignment: CENTER;" text="Bill ID" />
             <TableColumn fx:id="clmUser" prefWidth="255.0" style="-fx-alignment: CENTER;" text="User" />
@@ -36,12 +36,12 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </AreaChart>
-      <ImageView fx:id="btnNonView" fitHeight="35.0" fitWidth="35.0" layoutX="916.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="btnNonView" fitHeight="40.0" fitWidth="40.0" layoutX="922.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../icons/embems/symboliclink.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="btnView" fitHeight="35.0" fitWidth="35.0" layoutX="916.0" layoutY="356.0" onMouseClicked="#btnView_Clicked" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="btnView" fitHeight="40.0" fitWidth="40.0" layoutX="922.0" layoutY="356.0" onMouseClicked="#btnView_Clicked" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../icons/embems/locallymodified.png" />
          </image>
