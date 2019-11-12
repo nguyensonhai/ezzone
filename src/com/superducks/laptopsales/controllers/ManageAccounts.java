@@ -59,11 +59,6 @@ public class ManageAccounts {
         }
     }
 
-    //Close Form
-    static void closeForm() {
-        mainStage.close();
-    }
-
     //Show Table
     private void showTable() {
         ObservableList<Person> data = FXCollections.observableArrayList();

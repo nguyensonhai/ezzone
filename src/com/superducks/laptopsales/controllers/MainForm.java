@@ -204,4 +204,19 @@ public class MainForm {
     public void btnInfoMenu_Click(ActionEvent actionEvent) {
         openFormInfo();
     }
+
+    public void btnStatistics_Clicked(MouseEvent mouseEvent) {
+        Parent root;
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(LoginForm.class.getClassLoader().getResource("com/superducks/laptopsales/fxmls/Statistics.fxml")));
+            Statistics.mainStage.setTitle("Statistics");
+            Statistics.mainStage.setScene(new Scene(root));
+            Image icon = new Image("/com/superducks/laptopsales/icons/main_icons/statistics.png");
+            Statistics.mainStage.getIcons().add(icon);
+            Statistics.mainStage.setResizable(false);
+            Statistics.mainStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

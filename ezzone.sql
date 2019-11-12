@@ -76,6 +76,17 @@ VALUES ('cpu', 'AMD Ryzen 7 3800x', 'AMD', '36MB /3.9GHz /8 nhân 16 luồng', '
 INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
 VALUES ('cpu', 'AMD Ryzen 5 3400G', 'AMD', '6MB /3.7GHz /4 nhân 8 luồng', 'file:/C:/Users/nguye/Pictures/Products/CPU/ryzen5.jpg', '13090000');
 
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+VALUES ('gpu', 'ROG Strix 2080Ti Matrix 11GB', 'Asus', '', 'file:/C:/Users/nguye/Pictures/Products/GPU/2080ti.png', '54990000');
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+VALUES ('gpu', 'ROG Strix GeForce RTX 2070 SUPER 8GB', 'Asus', '', 'file:/C:/Users/nguye/Pictures/Products/GPU/2070.png', '16590000');
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+VALUES ('gpu', 'GeForce RTX 2060 SUPER WINFORCE OC 8GB', 'NDIVIA', '', 'file:/C:/Users/nguye/Pictures/Products/GPU/2060.png', '11990000');
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+VALUES ('gpu', 'MSI GTX 1660 Ti GAMING X 6G', 'MSI', '', 'file:/C:/Users/nguye/Pictures/Products/GPU/1660ti.png', '8390000');
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+VALUES ('gpu', 'ROG Strix GeForce® GTX 1650 Advance 4GB', 'Asus', '', 'file:/C:/Users/nguye/Pictures/Products/GPU/1650.jpg', '4770000');
+
 
 
 
