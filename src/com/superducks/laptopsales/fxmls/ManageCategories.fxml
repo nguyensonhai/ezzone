@@ -13,7 +13,7 @@
                 <TableColumn fx:id="clmID" prefWidth="97.0" style="-fx-alignment: CENTER;" text="Product ID" />
                 <TableColumn fx:id="clmCategoryID" prefWidth="104.0" style="-fx-alignment: CENTER;" text="Category ID" />
                 <TableColumn fx:id="clmName" minWidth="0.0" prefWidth="281.0" style="-fx-alignment: CENTER;" text="Name" />
-                <TableColumn fx:id="clmPrice" prefWidth="148.0" style="-fx-alignment: CENTER;" text="Price" />
+                <TableColumn fx:id="clmPrice" prefWidth="146.0" style="-fx-alignment: CENTER;" text="Price" />
             </columns>
         </TableView>
         <ImageView fx:id="btnAdd" fitHeight="30.0" fitWidth="30.0" layoutX="982.0" layoutY="34.0" onMouseClicked="#btnAddclick" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="25.0">

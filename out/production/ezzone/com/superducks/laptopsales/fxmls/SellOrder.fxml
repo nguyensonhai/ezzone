@@ -17,7 +17,7 @@
          <columns>
             <TableColumn fx:id="clmProducts" prefWidth="258.0" style="-fx-alignment: CENTER;" text="Sản Phẩm" />
             <TableColumn fx:id="clmAmount" prefWidth="105.0" style="-fx-alignment: CENTER;" text="Số Lượng" />
-            <TableColumn fx:id="clmPrice" prefWidth="104.0" style="-fx-alignment: CENTER;" text="Thành tiền" />
+            <TableColumn fx:id="clmPrice" prefWidth="103.0" style="-fx-alignment: CENTER;" text="Thành tiền" />
          </columns>
       </TableView>
       <Label fx:id="lblBuyer" alignment="TOP_LEFT" layoutX="14.0" layoutY="56.0" prefHeight="30.0" prefWidth="295.0" text="Người mua hàng:">

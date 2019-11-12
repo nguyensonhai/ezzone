@@ -13,7 +13,7 @@
             <TableColumn fx:id="clmID" prefWidth="77.0" style="-fx-alignment: CENTER;" text="ID" />
           <TableColumn fx:id="clmUsername" prefWidth="169.0" style="-fx-alignment: CENTER;" text="Username" />
           <TableColumn fx:id="clmFullname" prefWidth="386.0" style="-fx-alignment: CENTER;" text="Fullname" />
-            <TableColumn fx:id="clmPosition" prefWidth="133.0" style="-fx-alignment: CENTER;" text="Position" />
+            <TableColumn fx:id="clmPosition" prefWidth="131.0" style="-fx-alignment: CENTER;" text="Position" />
         </columns>
       </TableView>
       <ImageView fx:id="btnAdd" fitHeight="40.0" fitWidth="40.0" layoutX="802.0" layoutY="44.0" onMouseClicked="#btnAdd_Click" pickOnBounds="true" preserveRatio="true">
