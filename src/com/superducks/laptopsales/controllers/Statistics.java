@@ -35,7 +35,6 @@ public class Statistics {
     public ImageView btnNonView;
     public ImageView btnView;
     private ObservableList<Accounts> dataAccounts = FXCollections.observableArrayList();
-    ObservableList<Bills> dataBills = FXCollections.observableArrayList();
 
     public void initialize() {
         showTableAccounts();
@@ -69,6 +68,7 @@ public class Statistics {
     }
 
     private void showTableBills() {
+        ObservableList<Bills> dataBills = FXCollections.observableArrayList();
         Accounts db = (Accounts) tblAccounts.getSelectionModel().getSelectedItem();
         String username = "";
         String sqlUsername = "select * from accounts where username = '"+db.getUsername()+"';";
