@@ -33,14 +33,17 @@ import java.sql.*;
             String username = "";
             String password = "";
             String fullname = "";
+            String id = "";
             if (rst.next()) {
                 username = rst.getString("username");
                 password = rst.getString("password");
                 fullname = rst.getString("fullname");
+                id = rst.getString("id");
                 if(txtUsername.getText().toLowerCase().equals(username) && txtPassword.getText().toLowerCase().equals(password)) {
                     AlertMessage.showAlert("Logged in successfully with account " + username, "tick");
                     MainForm.loggedAccount = username;
                     MainForm.loggedFullname = fullname;
+                    MainForm.loggedID = id;
                     Main.getPrimaryStage().hide();
                     MainForm.showForm();
                 }

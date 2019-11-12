@@ -24,35 +24,35 @@
       <AnchorPane layoutX="14.0" layoutY="20.0" prefHeight="572.0" prefWidth="382.0">
          <children>
             <Label layoutX="27.0" layoutY="371.0" text="Categories" textFill="WHITE" />
-            <ComboBox fx:id="cbxCategories" layoutX="94.0" layoutY="367.0" onAction="#cbxCategoriesValue_Changed" prefHeight="25.0" prefWidth="258.0" />
+            <ComboBox fx:id="cbxCategories" layoutX="109.0" layoutY="371.0" onAction="#cbxCategoriesValue_Changed" prefHeight="25.0" prefWidth="258.0" />
             <Label layoutX="27.0" layoutY="426.0" text="Products" textFill="WHITE" />
-            <ComboBox fx:id="cbxProducts" layoutX="94.0" layoutY="422.0" onAction="#cbxValue_Changed" prefHeight="25.0" prefWidth="258.0" style="=: CENTER;" />
+            <ComboBox fx:id="cbxProducts" layoutX="109.0" layoutY="426.0" onAction="#cbxValue_Changed" prefHeight="25.0" prefWidth="258.0" style="=: CENTER;" />
             <Label layoutX="29.0" layoutY="484.0" text="Amount" textFill="WHITE" />
-            <TextField fx:id="txtAmount" layoutX="94.0" layoutY="480.0" onKeyReleased="#txtAmount_textChanged" prefHeight="25.0" prefWidth="146.0" style="-fx-alignment: CENTER;" text="1" />
-            <ImageView fx:id="btnAdd" fitHeight="40.0" fitWidth="40.0" layoutX="312.0" layoutY="464.0" onMouseClicked="#btnAdd_Click" pickOnBounds="true" preserveRatio="true" visible="false">
+            <TextField fx:id="txtAmount" layoutX="109.0" layoutY="484.0" onKeyReleased="#txtAmount_textChanged" prefHeight="25.0" prefWidth="146.0" style="-fx-alignment: CENTER;" text="1" />
+            <ImageView fx:id="btnAdd" fitHeight="40.0" fitWidth="40.0" layoutX="327.0" layoutY="468.0" onMouseClicked="#btnAdd_Click" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../icons/web_ui_color/checkmark.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="btnNonAdd" fitHeight="40.0" fitWidth="40.0" layoutX="312.0" layoutY="464.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btnNonAdd" fitHeight="40.0" fitWidth="40.0" layoutX="327.0" layoutY="468.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/web_ui_brown/checkmark.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="btnRemove" fitHeight="40.0" fitWidth="40.0" layoutX="258.0" layoutY="464.0" onMouseClicked="#btnRemove_Click" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="btnRemove" fitHeight="40.0" fitWidth="40.0" layoutX="273.0" layoutY="468.0" onMouseClicked="#btnRemove_Click" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../icons/web_ui_color/delete.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="btnNonRemove" fitHeight="40.0" fitWidth="40.0" layoutX="258.0" layoutY="464.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btnNonRemove" fitHeight="40.0" fitWidth="40.0" layoutX="273.0" layoutY="468.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/web_ui_brown/close.png" />
                </image>
             </ImageView>
             <Label layoutX="25.0" layoutY="263.0" text="Customer" textFill="WHITE" />
-            <TextField fx:id="txtCustomer" layoutX="94.0" layoutY="259.0" prefHeight="25.0" prefWidth="258.0" style="-fx-alignment: CENTER;" />
-            <Label layoutX="26.0" layoutY="318.0" text="Phone" textFill="WHITE" />
-            <TextField fx:id="txtPhone" layoutX="95.0" layoutY="310.0" prefHeight="25.0" prefWidth="258.0" style="-fx-alignment: CENTER;" />
+            <TextField fx:id="txtCustomer" layoutX="109.0" layoutY="263.0" onKeyReleased="#textChanged" prefHeight="25.0" prefWidth="258.0" style="-fx-alignment: CENTER;" />
+            <Label layoutX="26.0" layoutY="318.0" text="Phone/Code" textFill="WHITE" />
+            <TextField fx:id="txtPhone" layoutX="110.0" layoutY="314.0" onKeyReleased="#textChanged" prefHeight="25.0" prefWidth="258.0" style="-fx-alignment: CENTER;" />
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="29.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/main_icons/laptop-icon.png" />
@@ -63,8 +63,8 @@
                   <Font size="57.0" />
                </font>
             </Label>
-            <Button fx:id="btnConfirm" disable="true" layoutX="241.0" layoutY="533.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Confirm" />
-            <Button fx:id="btnClearAll" layoutX="94.0" layoutY="533.0" mnemonicParsing="false" onMouseClicked="#btnClear_Clicked" prefHeight="25.0" prefWidth="109.0" text="Clear All" />
+            <Button fx:id="btnConfirm" disable="true" layoutX="256.0" layoutY="537.0" mnemonicParsing="false" onMouseClicked="#btnConfirm_Clicked" prefHeight="25.0" prefWidth="109.0" text="Confirm" />
+            <Button fx:id="btnClearAll" layoutX="109.0" layoutY="537.0" mnemonicParsing="false" onMouseClicked="#btnClear_Clicked" prefHeight="25.0" prefWidth="109.0" text="Clear All" />
          </children>
       </AnchorPane>
       <Label fx:id="lblTotalePrice" alignment="CENTER_RIGHT" layoutX="418.0" layoutY="601.0" prefHeight="25.0" prefWidth="724.0" text="Total Price: 0 VND" textFill="WHITE">

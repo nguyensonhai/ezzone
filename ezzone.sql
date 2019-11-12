@@ -34,6 +34,7 @@ CREATE TABLE `categories` (
 );
 
 
+
 CREATE TABLE `products` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`category_id` VARCHAR(50) NOT NULL,
@@ -46,42 +47,38 @@ CREATE TABLE `products` (
 	CONSTRAINT `FK_products_categories` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
 );
 
-CREATE TABLE `laptop_sales`.`bill` (
-  `idbill` INT(11) NOT NULL AUTO_INCREMENT,
-  `idUser` INT(10) NOT NULL,
+CREATE TABLE `bill` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `user` INT(10) NOT NULL,
+  `customer_name` varchar(50) NOT NULL,
+  `customer_phone` int(11) NOT NULL,
   `date` DATETIME NOT NULL,
   `total` INT(11) NOT NULL,
-  PRIMARY KEY (`idbill`),
-  INDEX `FK_bill_accounts_idx` (`idUser` ASC) VISIBLE,
+  PRIMARY KEY (`id`),
+  INDEX `FK_bill_accounts_idx` (`user` ASC) VISIBLE,
   CONSTRAINT `FK_bill_accounts`
-    FOREIGN KEY (`idUser`)
-    REFERENCES `laptop_sales`.`accounts` (`id`)
+    FOREIGN KEY (`user`)
+    REFERENCES `accounts` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
-CREATE TABLE `laptop_sales`.`billinfo` (
-  `idbill` INT(11) NOT NULL,accounts
-  `productID` INT(11) NOT NULL,
+CREATE TABLE `bill_info` (
+  `bill_id` INT(11) NOT NULL,
+  `product_id` INT(11) NOT NULL,
   `amount` INT(11) NOT NULL,
-  `total` INT(11) NOT NULL,
-  PRIMARY KEY (`idbill`, `productID`),
-  INDEX `FK_billinfo_products_idx` (`productID` ASC) VISIBLE,
+  `total` INT(50) NOT NULL,
+  PRIMARY KEY (`bill_id`, `product_id`),
+  INDEX `FK_billinfo_products_idx` (`product_id` ASC) VISIBLE,
   CONSTRAINT `FK_billinfo_products`
-    FOREIGN KEY (`productID`)
-    REFERENCES `laptop_sales`.`products` (`productID`)
+    FOREIGN KEY (`product_id`)
+    REFERENCES `products` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `FX_billinfo_bill`
-    FOREIGN KEY (`idbill`)
-    REFERENCES `laptop_sales`.`bill` (`idbill`)
+    FOREIGN KEY (`bill_id`)
+    REFERENCES `bill` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
     
-    CREATE TABLE `laptop_sales`.`cart` (
-  `idcart` INT NOT NULL AUTO_INCREMENT,
-  `img` LONGTEXT NULL,
-  `name` VARCHAR(45) NULL,
-  `total` VARCHAR(45) NULL,
-  PRIMARY KEY (`idcart`));
 
 

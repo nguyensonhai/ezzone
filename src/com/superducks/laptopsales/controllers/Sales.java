@@ -14,8 +14,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -146,6 +146,7 @@ public class Sales {
     private void check() {
         checkAdd();
         checkRemove();
+        checkConfirm();
     }
 
     private void tableRow_Clicked () {
@@ -181,6 +182,16 @@ public class Sales {
         } else {
             btnAdd.setVisible(false);
             btnNonAdd.setVisible(true);
+        }
+    }
+
+    private void checkConfirm() {
+        String customerName = "^[a-zA-Z\\sÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ-]{2,50}$";
+        String phone = "^[0-9_-]{9,20}$";
+        if(mainTable.getItems().size() > 0 && txtCustomer.getText().matches(customerName) && txtPhone.getText().matches(phone)) {
+            btnConfirm.setDisable(false);
+        } else {
+            btnConfirm.setDisable(true);
         }
     }
 
@@ -253,20 +264,94 @@ public class Sales {
     }
 
     public void btnClear_Clicked(MouseEvent mouseEvent) {
-        clearAll();
+        if(AlertMessage.showAlertYesNo()) {
+            clearAll();
+        }
     }
     private void clearAll() {
+        txtCustomer.setText("");
+        txtAmount.setText("1");
+        txtPhone.setText("");
+        lblTotalePrice.setText("Total Price: 0 VND");
+        //cbxCategories.getSelectionModel().selectFirst();
+        //getDataComboboxProducts();
+        dataTable.clear();
+        mainTable.getItems().clear();
+        check();
+    }
+
+    public void textChanged(KeyEvent keyEvent) {
+        check();
+    }
+
+    public void btnConfirm_Clicked(MouseEvent mouseEvent) {
         if(AlertMessage.showAlertYesNo()) {
-            txtCustomer.setText("");
-            txtAmount.setText("1");
-            txtPhone.setText("");
-            lblTotalePrice.setText("Total Price: 0 VND");
-            //cbxCategories.getSelectionModel().selectFirst();
-            //getDataComboboxProducts();
-            dataTable.clear();
-            mainTable.getItems().clear();
-            check();
+            confirm();
+            clearAll();
         }
+    }
+    private void confirm() {
+        //Create new Bill
+        int billID = 0;
+        String createNewBill = "INSERT INTO `bill` (`user`, `customer_name`, `customer_phone`, `date`, `total`) VALUES (?, ?, ?, ?, ?);";
+        Connection con = ConnectDatabase.Connect();
+        int totalPice = 0;
+        int size = mainTable.getItems().size();
+        for(int i = 0; i < size; i ++) {
+            totalPice += getSplit(dataTable.get(i).getPrice());
+        }
+        try {
+            assert con != null;
+            PreparedStatement ps = con.prepareStatement(createNewBill);
+            ps.setString(1, MainForm.loggedID);
+            ps.setString(2, txtCustomer.getText());
+            ps.setString(3, txtPhone.getText());
+            ps.setString(4, String.valueOf(LocalDateTime.now()));
+            ps.setString(5, String.valueOf(totalPice));
+            ps.executeUpdate();
+            ResultSet rs = con.createStatement().executeQuery("select *from bill where id=(SELECT LAST_INSERT_ID());");
+            if(rs.next()) {
+                billID = rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        //Create Bill Info
+        String product_name = "", total = "";
+        int amount = 0, product_id = 0;
+        int row = mainTable.getItems().size();
+        for(int i = 0; i < row; i++) {
+            product_name = dataTable.get(i).getProducts();
+            total = dataTable.get(i).getPrice();
+            amount = dataTable.get(i).getAmount();
+            product_id = getProductID(product_name);
+            String sql = "INSERT INTO `bill_info` (`bill_id`, `product_id`, `amount`, `total`) VALUES (?, ?, ?, ?);";
+            try {
+                PreparedStatement ps = con.prepareStatement(sql);
+                ps.setString(1, String.valueOf(billID));
+                ps.setString(2, String.valueOf(product_id));
+                ps.setString(3, String.valueOf(amount));
+                ps.setString(4, String.valueOf(getSplit(total)));
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public Integer getProductID(String product_name) {
+        int product_id = 0;
+        String sql = "Select * from products where name='"+product_name+"';";
+        try {
+            ResultSet rs = Objects.requireNonNull(ConnectDatabase.Connect()).createStatement().executeQuery(sql);
+            if(rs.next()) {
+                product_id = rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return product_id;
     }
 
     public static class ClassSales {

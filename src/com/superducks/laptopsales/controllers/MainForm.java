@@ -23,6 +23,7 @@ import java.util.Objects;
 public class MainForm {
     static String loggedAccount = "";
     static String loggedFullname = "";
+    static String loggedID = "";
     static String loggedPosition = "";
     public MenuItem itmAccount;
     public MenuItem itmLogOut;
