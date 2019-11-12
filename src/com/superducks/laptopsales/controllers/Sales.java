@@ -338,6 +338,7 @@ public class Sales {
                 e.printStackTrace();
             }
         }
+        SellOrder.showForm(billID);
     }
 
     public Integer getProductID(String product_name) {

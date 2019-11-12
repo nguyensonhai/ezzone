@@ -1,5 +1,6 @@
 package com.superducks.laptopsales.Class;
 
+import com.superducks.laptopsales.controllers.SellOrder;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
