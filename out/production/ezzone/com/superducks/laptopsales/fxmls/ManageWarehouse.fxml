@@ -12,11 +12,11 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="568.0" prefWidth="851.0" styleClass="bg5" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.superducks.laptopsales.controllers.ManageWarehouse">
+<BorderPane prefHeight="619.0" prefWidth="876.0" styleClass="bg5" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.superducks.laptopsales.controllers.ManageWarehouse">
 <top>
     <VBox styleClass="bg-light-grey" BorderPane.alignment="CENTER">
         <children>
-            <HBox prefHeight="40.0" prefWidth="741.0">
+            <HBox prefHeight="50.0" prefWidth="859.0">
                 <children>
                     <ComboBox fx:id="cbcategory" onAction="#CbCategoryClick" prefWidth="176.0">
                         <HBox.margin>
@@ -48,7 +48,7 @@
                               <Insets left="10.0" top="3.0" />
                            </HBox.margin>
                             </TextField>
-                            <ImageView fitHeight="30.0" fitWidth="30.0" onMouseClicked="#Search" pickOnBounds="true" preserveRatio="true">
+                            <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#Search" pickOnBounds="true" preserveRatio="true">
                                 <image>
                                     <Image url="@../icons/web_ui_color/search.png" />
                                 </image>
@@ -68,6 +68,9 @@
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
+               <VBox.margin>
+                  <Insets left="5.0" />
+               </VBox.margin>
             </HBox>
         </children>
     </VBox>
@@ -75,14 +78,14 @@
 <left>
     <ScrollPane prefHeight="456.0" prefWidth="844.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
         <content>
-            <TilePane fx:id="tpn" alignment="TOP_CENTER" hgap="10.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="506.0" prefWidth="840.0" style="-fx-background-color: white;" vgap="10.0">
+            <TilePane fx:id="tpn" alignment="TOP_CENTER" hgap="10.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="544.0" prefWidth="840.0" style="-fx-background-color: white;" vgap="10.0">
                 <padding>
                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                 </padding>
             </TilePane>
         </content>
         <BorderPane.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="15.0" left="15.0" right="5.0" top="5.0" />
         </BorderPane.margin>
     </ScrollPane>
 </left>
