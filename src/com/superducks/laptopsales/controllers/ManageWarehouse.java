@@ -90,7 +90,7 @@ public class ManageWarehouse {
                     remaining = rst.getInt("products_remaining");
                     sold = rst.getInt("products_sold");
                 }
-                Label remaining_sold = new Label("Remaining: "+remaining+" - Sold: "+sold);
+                Label remaining_sold = new Label("Available: "+remaining+" - Sold: "+sold);
                 remaining_sold.setFont(Font.font("Times New Roman", FontPosture.REGULAR, 16));
                 vBox.getChildren().add(imageView);
                 vBox.getChildren().add(nameProduct);
