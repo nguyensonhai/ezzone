@@ -49,7 +49,7 @@ public class ManageWarehouse {
         ObservableList<String> list = FXCollections.observableArrayList();
         String sql = "Select *from categories ";
         try {
-            ResultSet rs = ConnectDatabase.Connect().createStatement().executeQuery(sql);
+            ResultSet rs = Objects.requireNonNull(ConnectDatabase.Connect()).createStatement().executeQuery(sql);
             while (rs.next()) {
                 data.add(rs.getString(1));
                 list.add(rs.getString(2));
@@ -65,7 +65,7 @@ public class ManageWarehouse {
     private void showData(String sql) {
         ObservableList<VBox> listIMG = FXCollections.observableArrayList();
         try {
-            ResultSet rs = ConnectDatabase.Connect().createStatement().executeQuery(sql);
+            ResultSet rs = Objects.requireNonNull(ConnectDatabase.Connect()).createStatement().executeQuery(sql);
             while (rs.next()) {
                 VBox vBox = new VBox();
                 vBox.setAlignment(Pos.CENTER);
