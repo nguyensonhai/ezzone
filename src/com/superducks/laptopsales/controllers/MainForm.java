@@ -82,7 +82,7 @@ public class MainForm {
             mainStage.show();
             mainStage.setResizable(false);
 
-            mainStage.setOnCloseRequest(e->Main.getPrimaryStage().close());
+            mainStage.setOnCloseRequest(e->System.exit(0));
         }
         catch (IOException e) {
             e.printStackTrace();
