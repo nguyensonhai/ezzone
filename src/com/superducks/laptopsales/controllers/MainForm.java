@@ -33,7 +33,6 @@ public class MainForm {
     public Label lblSales;
     public Label lblInfo;
     public ImageView btnInfo;
-    public Label lblLog;
     public ImageView btnAccounts;
     public Label lblAccounts;
     public ImageView btnStatistics;
@@ -44,6 +43,8 @@ public class MainForm {
     public Tab tabHome;
     public ImageView btnWarehouse;
     public Label lblWarehouse;
+    public ImageView btnProducts;
+    public Label lblProducts;
 
     public void initialize() {
         setTab();
@@ -122,12 +123,12 @@ public class MainForm {
         lblInfo.setVisible(true);
     }
 
-    public void btnLog_MouseExited(MouseEvent mouseEvent) {
-        lblLog.setVisible(false);
+    public void btnProducts_MouseExited(MouseEvent mouseEvent) {
+        lblProducts.setVisible(false);
     }
 
-    public void btnLog_MouseMoved(MouseEvent mouseEvent) {
-        lblLog.setVisible(true);
+    public void btnProducts_MouseMoved(MouseEvent mouseEvent) {
+        lblProducts.setVisible(true);
     }
 
     public void btnAccount_MouseExited(MouseEvent mouseEvent) {
@@ -245,5 +246,4 @@ public class MainForm {
             e.printStackTrace();
         }
     }
-
 }

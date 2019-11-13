@@ -54,9 +54,9 @@
                               <Image url="@../icons/main_icons/view-info.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="160.0" fitWidth="160.0" layoutX="649.0" layoutY="89.0" onMouseExited="#btnLog_MouseExited" onMouseMoved="#btnLog_MouseMoved" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="btnProducts" fitHeight="160.0" fitWidth="160.0" layoutX="649.0" layoutY="89.0" onMouseExited="#btnProducts_MouseExited" onMouseMoved="#btnProducts_MouseMoved" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../icons/main_icons/log.png" />
+                              <Image url="@../icons/main_icons/items.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="btnSales" fitHeight="160.0" fitWidth="175.0" layoutX="143.0" layoutY="89.0" onMouseClicked="#btnSales_Click" onMouseExited="#btnSales_MouseExited" onMouseMoved="#btnSales_MouseMoved" pickOnBounds="true" preserveRatio="true">
@@ -74,7 +74,7 @@
                               <Font size="28.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblLog" layoutX="706.0" layoutY="268.0" text="Log" textFill="#253b42" visible="false">
+                        <Label fx:id="lblProducts" layoutX="675.0" layoutY="268.0" text="Products" textFill="#ce5959" visible="false">
                            <font>
                               <Font size="28.0" />
                            </font>
