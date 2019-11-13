@@ -231,6 +231,18 @@ public class MainForm {
     }
 
     public void btnWarehouse_MouseClicked(MouseEvent mouseEvent) {
+        Parent root;
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(LoginForm.class.getClassLoader().getResource("com/superducks/laptopsales/fxmls/ManageWarehouse.fxml")));
+            ManageWarehouse.mainStage.setTitle("Manage Warehouse");
+            ManageWarehouse.mainStage.setScene(new Scene(root));
+            Image icon = new Image("/com/superducks/laptopsales/icons/main_icons/warehouse.png");
+            ManageWarehouse.mainStage.getIcons().add(icon);
+            ManageWarehouse.mainStage.setResizable(false);
+            ManageWarehouse.mainStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

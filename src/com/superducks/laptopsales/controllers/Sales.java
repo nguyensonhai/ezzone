@@ -88,7 +88,33 @@ public class Sales {
 
 
     public void btnAdd_Click(MouseEvent mouseEvent) {
-        addTableRow();
+        if(!checkWarehouse()){
+            addTableRow();
+        } else {
+            AlertMessage.showAlert("Out of stock!", "error");
+        }
+    }
+
+    private boolean checkWarehouse() {
+        boolean check = true;
+        int product_id = 0;
+        String sql = "select * from products where name = '"+cbxProducts.getValue()+"';";
+        try {
+            ResultSet rs = ConnectDatabase.Connect().createStatement().executeQuery(sql);
+            if(rs.next()) {
+                product_id = rs.getInt("id");
+            }
+            String sqlFind = "select * from warehouse where product_id = " + product_id + ";";
+            ResultSet rst = ConnectDatabase.Connect().createStatement().executeQuery(sqlFind);
+            if(rst.next()) {
+                if(rst.getInt("products_remaining")>0) {
+                    check = Integer.parseInt(txtAmount.getText()) > rst.getInt("products_remaining");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return check;
     }
 
     public void btnRemove_Click(MouseEvent mouseEvent) {
@@ -103,7 +129,6 @@ public class Sales {
         type = cbxCategories.getValue().toString();
         products = cbxProducts.getValue().toString();
         amount = Integer.parseInt(txtAmount.getText());
-
         String sql = "select * from products where name = '" + products + "';";
         try {
             ResultSet rs = Objects.requireNonNull(ConnectDatabase.Connect()).createStatement().executeQuery(sql);
@@ -334,6 +359,23 @@ public class Sales {
                 ps.setString(3, String.valueOf(amount));
                 ps.setString(4, String.valueOf(getSplit(total)));
                 ps.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            String sqlWh = "select * from warehouse where product_id=" + product_id + ";";
+            try {
+                ResultSet updateWh =  Objects.requireNonNull(ConnectDatabase.Connect()).createStatement().executeQuery(sqlWh);
+                int remaining = 0, sold = 0;
+                if(updateWh.next()) {
+                    remaining = updateWh.getInt("products_remaining") - amount;
+                    sold = updateWh.getInt("products_sold") + amount;
+                }
+                String upWh = "UPDATE `warehouse` SET `products_remaining` = ?, `products_sold` = ? WHERE (`product_id` = ?);";
+                PreparedStatement pst = Objects.requireNonNull(ConnectDatabase.Connect()).prepareStatement(upWh);
+                pst.setString(1, String.valueOf(remaining));
+                pst.setString(2, String.valueOf(sold));
+                pst.setString(3, String.valueOf(product_id));
+                pst.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
             }

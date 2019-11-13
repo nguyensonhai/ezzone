@@ -102,7 +102,12 @@
                               <Image url="@../icons/main_icons/categories.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="lblAccounts" layoutX="69.0" layoutY="268.0" text="Accounts" textFill="#77b4be" visible="false">
+                        <Label fx:id="lblAccounts" layoutX="69.0" layoutY="268.0" text="Accounts" textFill="#26424b" visible="false">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblCategories" layoutX="291.0" layoutY="268.0" text="Categories" textFill="#e8b750" visible="false">
                            <font>
                               <Font size="28.0" />
                            </font>
@@ -112,7 +117,7 @@
                               <Font size="28.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblCategories" layoutX="291.0" layoutY="268.0" text="Categories" textFill="#77b4be" visible="false">
+                        <Label fx:id="lblWarehouse" layoutX="527.0" layoutY="268.0" text="Warehouse" textFill="#367596" visible="false">
                            <font>
                               <Font size="28.0" />
                            </font>
@@ -122,11 +127,6 @@
                               <Image url="@../icons/main_icons/warehouse.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="lblWarehouse" layoutX="527.0" layoutY="268.0" text="Warehouse" textFill="#367596" visible="false">
-                           <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Label>
                      </children></AnchorPane>
             </content>
           </Tab>
