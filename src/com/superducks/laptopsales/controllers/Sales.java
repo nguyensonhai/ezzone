@@ -91,7 +91,7 @@ public class Sales {
         if(!checkWarehouse()){
             addTableRow();
         } else {
-            AlertMessage.showAlert("Out of stock!", "error");
+            AlertMessage.showAlert("Not enough amount of products or products not available, please check again!", "error");
         }
     }
 
