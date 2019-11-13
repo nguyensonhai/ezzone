@@ -46,7 +46,7 @@ public class SellOrder {
         try {
             root = FXMLLoader.load(Objects.requireNonNull(LoginForm.class.getClassLoader().getResource("com/superducks/laptopsales/fxmls/SellOrder.fxml")));
 
-            mainStage.setTitle("Hoá Đơn Bán Lẻ");
+            mainStage.setTitle("Hoá Đơn Bán Hàng");
             mainStage.setScene(new Scene(root));
             Image icon = new Image("/com/superducks/laptopsales/icons/main_icons/bill.png");
             mainStage.getIcons().add(icon);

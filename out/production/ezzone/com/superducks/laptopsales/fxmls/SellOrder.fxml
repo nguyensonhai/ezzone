@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="674.0" prefWidth="496.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.superducks.laptopsales.controllers.SellOrder">
+<AnchorPane prefHeight="710.0" prefWidth="499.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.superducks.laptopsales.controllers.SellOrder">
    <children>
       <Label alignment="TOP_CENTER" layoutX="14.0" layoutY="14.0" prefHeight="42.0" prefWidth="469.0" style="-fx-font-weight: BOLD;" text="HOÁ ĐƠN BÁN HÀNG">
          <font>

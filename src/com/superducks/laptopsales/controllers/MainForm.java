@@ -42,6 +42,8 @@ public class MainForm {
     public Label lblCategories;
     public Tab tabAdmin;
     public Tab tabHome;
+    public ImageView btnWarehouse;
+    public Label lblWarehouse;
 
     public void initialize() {
         setTab();
@@ -151,6 +153,14 @@ public class MainForm {
         lblCategories.setVisible(true);
     }
 
+    public void btnWarehouse_MouseExited(MouseEvent mouseEvent) {
+        lblWarehouse.setVisible(false);
+    }
+
+    public void btnWarehouse_MouseMoved(MouseEvent mouseEvent) {
+        lblWarehouse.setVisible(true);
+    }
+
     public void btnAccounts_Click(MouseEvent mouseEvent) {
         ManageAccounts.showForm();
     }
@@ -219,4 +229,8 @@ public class MainForm {
             e.printStackTrace();
         }
     }
+
+    public void btnWarehouse_MouseClicked(MouseEvent mouseEvent) {
+    }
+
 }

@@ -123,4 +123,15 @@ CREATE TABLE `bill_info` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
     
-
+CREATE TABLE `warehouse` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `product_id` INT NOT NULL,
+  `products_remaining` INT NOT NULL,
+  `products_sold` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `product_id_idx` (`product_id` ASC) VISIBLE,
+  CONSTRAINT `fk_product_id`
+    FOREIGN KEY (`product_id`)
+    REFERENCES `products` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);

@@ -83,36 +83,46 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab fx:id="tabAdmin" text="For Admin">
+          <Tab fx:id="tabAdmin" text="Manage">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ImageView fx:id="btnAccounts" fitHeight="160.0" fitWidth="160.0" layoutX="143.0" layoutY="89.0" onMouseClicked="#btnAccounts_Click" onMouseExited="#btnAccount_MouseExited" onMouseMoved="#btnAccount_MouseMoved" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="btnAccounts" fitHeight="160.0" fitWidth="160.0" layoutX="46.0" layoutY="89.0" onMouseClicked="#btnAccounts_Click" onMouseExited="#btnAccount_MouseExited" onMouseMoved="#btnAccount_MouseMoved" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icons/main_icons/accounts.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="btnStatistics" fitHeight="160.0" fitWidth="160.0" layoutX="649.0" layoutY="89.0" onMouseClicked="#btnStatistics_Clicked" onMouseExited="#btnStatistics_MouseExited" onMouseMoved="#btnStatistics_MouseMoved" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="btnStatistics" fitHeight="160.0" fitWidth="160.0" layoutX="746.0" layoutY="89.0" onMouseClicked="#btnStatistics_Clicked" onMouseExited="#btnStatistics_MouseExited" onMouseMoved="#btnStatistics_MouseMoved" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icons/main_icons/statistics.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="btnCategories" fitHeight="160.0" fitWidth="160.0" layoutX="394.0" layoutY="89.0" onMouseClicked="#btnCategories_MouseClicked" onMouseExited="#btnCategories_MouseExited" onMouseMoved="#btnCategories_MouseMoved" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="btnCategories" fitHeight="160.0" fitWidth="160.0" layoutX="277.0" layoutY="89.0" onMouseClicked="#btnCategories_MouseClicked" onMouseExited="#btnCategories_MouseExited" onMouseMoved="#btnCategories_MouseMoved" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icons/main_icons/categories.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="lblAccounts" layoutX="166.0" layoutY="268.0" text="Accounts" textFill="#77b4be" visible="false">
+                        <Label fx:id="lblAccounts" layoutX="69.0" layoutY="268.0" text="Accounts" textFill="#77b4be" visible="false">
                            <font>
                               <Font size="28.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblStatistics" layoutX="675.0" layoutY="268.0" text="Statistics" textFill="#db605a" visible="false">
+                        <Label fx:id="lblStatistics" layoutX="772.0" layoutY="268.0" text="Statistics" textFill="#db605a" visible="false">
                            <font>
                               <Font size="28.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblCategories" layoutX="410.0" layoutY="268.0" text="Categories" textFill="#77b4be" visible="false">
+                        <Label fx:id="lblCategories" layoutX="291.0" layoutY="268.0" text="Categories" textFill="#77b4be" visible="false">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="btnWarehouse" fitHeight="160.0" fitWidth="160.0" layoutX="513.0" layoutY="89.0" onMouseClicked="#btnWarehouse_MouseClicked" onMouseExited="#btnWarehouse_MouseExited" onMouseMoved="#btnWarehouse_MouseMoved" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/main_icons/warehouse.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="lblWarehouse" layoutX="527.0" layoutY="268.0" text="Warehouse" textFill="#367596" visible="false">
                            <font>
                               <Font size="28.0" />
                            </font>
