@@ -29,6 +29,10 @@
     -fx-background-image: url("../images/backgounds/4.jpg");
     -fx-background-size: cover;
 }
+.bg5 {
+    -fx-background-image: url("../images/backgounds/5.png");
+    -fx-background-size: cover;
+}
 
 .table-style {
     -fx-alignment: center-right;

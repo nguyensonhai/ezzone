@@ -42,11 +42,8 @@ public class Statistics {
         check();
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
-                        new PieChart.Data("Grapefruit", 13),
-                        new PieChart.Data("Oranges", 25),
-                        new PieChart.Data("Plums", 10),
-                        new PieChart.Data("Pears", 22),
-                        new PieChart.Data("Apples", 30));
+                        new PieChart.Data("Laptop", 4),
+                        new PieChart.Data("CPU", 2));
         pieChartStatistics.setData(pieChartData);
     }
 

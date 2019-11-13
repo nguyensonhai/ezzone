@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.AreaChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -9,16 +10,43 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="681.0" prefWidth="976.0" styleClass="bg3" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.superducks.laptopsales.controllers.Statistics">
+<AnchorPane prefHeight="693.0" prefWidth="978.0" styleClass="bg3" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.superducks.laptopsales.controllers.Statistics">
    <children>
-      <TableView fx:id="tblAccounts" layoutX="22.0" layoutY="21.0" onMouseClicked="#tblAccounts_Clicked" prefHeight="300.0" prefWidth="300.0">
-        <columns>
-          <TableColumn fx:id="clmUsername" prefWidth="113.0" style="-fx-alignment: CENTER;" text="Username" />
-          <TableColumn fx:id="clmFullname" prefWidth="185.0" style="-fx-alignment: CENTER;" text="Fullname" />
-        </columns>
-      </TableView>
-      <TableView fx:id="tblBills" layoutX="22.0" layoutY="330.0" prefHeight="330.0" prefWidth="891.0">
+      <HBox>
+         <children>
+            <TableView fx:id="tblAccounts" onMouseClicked="#tblAccounts_Clicked" prefHeight="300.0" prefWidth="300.0">
+              <columns>
+                <TableColumn fx:id="clmUsername" prefWidth="113.0" style="-fx-alignment: CENTER;" text="Username" />
+                <TableColumn fx:id="clmFullname" prefWidth="185.0" style="-fx-alignment: CENTER;" text="Fullname" />
+              </columns>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+               </HBox.margin>
+            </TableView>
+            <AreaChart fx:id="areaChartStatistics" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: white;">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </AreaChart>
+            <PieChart fx:id="pieChartStatistics" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: white;" title="Pie Chart">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </PieChart>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </HBox>
+      <TableView fx:id="tblBills" layoutX="14.0" layoutY="330.0" prefHeight="305.0" prefWidth="891.0">
          <columns>
             <TableColumn fx:id="clmBillID" prefWidth="83.0" style="-fx-alignment: CENTER;" text="Bill ID" />
             <TableColumn fx:id="clmUser" prefWidth="255.0" style="-fx-alignment: CENTER;" text="User" />
@@ -27,21 +55,12 @@
             <TableColumn fx:id="clmTotalPrice" prefWidth="126.0" style="-fx-alignment: CENTER;" text="Total Price" />
          </columns>
       </TableView>
-      <PieChart fx:id="pieChartStatistics" layoutX="651.0" layoutY="21.0" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: white;" title="Pie Chart" />
-      <AreaChart fx:id="areaChartStatistics" layoutX="335.0" layoutY="21.0" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: white;">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
-      </AreaChart>
-      <ImageView fx:id="btnNonView" fitHeight="40.0" fitWidth="40.0" layoutX="922.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="btnNonView" fitHeight="40.0" fitWidth="40.0" layoutX="921.0" layoutY="351.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../icons/embems/symboliclink.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="btnView" fitHeight="40.0" fitWidth="40.0" layoutX="922.0" layoutY="356.0" onMouseClicked="#btnView_Clicked" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="btnView" fitHeight="40.0" fitWidth="40.0" layoutX="921.0" layoutY="351.0" onMouseClicked="#btnView_Clicked" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../icons/embems/locallymodified.png" />
          </image>

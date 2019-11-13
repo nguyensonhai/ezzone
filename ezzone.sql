@@ -52,6 +52,7 @@ CREATE TABLE `products` (
 	PRIMARY KEY (`id`),
 	CONSTRAINT `FK_products_categories` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
 );
+
 INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
 VALUES ('laptop', 'Razer Blade Stealth 13.3 (2019)', 'Razer', 'i7 8565U RAM 16GB SSD 256GB MX150 FHD IPS Touch', 'file:/C:/Users/nguye/Pictures/Products/Laptop/Razer_Blade_Stealth_13.3.jpg', '39990000');
 INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
@@ -135,3 +136,5 @@ CREATE TABLE `warehouse` (
     REFERENCES `products` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+    
+INSERT INTO `warehouse` (`product_id`, `products_remaining`, `products_sold`) VALUES ('15', '10', '0');
