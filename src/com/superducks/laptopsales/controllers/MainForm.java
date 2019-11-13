@@ -81,7 +81,8 @@ public class MainForm {
             mainStage.getIcons().add(icon);
             mainStage.show();
             mainStage.setResizable(false);
-            mainStage.setOnCloseRequest(e->Platform.exit());
+
+            mainStage.setOnCloseRequest(e->Main.getPrimaryStage().close());
         }
         catch (IOException e) {
             e.printStackTrace();
