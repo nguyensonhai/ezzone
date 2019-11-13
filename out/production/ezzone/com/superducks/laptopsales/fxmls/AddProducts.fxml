@@ -9,13 +9,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#Changed" prefHeight="375.0" prefWidth="759.0" styleClass="bg1" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.superducks.laptopsales.controllers.AddProducts">
+<AnchorPane fx:id="ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#Changed" prefHeight="375.0" prefWidth="759.0" styleClass="bg6" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.superducks.laptopsales.controllers.AddProducts">
    <children>
-      <Label layoutX="20.0" layoutY="29.0" text="Categories" />
+      <Label layoutX="20.0" layoutY="29.0" text="Categories" textFill="WHITE" />
       <Label layoutX="393.0" layoutY="29.0" text="Name" />
       <TextField fx:id="txtNameProduct" layoutX="472.0" layoutY="25.0" onKeyReleased="#Changed" prefHeight="25.0" prefWidth="250.0" style="-fx-alignment: CENTER;" />
-      <Label layoutX="20.0" layoutY="106.0" text="Producer" />
-      <Label layoutX="21.0" layoutY="179.0" text="Infomation" />
+      <Label layoutX="20.0" layoutY="106.0" text="Producer" textFill="WHITE" />
+      <Label layoutX="21.0" layoutY="179.0" text="Infomation" textFill="WHITE" />
       <Label layoutX="393.0" layoutY="63.0" text="Price" />
       <ImageView fx:id="btnNonAdd" fitHeight="40.0" fitWidth="40.0" layoutX="119.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true">
          <image>

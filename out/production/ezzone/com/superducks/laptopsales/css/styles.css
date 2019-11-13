@@ -30,7 +30,15 @@
     -fx-background-size: cover;
 }
 .bg5 {
-    -fx-background-image: url("../images/backgounds/5.png");
+    -fx-background-image: url("../images/backgounds/5.jpg");
+    -fx-background-size: cover;
+}
+.bg6 {
+    -fx-background-image: url("../images/backgounds/6.jpg");
+    -fx-background-size: cover;
+}
+.bg7 {
+    -fx-background-image: url("../images/backgounds/7.jpg");
     -fx-background-size: cover;
 }
 

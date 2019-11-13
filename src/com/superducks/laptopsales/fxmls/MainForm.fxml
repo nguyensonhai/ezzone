@@ -54,7 +54,7 @@
                               <Image url="@../icons/main_icons/view-info.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="btnProducts" fitHeight="160.0" fitWidth="160.0" layoutX="649.0" layoutY="89.0" onMouseExited="#btnProducts_MouseExited" onMouseMoved="#btnProducts_MouseMoved" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="btnProducts" fitHeight="160.0" fitWidth="160.0" layoutX="649.0" layoutY="89.0" onMouseClicked="#btnProducts_Clicked" onMouseExited="#btnProducts_MouseExited" onMouseMoved="#btnProducts_MouseMoved" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icons/main_icons/items.png" />
                            </image>

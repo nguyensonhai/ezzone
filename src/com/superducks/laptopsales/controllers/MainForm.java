@@ -246,4 +246,19 @@ public class MainForm {
             e.printStackTrace();
         }
     }
+
+    public void btnProducts_Clicked(MouseEvent mouseEvent) {
+        Parent root;
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(LoginForm.class.getClassLoader().getResource("com/superducks/laptopsales/fxmls/Products.fxml")));
+            Products.mainStage.setTitle("Products");
+            Products.mainStage.setScene(new Scene(root));
+            Image icon = new Image("/com/superducks/laptopsales/icons/main_icons/items.png");
+            Products.mainStage.getIcons().add(icon);
+            Products.mainStage.setResizable(false);
+            Products.mainStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -7,14 +7,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="131.0" prefWidth="453.0" styleClass="bg1" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.superducks.laptopsales.controllers.EditCategories">
+<AnchorPane prefHeight="131.0" prefWidth="453.0" styleClass="bg6" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.superducks.laptopsales.controllers.EditCategories">
     <children>
-        <Label layoutX="23.0" layoutY="33.0" text="Category ID ">
+        <Label layoutX="23.0" layoutY="33.0" text="Category ID " textFill="WHITE">
             <font>
                 <Font name="Times New Roman" size="16.0" />
             </font>
         </Label>
-        <Label layoutX="23.0" layoutY="79.0" text="Category Name">
+        <Label layoutX="23.0" layoutY="79.0" text="Category Name" textFill="WHITE">
             <font>
                 <Font name="Times New Roman" size="16.0" />
             </font>
