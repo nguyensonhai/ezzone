@@ -98,7 +98,7 @@ public class MainForm {
             Parent root = FXMLLoader.load(getClass().getResource("../fxmls/LoginForm.fxml"));
             Main.getPrimaryStage().setScene(new Scene(root));
             Main.getPrimaryStage().setTitle("Log In");
-            Image icon = new Image("/com/superducks/laptopsales/icons/laptop-icon.png");
+            Image icon = new Image("/com/superducks/laptopsales/icons/main_icons/laptop-icon.png");
             Main.getPrimaryStage().getIcons().add(icon);
             Main.getPrimaryStage().show();
             Main.getPrimaryStage().setResizable(false);
