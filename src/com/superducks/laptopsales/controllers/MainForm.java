@@ -78,7 +78,7 @@ public class MainForm {
             root = FXMLLoader.load(Objects.requireNonNull(LoginForm.class.getClassLoader().getResource("com/superducks/laptopsales/fxmls/MainForm.fxml")));
             mainStage.setTitle("Main Form");
             mainStage.setScene(new Scene(root));
-            Image icon = new Image("/com/superducks/laptopsales/icons/main_icons/laptop-icon.png");
+            Image icon = new Image("/com/superducks/laptopsales/icons/main_icons/lt-cc.png");
             mainStage.getIcons().add(icon);
             mainStage.show();
             mainStage.setResizable(false);
