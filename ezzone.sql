@@ -88,6 +88,47 @@ VALUES ('gpu', 'MSI GTX 1660 Ti GAMING X 6G', 'MSI', '', 'file:/C:/Users/nguye/P
 INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
 VALUES ('gpu', 'ROG Strix GeForce® GTX 1650 Advance 4GB', 'Asus', '', 'file:/C:/Users/nguye/Pictures/Products/GPU/1650.jpg', '4770000');
 
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+ VALUES ( 'keyboard', 'Asus ROG Strix Scope', 'Asus ROG', 'Nhà Sản Xuất : Asus ROG\n\nTình Trạng : Mới 100%- Fullbox\n\nBảo Hành : 36 tháng', 'file:/C:/Users/nguye/Pictures/Products/Keyboards/bp1.png', '300000' );
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+ VALUES ( 'keyboard', 'Asus ROG Claymore Numpad', 'Asus ', 'Nhà Sản Xuất : Asus\nTình Trạng : Mới 100% - Fullbox\nBảo Hành : 24 tháng', 'file:/C:/Users/nguye/Pictures/Products/Keyboards/bp2.jpg', '300000' );
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+ VALUES ( 'keyboard', 'Asus Cerberus', 'Asus', 'Nhà Sản Xuất : Asus\nTình Trạng : Mới 100% - Fullbox\nBảo Hành : 24 tháng', 'file:/C:/Users/nguye/Pictures/Products/Keyboards/bp3.jpg', '250000' );
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+ VALUES ( 'keyboard', 'Newmen T260+', 'Newmen', 'Nhà Sản Xuất : Newmen\n\nTình Trạng : Mới 100% - Fullbox\n\nBảo Hành : 12 tháng (Đổi mới 6 tháng đầu)', 'file:/C:/Users/nguye/Pictures/Products/Keyboards/bp4.png', '270000' );
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+ VALUES ( 'keyboard', 'E-Dra EK387', 'E-Dra', 'Nhà Sản Xuất : E-Dra\n\nTình Trạng: Mới 100% - Fullbox\n\nBảo Hành: 24 tháng\n\nSwitch : Blue/Red/Brown\n\nLed: Rainbow', 'file:/C:/Users/nguye/Pictures/Products/Keyboards/bp5.png', '540000' );
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+ VALUES ( 'keyboard', 'Cougar Aurora S', 'Cougar', 'Nhà Sản Xuất: Cougar\n\nBảo Hành: 12 tháng\n\nSwitch: Bàn Phím Giả Cơ ', 'file:/C:/Users/nguye/Pictures/Products/Keyboards/bp6.png', '890000' );
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+ VALUES ( 'keyboard', 'Dare-U EK880 RGB 2019 - Black', 'Dare-U', 'Nhà Sản Xuất : Dare-U\n\nTình Trạng: Mới 100% - Fullbox\n\nBảo Hành: 24 tháng\n\nSwitch : D Switch - Blue/Red/Brown\n\nLed : RGB', 'file:/C:/Users/nguye/Pictures/Products/Keyboards/bp7.jpg', '880000' );
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+ VALUES ( 'keyboard', 'Rapoo V580', 'Rapoo', 'Nhà Sản Xuất : Rapoo\n\n· Tình Trạng : Mới 100% - Fullbox\n\n· Bảo Hành : 12 tháng  \n\n· Switch : Rapoo Blue Switch', 'file:/C:/Users/nguye/Pictures/Products/Keyboards/bp8.png', '1200000' );
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+ VALUES ( 'keyboard', 'Fuhlen D (Destroyer)', 'Fuhlen', 'Nhà sản xuất :Fuhlen\nTình trạng : Fullbox- 100%\nBảo hành : 24 tháng \nLED: Rainbow\nSwitch:  Quang học', 'file:/C:/Users/nguye/Pictures/Products/Keyboards/bp9.jpg', '990000' );
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+ VALUES ( 'keyboard', 'K60M Cherry MX Blue', 'I-ROCKS', 'Nhà Sản Xuất : I-ROCKS\n\n Tình Trạng : Mới 100% - Fullbox\n\n Bảo Hành : 12 tháng ', 'file:/C:/Users/nguye/Pictures/Products/Keyboards/bp10.png', '1800000' );
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+VALUES ( 'mouse', 'Dare-U LM115G - Pink', 'Dare-U', 'Nhà Sản Xuất : Dare-U\n\nTình Trạng : Mới Fullbox 100%\n\nBảo Hành : 24 tháng\n\nMàu Sắc: Hồng', 'file:/C:/Users/nguye/Pictures/Products/Mouses/ch1.png', '200000' );
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+ VALUES ( 'mouse', 'Durgod M39', 'Durgod', 'Nhà Sản Xuất : Durgod\n\nBảo Hành : 6 tháng', 'file:/C:/Users/nguye/Pictures/Products/Mouses/ch2.jpg', '200000' );
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`) 
+VALUES ( 'mouse', 'E-Dra EM614', 'E-Dra', 'Bảo Hành : 24 tháng ', 'file:/C:/Users/nguye/Pictures/Products/Mouses/ch3.png', '200000' );
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+ VALUES ( 'mouse', 'Rapoo V26S', 'Rapoo', 'Nhà Sản Xuất: Rappo \n\nBảo Hành: 24 tháng \n\nTình Trạng: Mới 100%', 'file:/C:/Users/nguye/Pictures/Products/Mouses/ch4.jpg', '400000' );
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+ VALUES ( 'mouse', 'Cougar 250M White RGB', 'Cougar ', 'Nhà sản xuất : COUGAR\n\nTình trạng : Mới 100%\n\nBảo Hành : 6 tháng', 'file:/C:/Users/nguye/Pictures/Products/Mouses/ch5.png', '600000' );
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+ VALUES ( 'mouse', 'DS B1', 'MSI', '·Nhà Sản Xuất : MSI\n\n· Tình Trạng : Mới 100% - Fullbox\n· Bảo Hành : 6 Tháng\n· Led : Đỏ\n· Trọng lượng: 108g\n· Số nút: 6 nút', 'file:/C:/Users/nguye/Pictures/Products/Mouses/ch6.jpg', '600000' );
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`) 
+VALUES ( 'mouse', 'Asus Cerberus', 'Asus ', 'Nhà Sản Xuất: ASUS\n\nTình Trạng : Mới 100% - Fullbox\n\nBảo Hành : 24 Tháng', 'file:/C:/Users/nguye/Pictures/Products/Mouses/ch7.png', '500000' );
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+VALUES ( 'mouse', 'I-Rock M35 RGB', 'COUGAR', 'Nhà sản xuất : COUGAR\n\nTình trạng : Mới 100%\n\nBảo Hành : 12 tháng', 'file:/C:/Users/nguye/Pictures/Products/Mouses/ch8.png', '500000' );
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+ VALUES ( 'mouse', 'Lenovo Legion M200 RGB', 'Lenovo ', 'Nhà Sản Xuất: Lenovo\n\nTình Trạng : Mới 100% - Fullbox\n\nBảo Hành : 12 Tháng', 'file:/C:/Users/nguye/Pictures/Products/Mouses/ch9.jpg', '490000' );
+INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
+ VALUES ( 'mouse', 'GM40 - Black', 'MSI ', 'Nhà sản xuất : MSI \n\nTình trạng : Mới 100% - FULLBOX\n\nBảo Hành : 24 tháng.', 'file:/C:/Users/nguye/Pictures/Products/Mouses/ch10.jpg', '740000' );
+
 
 
 
