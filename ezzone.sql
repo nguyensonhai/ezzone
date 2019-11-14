@@ -155,3 +155,5 @@ FROM
 where bill.user=id
 group by categories.name;
 END$$
+
+call showPieChart(1);

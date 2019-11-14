@@ -40,7 +40,7 @@ import java.sql.*;
                 fullname = rst.getString("fullname");
                 id = rst.getString("id");
                 if(txtUsername.getText().toLowerCase().equals(username) && txtPassword.getText().toLowerCase().equals(password)) {
-                    AlertMessage.showAlert("Logged in successfully with account " + username, "tick");
+//                    AlertMessage.showAlert("Logged in successfully with account " + username, "tick");
                     MainForm.loggedAccount = username;
                     MainForm.loggedFullname = fullname;
                     MainForm.loggedID = id;

@@ -106,27 +106,16 @@ public class Products {
     }
 
     private void event(String pid, String cid) {
-        EditWarehouse.product_id = pid;
+        ViewProducts.product_id = pid;
         Parent root;
         try {
-            root = FXMLLoader.load(Objects.requireNonNull(LoginForm.class.getClassLoader().getResource("com/superducks/laptopsales/fxmls/EditWarehouse.fxml")));
-            EditWarehouse.mainStage.setTitle("Edit Products Remaining");
-            EditWarehouse.mainStage.setScene(new Scene(root));
-            Image icon = new Image("/com/superducks/laptopsales/icons/web_ui_color/compose.png");
-            EditWarehouse.mainStage.getIcons().add(icon);
-            EditWarehouse.mainStage.setResizable(false);
-            EditWarehouse.mainStage.showAndWait();
-            if(EditWarehouse.change) {
-                String sql = "";
-                int index = cbcategory.getSelectionModel().getSelectedIndex();
-                if(cbcategory.getValue().equals("All Products")) {
-                    sql = "select * from products";
-                }
-                else
-                    sql = "SELECT * FROM products where category_id like'%" + data.get(index) + "%'";
-                showData(sql);
-                EditWarehouse.change = false;
-            }
+            root = FXMLLoader.load(Objects.requireNonNull(LoginForm.class.getClassLoader().getResource("com/superducks/laptopsales/fxmls/ViewProducts.fxml")));
+            ViewProducts.mainStage.setTitle("View Products Infomation");
+            ViewProducts.mainStage.setScene(new Scene(root));
+            Image icon = new Image("/com/superducks/laptopsales/icons/main_icons/items.png");
+            ViewProducts.mainStage.getIcons().add(icon);
+            ViewProducts.mainStage.setResizable(false);
+            ViewProducts.mainStage.showAndWait();
         }
         catch (IOException e) {
             e.printStackTrace();

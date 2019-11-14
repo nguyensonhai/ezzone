@@ -1,16 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="653.0" prefWidth="833.0" styleClass="bg7" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.superducks.laptopsales.controllers.ViewProducts">
+<AnchorPane prefHeight="423.0" prefWidth="857.0" styleClass="bg7" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.superducks.laptopsales.controllers.ViewProducts">
    <children>
       <ImageView fx:id="imgAvatar" fitHeight="350.0" fitWidth="350.0" layoutX="37.0" layoutY="36.0" pickOnBounds="true">
          <image>
             <Image url="@../images/backgounds/white.jpg" />
          </image>
       </ImageView>
+      <Label layoutX="441.0" layoutY="45.0" text="Type:" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblType" layoutX="481.0" layoutY="45.0" prefHeight="20.0" prefWidth="323.0" text="empty" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="442.0" layoutY="80.0" text="Producer:" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblProducer" layoutX="508.0" layoutY="80.0" prefHeight="20.0" prefWidth="333.0" text="empty" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="442.0" layoutY="115.0" text="Name:" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblName" layoutX="488.0" layoutY="115.0" prefHeight="20.0" prefWidth="333.0" text="empty" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="444.0" layoutY="188.0" text="Information:" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblInformation" alignment="TOP_LEFT" layoutX="524.0" layoutY="188.0" prefHeight="198.0" prefWidth="309.0" text="empty" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="444.0" layoutY="150.0" text="Price:" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPrice" layoutX="488.0" layoutY="150.0" prefHeight="20.0" prefWidth="250.0" text="empty" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
