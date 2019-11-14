@@ -89,6 +89,7 @@ public class EditWarehouse {
             btnAccept.setVisible(false);
             btnNonAccept.setVisible(true);
         }
+        txtRemaining.requestFocus();
     }
 
     public void text_Changed(KeyEvent keyEvent) {
