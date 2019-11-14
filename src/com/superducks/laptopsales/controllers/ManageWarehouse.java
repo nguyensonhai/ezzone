@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
@@ -32,9 +33,10 @@ public class ManageWarehouse {
     public TilePane tpn;
     public ComboBox cbSearch;
     public TextField txtTo;
-    public TextField txtForm;
     public ComboBox<String> cbcategory;
     static Stage mainStage = new Stage();
+    public TextField txtFrom;
+    public ImageView btnSearch;
 
     public void initialize() {
         showcbSearch();
@@ -134,10 +136,25 @@ public class ManageWarehouse {
             e.printStackTrace();
         }
     }
+    private boolean tryParseInt(String value) {
+        try {
+            Integer.parseInt(value);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 
+    public void txtFrom_key(KeyEvent keyEvent) {
+        if(tryParseInt(txtFrom.getText()) && tryParseInt(txtTo.getText())) {
+            btnSearch.setVisible(true);
+        } else {
+            btnSearch.setVisible(false);
+        }
+    }
 
     public void Search(MouseEvent mouseEvent) {
-        String sql = "SELECT * FROM products where price between '" + Integer.parseInt(txtForm.getText()) + "' and '" + Integer.parseInt(txtTo.getText()) + "'";
+        String sql = "SELECT * FROM products where price between '" + Integer.parseInt(txtFrom.getText()) + "' and '" + Integer.parseInt(txtTo.getText()) + "'";
         showData(sql);
     }
 

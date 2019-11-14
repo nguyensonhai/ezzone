@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
@@ -25,14 +26,17 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 
 public class Products {
     static Stage mainStage = new Stage(); public Label label;
     public TilePane tpn;
     public TextField txtTo;
-    public TextField txtForm;
     public ComboBox<String> cbcategory;
+    public TextField txtFrom;
+    public ComboBox cbSearch;
+    public ImageView btnSearch;
 
     public void initialize() {
         showcbSearch();
@@ -124,7 +128,7 @@ public class Products {
 
 
     public void Search(MouseEvent mouseEvent) {
-        String sql = "SELECT * FROM products where price between '" + Integer.parseInt(txtForm.getText()) + "' and '" + Integer.parseInt(txtTo.getText()) + "'";
+        String sql = "SELECT * FROM products where price between '" + Integer.parseInt(txtFrom.getText()) + "' and '" + Integer.parseInt(txtTo.getText()) + "'";
         showData(sql);
     }
 
@@ -137,5 +141,53 @@ public class Products {
         else
             sql = "SELECT * FROM products where category_id like'%" + data.get(index) + "%'";
         showData(sql);
+    }
+
+    private boolean tryParseInt(String value) {
+        try {
+            Integer.parseInt(value);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public void txtFrom_key(KeyEvent keyEvent) {
+        if(tryParseInt(txtFrom.getText()) && tryParseInt(txtTo.getText())) {
+            btnSearch.setVisible(true);
+        } else {
+            btnSearch.setVisible(false);
+        }
+    }
+
+
+    private static Integer getSplit (String input) {
+        StringBuilder output = new StringBuilder();
+        if(input.contains(".")) {
+            String [] inputSplit = input.split("\\.");
+            for (String s : inputSplit) {
+                output.append(s);
+            }
+            return Integer.parseInt(output.toString());
+        }
+        else
+            return 0;
+    }
+
+    private static String getFormattedAmount(int amount) {
+        StringBuilder formatted_value = new StringBuilder();
+        boolean isNavigate = amount < 0;
+        amount = Math.abs(amount);
+        while (amount > 999) {
+            int du = amount % 1000;
+            amount = amount / 1000;
+            formatted_value.insert(0, String.format(Locale.getDefault(), ".%,03d", du));
+        }
+        if(isNavigate){
+            formatted_value.insert(0, String.format(Locale.getDefault(), "-%,d", amount));
+        } else {
+            formatted_value.insert(0, String.format(Locale.getDefault(), "%,d", amount));
+        }
+        return String.format(Locale.getDefault(), "%s", formatted_value.toString());
     }
 }
