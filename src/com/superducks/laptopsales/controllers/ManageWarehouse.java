@@ -151,9 +151,5 @@ public class ManageWarehouse {
             sql = "SELECT * FROM products where category_id like'%" + data.get(index) + "%'";
         showData(sql);
     }
-
-    public void btnThemPie(MouseEvent mouseEvent) {
-
-    }
 }
 
