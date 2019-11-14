@@ -77,7 +77,7 @@ public class ManageWarehouse {
                 imageView.setBlendMode(BlendMode.MULTIPLY);
                 imageView.setOnMouseClicked(e -> event(pid, cid));
                 Label nameProduct = new Label(rs.getString(3));
-                Label text = new Label(String.format("%,2d", rs.getInt(7)) + "vnd");
+                Label text = new Label(String.format("%,2d", rs.getInt(7)) + " VND");
                 nameProduct.setMaxWidth(200);
                 nameProduct.setMaxHeight(100);
                 nameProduct.setAlignment(Pos.CENTER);
