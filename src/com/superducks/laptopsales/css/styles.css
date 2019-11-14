@@ -42,6 +42,24 @@
     -fx-background-size: cover;
 }
 
+.default-color0.chart-pie { -fx-pie-color: #fbff75; }
+.default-color1.chart-pie { -fx-pie-color: #ff9f52; }
+.default-color2.chart-pie { -fx-pie-color: #ff7e74; }
+.default-color3.chart-pie { -fx-pie-color: #c6ff68; }
+.default-color4.chart-pie { -fx-pie-color: #7ba8ff; }
+
+.chart-pie-label-line {
+    -fx-fill: #2E112D;
+}
+.chart-pie-label {
+    -fx-fill: #2E112D;
+    -fx-font-size: 1em;
+}
+.chart-legend {
+    -fx-background-color: #F1D0BD;
+    -fx-stroke: #fff;
+}
+
 .table-style {
     -fx-alignment: center-right;
 }
