@@ -60,6 +60,6 @@
             <Image url="@../icons/embems/locallymodified.png" />
          </image>
       </ImageView>
-      <PieChart fx:id="pieChartStatistics" labelLineLength="25.0" layoutX="716.0" layoutY="11.0" prefHeight="670.0" prefWidth="659.0" stylesheets="@../css/styles.css" title="Pie Chart" />
+      <PieChart fx:id="pieChartStatistics" labelLineLength="25.0" layoutX="716.0" layoutY="11.0" prefHeight="670.0" prefWidth="659.0" style="-fx-background-color: white;" stylesheets="@../css/styles.css" title="Pie Chart" />
    </children>
 </AnchorPane>

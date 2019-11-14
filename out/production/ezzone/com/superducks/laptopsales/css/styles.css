@@ -56,7 +56,7 @@
     -fx-font-size: 1em;
 }
 .chart-legend {
-    -fx-background-color: #F1D0BD;
+    -fx-background-color: #fff;
     -fx-stroke: #fff;
 }
 
