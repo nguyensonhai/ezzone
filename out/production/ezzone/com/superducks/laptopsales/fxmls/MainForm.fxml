@@ -16,12 +16,12 @@
    <children>
       <Pane prefHeight="120.0" prefWidth="952.0" style="-fx-background-color: white;">
          <children>
-            <ImageView fitHeight="84.0" fitWidth="106.0" layoutX="140.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="109.0" fitWidth="112.0" layoutX="125.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/main_icons/lt.png" />
                </image>
             </ImageView>
-            <Label layoutX="243.0" layoutY="37.0" styleClass="label-style" stylesheets="@../css/styles.css" text="APPLICATION BY SUPERDUCKS TEAM" textFill="#4f5d73">
+            <Label layoutX="258.0" layoutY="37.0" styleClass="label-style" stylesheets="@../css/styles.css" text="APPLICATION BY SUPERDUCKS TEAM" textFill="#4f5d73">
                <font>
                   <Font size="32.0" />
                </font>

@@ -95,14 +95,19 @@ public class EditAccounts {
     public void textChanged(KeyEvent keyEvent) {
         String rePassword = "^.*(?=.{4,})(?=.*\\d)(?=.*[a-zA-Z])|(?=.{4,})(?=.*\\d)(?=.*[!@#$%^&])|(?=.{4,})(?=.*[a-zA-Z])(?=.*[!@#$%^&]).*$";
         if (!password.equals(txtPassword.getText()) || !email.equals(txtEmail.getText()) || !fullname.equals(txtFullname.getText()) || !address.equals(txtAddress.getText()) || !phone.equals(txtPhone.getText())) {
-            if(txtPassword.getText().matches(rePassword)) {
+            if(!password.equals(txtPassword.getText())) {
+                if (txtPassword.getText().matches(rePassword)) {
+                    btnEdit.setVisible(true);
+                    btnNonEdit.setVisible(false);
+                } else {
+                    btnEdit.setVisible(false);
+                    btnNonEdit.setVisible(true);
+                }
+            } else {
                 btnEdit.setVisible(true);
                 btnNonEdit.setVisible(false);
             }
-            else {
-                btnEdit.setVisible(false);
-                btnNonEdit.setVisible(true);
-            }
+
         } else {
             btnEdit.setVisible(false);
             btnNonEdit.setVisible(true);
