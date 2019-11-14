@@ -6,18 +6,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="710.0" prefWidth="499.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.superducks.laptopsales.controllers.SellOrder">
+<AnchorPane prefHeight="710.0" prefWidth="461.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.superducks.laptopsales.controllers.SellOrder">
    <children>
-      <Label alignment="TOP_CENTER" layoutX="14.0" layoutY="14.0" prefHeight="42.0" prefWidth="469.0" style="-fx-font-weight: BOLD;" text="HOÁ ĐƠN BÁN HÀNG">
+      <Label alignment="TOP_CENTER" layoutX="14.0" layoutY="14.0" prefHeight="42.0" prefWidth="429.0" style="-fx-font-weight: BOLD;" text="HOÁ ĐƠN BÁN HÀNG">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <TableView fx:id="tblBill" layoutX="14.0" layoutY="116.0" prefHeight="482.0" prefWidth="469.0" styleClass="table-style" stylesheets="@../css/styles.css">
+      <TableView fx:id="tblBill" layoutX="14.0" layoutY="116.0" prefHeight="482.0" prefWidth="429.0" styleClass="table-style" stylesheets="@../css/styles.css">
          <columns>
-            <TableColumn fx:id="clmProducts" prefWidth="258.0" style="-fx-alignment: CENTER;" text="Sản Phẩm" />
-            <TableColumn fx:id="clmAmount" prefWidth="105.0" style="-fx-alignment: CENTER;" text="Số Lượng" />
-            <TableColumn fx:id="clmPrice" prefWidth="103.0" style="-fx-alignment: CENTER;" text="Thành tiền" />
+            <TableColumn fx:id="clmProducts" prefWidth="233.0" style="-fx-alignment: CENTER;" text="Sản Phẩm" />
+            <TableColumn fx:id="clmAmount" prefWidth="92.0" style="-fx-alignment: CENTER;" text="Số Lượng" />
+            <TableColumn fx:id="clmPrice" prefWidth="101.0" style="-fx-alignment: CENTER;" text="Thành tiền" />
          </columns>
       </TableView>
       <Label fx:id="lblBuyer" alignment="TOP_LEFT" layoutX="14.0" layoutY="56.0" prefHeight="30.0" prefWidth="295.0" text="Người mua hàng:">
@@ -30,22 +30,22 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <Label fx:id="lblTotalePrice" alignment="CENTER_RIGHT" layoutX="15.0" layoutY="610.0" prefHeight="25.0" prefWidth="469.0" text="Tổng tiền: 0 VND">
+      <Label fx:id="lblTotalePrice" alignment="CENTER_RIGHT" layoutX="15.0" layoutY="610.0" prefHeight="25.0" prefWidth="429.0" text="Tổng tiền: 0 VND">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label fx:id="lblBillNumber" alignment="TOP_RIGHT" layoutX="383.0" layoutY="56.0" prefHeight="30.0" prefWidth="100.0" text="Số:">
+      <Label fx:id="lblBillNumber" alignment="TOP_RIGHT" layoutX="341.0" layoutY="56.0" prefHeight="30.0" prefWidth="100.0" text="Số:">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label fx:id="lblCreatedBy" alignment="CENTER_RIGHT" layoutX="15.0" layoutY="635.0" prefHeight="25.0" prefWidth="469.0" text="Người tạo hoá đơn:">
+      <Label fx:id="lblCreatedBy" alignment="CENTER_RIGHT" layoutX="15.0" layoutY="635.0" prefHeight="25.0" prefWidth="429.0" text="Người tạo hoá đơn:">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label alignment="TOP_RIGHT" layoutX="385.0" layoutY="86.0" prefHeight="30.0" prefWidth="100.0" text="Đơn vị: EzZone">
+      <Label alignment="TOP_RIGHT" layoutX="343.0" layoutY="86.0" prefHeight="30.0" prefWidth="100.0" text="Đơn vị: EzZone">
          <font>
             <Font size="13.0" />
          </font>
