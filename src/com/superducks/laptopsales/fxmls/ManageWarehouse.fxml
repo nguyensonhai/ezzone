@@ -31,19 +31,11 @@
                     <HBox prefHeight="30.0" prefWidth="465.0">
                         <children>
                             <TextField fx:id="txtFrom" onKeyReleased="#txtFrom_key" prefHeight="25.0" prefWidth="210.0" promptText="From:" style="-fx-alignment: CENTER;">
-                                <styleClass>
-                                    <String fx:value="bg-transparent" />
-                                    <String fx:value="fn-14" />
-                                </styleClass>
                            <HBox.margin>
                               <Insets top="3.0" />
                            </HBox.margin>
                             </TextField>
                             <TextField fx:id="txtTo" onKeyReleased="#txtFrom_key" prefHeight="25.0" prefWidth="215.0" promptText="To:" style="-fx-alignment: CENTER;">
-                                <styleClass>
-                                    <String fx:value="bg-transparent" />
-                                    <String fx:value="fn-14" />
-                                </styleClass>
                            <HBox.margin>
                               <Insets left="10.0" top="3.0" />
                            </HBox.margin>
