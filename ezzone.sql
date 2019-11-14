@@ -162,7 +162,7 @@ DELIMITER $$
 USE `laptop_sales`$$
 CREATE PROCEDURE `showBarChart` (in bill_id int)
 BEGIN
-SELECT products.producer, bill_info.amount
+SELECT products.producer, sum(bill_info.amount)
 FROM
     products 
     INNER JOIN bill_info ON bill_info.product_id = products.id
