@@ -141,7 +141,6 @@ INSERT INTO `warehouse` (`product_id`, `products_remaining`, `products_sold`) VA
 
 USE `laptop_sales`;
 DROP procedure IF EXISTS `showPieChart`;
-
 DELIMITER $$
 USE `laptop_sales`$$
 CREATE PROCEDURE `showPieChart` (in id int)
@@ -155,5 +154,22 @@ FROM
 where bill.user=id
 group by categories.name;
 END$$
-
 call showPieChart(1);
+
+USE `laptop_sales`;
+DROP procedure IF EXISTS `showBarChart`;
+DELIMITER $$
+USE `laptop_sales`$$
+CREATE PROCEDURE `showBarChart` (in bill_id int)
+BEGIN
+SELECT products.producer, bill_info.amount
+FROM
+    products 
+    INNER JOIN bill_info ON bill_info.product_id = products.id
+where bill_info.bill_id=bill_id
+group by products.producer;
+END$$
+
+call showBarChart(5);
+
+

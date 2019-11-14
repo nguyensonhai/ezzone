@@ -7,7 +7,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Side;
 import javafx.scene.chart.AreaChart;
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -34,33 +36,55 @@ public class Statistics {
     public TableColumn clmDateCreated;
     public TableColumn clmTotalPrice;
     public PieChart pieChartStatistics;
-    public AreaChart areaChartStatistics;
     public TableColumn clmUser;
     public ImageView btnNonView;
     public ImageView btnView;
+    public BarChart barChartStatistics;
     private ObservableList<Accounts> dataAccounts = FXCollections.observableArrayList();
     ObservableList<PieChart.Data> pieChartData =FXCollections.observableArrayList();
+
     public void initialize() {
         showTableAccounts();
         showTableBills();
         check();
         pieChartData.clear();
         Accounts accounts=(Accounts) tblAccounts.getSelectionModel().getSelectedItem();
-        showPieChartwithUser(accounts.getId());
+        showPieChartWithUser(accounts.getId());
+        Bills bl = (Bills) tblBills.getSelectionModel().getSelectedItem();
+        showBarChart(bl.getBillID());
     }
-    public void showPieChartwithUser(int user){
+
+    private void showBarChart(int billID) {
+        String sql="call showBarChart("+billID+")";
+        CallableStatement cs = null;
+        XYChart.Series dataSeries = new XYChart.Series();
+        try {
+            cs = Objects.requireNonNull(ConnectDatabase.Connect()).prepareCall(sql);
+            ResultSet rs = cs.executeQuery();
+            while (rs.next()) {
+                dataSeries.getData().add(new XYChart.Data(rs.getString(1), rs.getInt(2)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        barChartStatistics.getData().clear();
+        barChartStatistics.getData().add(dataSeries);
+    }
+
+    private void showPieChartWithUser(int user){
         pieChartData.clear();
         String sql="call showPieChart("+user+")";
         try {
             CallableStatement cs = ConnectDatabase.Connect().prepareCall(sql);
             ResultSet rs=cs.executeQuery();
             while(rs.next()) {
-                PieChart.Data slice1 = new PieChart.Data(rs.getString(1), rs.getInt(2));
+                PieChart.Data slice1 = new PieChart.Data(rs.getString(1) +" ("+rs.getInt(2)+")", rs.getInt(2));
                 pieChartData.add(slice1);
             }
             pieChartStatistics.getData().clear();
             pieChartStatistics.getData().addAll(pieChartData);
-            pieChartStatistics.setLegendSide(Side.LEFT);
+            pieChartStatistics.setLegendSide(Side.BOTTOM);
+            pieChartStatistics.setClockwise(true);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -149,9 +173,11 @@ public class Statistics {
     public void tblAccounts_Clicked(MouseEvent mouseEvent) {
         showTableBills();
         Accounts db = (Accounts) tblAccounts.getSelectionModel().getSelectedItem();
-        showPieChartwithUser(db.getId());
-        check();
+        showPieChartWithUser(db.getId());
+        Bills bl = (Bills) tblBills.getSelectionModel().getSelectedItem();
+        showBarChart(bl.getBillID());
     }
+
     private void check() {
         if(tblBills.getItems().size()>0) {
             btnView.setVisible(true);
@@ -162,6 +188,12 @@ public class Statistics {
             btnNonView.setVisible(true);
         }
     }
+
+    public void tblBills_Clicked(MouseEvent mouseEvent) {
+        Bills bl = (Bills) tblBills.getSelectionModel().getSelectedItem();
+        showBarChart(bl.getBillID());
+    }
+
     public static class Accounts {
         private int id;
         private final SimpleStringProperty username;
