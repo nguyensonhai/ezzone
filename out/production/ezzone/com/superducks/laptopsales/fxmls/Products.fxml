@@ -1,8 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane prefHeight="568.0" prefWidth="953.0" styleClass="bg7" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.superducks.laptopsales.controllers.Products">
-
-</AnchorPane>
+<BorderPane prefHeight="686.0" prefWidth="1115.0" styleClass="bg7" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.superducks.laptopsales.controllers.Products">
+    <top>
+        <VBox styleClass="bg-light-grey" BorderPane.alignment="CENTER">
+            <children>
+                <HBox prefHeight="50.0" prefWidth="859.0">
+                    <children>
+                        <ComboBox fx:id="cbcategory" onAction="#CbCategoryClick" prefWidth="176.0">
+                            <HBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </HBox.margin>
+                        </ComboBox>
+                        <HBox prefHeight="30.0" prefWidth="465.0">
+                            <HBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </HBox.margin>
+                            <padding>
+                                <Insets left="10.0" />
+                            </padding>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                    <VBox.margin>
+                        <Insets left="5.0" />
+                    </VBox.margin>
+                </HBox>
+            </children>
+        </VBox>
+    </top>
+    <left>
+        <ScrollPane prefHeight="612.0" prefWidth="1083.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+            <content>
+                <TilePane fx:id="tpn" alignment="TOP_CENTER" hgap="10.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="617.0" prefWidth="1081.0" style="-fx-background-color: white;" vgap="10.0">
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                </TilePane>
+            </content>
+            <BorderPane.margin>
+                <Insets bottom="15.0" left="15.0" right="5.0" top="5.0" />
+            </BorderPane.margin>
+        </ScrollPane>
+    </left>
+</BorderPane>

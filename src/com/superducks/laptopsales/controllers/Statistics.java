@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Side;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.TableColumn;
@@ -14,8 +15,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -35,24 +39,38 @@ public class Statistics {
     public ImageView btnNonView;
     public ImageView btnView;
     private ObservableList<Accounts> dataAccounts = FXCollections.observableArrayList();
-
+    ObservableList<PieChart.Data> pieChartData =FXCollections.observableArrayList();
     public void initialize() {
         showTableAccounts();
         showTableBills();
         check();
-        ObservableList<PieChart.Data> pieChartData =
-                FXCollections.observableArrayList(
-                        new PieChart.Data("Laptop", 4),
-                        new PieChart.Data("CPU", 2));
-        pieChartStatistics.setData(pieChartData);
+        pieChartData.clear();
+        Accounts accounts=(Accounts) tblAccounts.getSelectionModel().getSelectedItem();
+        showPieChartwithUser(accounts.getId());
     }
-
+    public void showPieChartwithUser(int user){
+        pieChartData.clear();
+        String sql="call showPieChart("+user+")";
+        try {
+            CallableStatement cs = ConnectDatabase.Connect().prepareCall(sql);
+            ResultSet rs=cs.executeQuery();
+            while(rs.next()) {
+                PieChart.Data slice1 = new PieChart.Data(rs.getString(1), rs.getInt(2));
+                pieChartData.add(slice1);
+            }
+            pieChartStatistics.getData().clear();
+            pieChartStatistics.getData().addAll(pieChartData);
+            pieChartStatistics.setLegendSide(Side.LEFT);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     private void showTableAccounts() {
         String sql = "select * from accounts";
         try {
             ResultSet rs = Objects.requireNonNull(ConnectDatabase.Connect()).createStatement().executeQuery(sql);
             while (rs.next()) {
-                dataAccounts.add(new Accounts(rs.getString("username"), rs.getString("fullname")));
+                dataAccounts.add(new Accounts(rs.getInt("id"),rs.getString("username"), rs.getString("fullname")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -130,6 +148,8 @@ public class Statistics {
 
     public void tblAccounts_Clicked(MouseEvent mouseEvent) {
         showTableBills();
+        Accounts db = (Accounts) tblAccounts.getSelectionModel().getSelectedItem();
+        showPieChartwithUser(db.getId());
         check();
     }
     private void check() {
@@ -143,8 +163,23 @@ public class Statistics {
         }
     }
     public static class Accounts {
+        private int id;
         private final SimpleStringProperty username;
         private final SimpleStringProperty fullname;
+
+        public Accounts(int id, String username, String fullname) {
+            this.id = id;
+            this.username = new SimpleStringProperty(username);
+            this.fullname = new SimpleStringProperty(fullname);
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
 
         private Accounts(String uName, String fName) {
             this.username = new SimpleStringProperty(uName);

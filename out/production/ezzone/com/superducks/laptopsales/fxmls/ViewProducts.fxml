@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="653.0" prefWidth="833.0" styleClass="bg7" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.superducks.laptopsales.controllers.ViewProducts">
+   <children>
+      <ImageView fx:id="imgAvatar" fitHeight="350.0" fitWidth="350.0" layoutX="37.0" layoutY="36.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/backgounds/white.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

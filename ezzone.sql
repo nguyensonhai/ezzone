@@ -138,3 +138,20 @@ CREATE TABLE `warehouse` (
     ON UPDATE NO ACTION);
     
 INSERT INTO `warehouse` (`product_id`, `products_remaining`, `products_sold`) VALUES ('15', '10', '0');
+
+USE `laptop_sales`;
+DROP procedure IF EXISTS `showPieChart`;
+
+DELIMITER $$
+USE `laptop_sales`$$
+CREATE PROCEDURE `showPieChart` (in id int)
+BEGIN
+SELECT categories.name,sum(bill_info.amount)
+FROM
+    products 
+    INNER JOIN categories ON products.category_id=categories.id
+    INNER JOIN bill_info ON products.id = bill_info.product_id
+    INNER JOIN bill ON bill_info.bill_id = bill.id
+where bill.user=id
+group by categories.name;
+END$$
