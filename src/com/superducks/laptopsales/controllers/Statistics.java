@@ -66,8 +66,7 @@ public class Statistics {
         pieChartStatistics.setTitle("Quantity of products sold of "+accounts.getFullname());
         showPieChartWithUser(accounts.getId());
         Bills bl = (Bills) tblBills.getSelectionModel().getSelectedItem();
-        int i=1;
-        showBarChart(i);
+        showBarChart(bl.getBillID());
     }
 
     private void setdatetimepickerAndRadiobutton(){
@@ -291,10 +290,8 @@ public class Statistics {
     public void dtpFromSearch(ActionEvent actionEvent) {
         Accounts db = (Accounts) tblAccounts.getSelectionModel().getSelectedItem();
         pieChartStatistics.setTitle("Quantity of products sold of "+db.getFullname());
+        String query="";
         if (radDay.isSelected()){
-            String sql="call showBarChartwithDay('"+ dtpFrom.getEditor().getText()+"')";
-            search(sql);
-            String query="";
             if(radallUser.isSelected()){
                 query="call showBillwithDate('"+dtpFrom.getEditor().getText()+"')";
             }else{
@@ -302,9 +299,6 @@ public class Statistics {
             }
             showbillWithExcute(query);
         }else if (radMonth.isSelected()){
-            String sql="call showBarChartwithMonth('"+ dtpFrom.getEditor().getText()+"')";
-            search(sql);
-            String query="";
             if(radallUser.isSelected()){
                 query="call showBillwithMonth('"+dtpFrom.getEditor().getText()+"')";
             }else{
@@ -312,9 +306,6 @@ public class Statistics {
             }
             showbillWithExcute(query);
         }else if (radYear.isSelected()){
-            String sql="call showBarChartwithYear('"+ dtpFrom.getEditor().getText()+"')";
-            search(sql);
-            String query="";
             if(radallUser.isSelected()){
                 query="call showBillwithYear('"+dtpFrom.getEditor().getText()+"')";
             }else{
@@ -322,7 +313,10 @@ public class Statistics {
             }
             showbillWithExcute(query);
         }
-
+        Bills bl = (Bills) tblBills.getSelectionModel().getSelectedItem();
+        barChartStatistics.getData().clear();
+        barChartStatistics.setTitle("");
+        showBarChart(bl.getBillID());
     }
     public void radAllUserClicked(MouseEvent mouseEvent) {
         String sql="select bill.id,accounts.fullname,bill.customer_name,bill.date,bill.total \n" +

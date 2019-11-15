@@ -178,6 +178,8 @@ CREATE TABLE `warehouse` (
     
 INSERT INTO `warehouse` (`product_id`, `products_remaining`, `products_sold`) VALUES ('15', '10', '0');
 
+///////////////////////////////////////////////////////////////////////////
+
 USE `laptop_sales`;
 DROP procedure IF EXISTS `showPieChart`;
 DELIMITER $$
@@ -210,66 +212,6 @@ group by products.producer;
 END$$
 
 call showBarChart(5);
-
-//////////////////////////////////////////////////////////
-
-USE `laptop_sales`;
-DROP procedure IF EXISTS `showBarChartwithDay`;
-
-DELIMITER $$
-USE `laptop_sales`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `showBarChartwithDay`(in date datetime)
-BEGIN
-SELECT products.producer ,sum(bill_info.amount)
-FROM
-    products 
-    INNER JOIN bill_info ON bill_info.product_id = products.id
-    INNER JOIN bill ON bill.id = bill_info.bill_id
-where Date(bill.date) =date(date)
-	group by products.producer;
-END$$
-
-DELIMITER ;
-
-
-
-
-USE `laptop_sales`;
-DROP procedure IF EXISTS `showBarChartwithMonth`;
-
-DELIMITER $$
-USE `laptop_sales`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `showBarChartwithMonth`(in date datetime )
-BEGIN
-SELECT products.producer ,sum(bill_info.amount)
-FROM
-    products 
-    INNER JOIN bill_info ON bill_info.product_id = products.id
-    INNER JOIN bill ON bill.id = bill_info.bill_id
-where MONTH(bill.date) =MONTH(date)  and YEAR(bill.date)=YEAR(date)
-	group by products.producer;
-END$$
-
-DELIMITER ;
-
-
-USE `laptop_sales`;
-DROP procedure IF EXISTS `showBarChartwithYear`;
-
-DELIMITER $$
-USE `laptop_sales`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `showBarChartwithYear`(in date datetime)
-BEGIN
-SELECT products.producer ,sum(bill_info.amount)
-FROM
-    products 
-    INNER JOIN bill_info ON bill_info.product_id = products.id
-    INNER JOIN bill ON bill.id = bill_info.bill_id
-where YEAR(bill.date) =YEAR(date)
-	group by products.producer;
-END$$
-
-DELIMITER ;
 
 
 USE `laptop_sales`;
