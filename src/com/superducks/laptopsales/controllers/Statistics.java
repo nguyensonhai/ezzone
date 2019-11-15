@@ -63,6 +63,7 @@ public class Statistics {
         check();
         pieChartData.clear();
         Accounts accounts=(Accounts) tblAccounts.getSelectionModel().getSelectedItem();
+        pieChartStatistics.setTitle("Quantity of products sold of "+accounts.getFullname());
         showPieChartWithUser(accounts.getId());
         Bills bl = (Bills) tblBills.getSelectionModel().getSelectedItem();
         int i=1;
@@ -235,6 +236,7 @@ public class Statistics {
     public void tblAccounts_Clicked(MouseEvent mouseEvent) {
         showTableBills();
         Accounts db = (Accounts) tblAccounts.getSelectionModel().getSelectedItem();
+        pieChartStatistics.setTitle("Quantity of products sold of "+db.getFullname());
         showPieChartWithUser(db.getId());
         Bills bl = (Bills) tblBills.getSelectionModel().getSelectedItem();
         barChartStatistics.setTitle("");
