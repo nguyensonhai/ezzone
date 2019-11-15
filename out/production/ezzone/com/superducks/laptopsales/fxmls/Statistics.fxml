@@ -95,7 +95,7 @@
                     <children>
                         <HBox>
                             <children>
-                                <RadioButton fx:id="radDay" mnemonicParsing="false" onAction="#dtpFromSearch" onMouseClicked="#radBetweenClicked" styleClass="fn-16" text="Day" textFill="#f5eded">
+                                <RadioButton fx:id="radDay" mnemonicParsing="false" onAction="#dtpFromSearch" styleClass="fn-16" text="Day" textFill="#f5eded">
                                     <HBox.margin>
                                         <Insets bottom="5.0" right="5.0" />
                                     </HBox.margin>

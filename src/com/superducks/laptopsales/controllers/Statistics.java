@@ -60,7 +60,7 @@ public class Statistics {
         Accounts accounts=(Accounts) tblAccounts.getSelectionModel().getSelectedItem();
         pieChartStatistics.setTitle("Quantity of products sold of "+accounts.getFullname());
         showPieChartWithUser(accounts.getId());
-        cleatBarChart();
+        clearBarChart();
         showBarChart();
     }
 
@@ -137,11 +137,13 @@ public class Statistics {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        tblBills.getSelectionModel().selectFirst();
     }
 
     //SHOW BAR CHART
     private void showBarChart() {
-        Bills bl = (Bills) tblBills.getSelectionModel().getSelectedItem();
+        Bills bl;
+        bl = (Bills) tblBills.getSelectionModel().getSelectedItem();
         String sql="call showBarChart("+bl.getBillID()+")";
         barChartStatistics.setTitle("Quantity of products sold from bill "+bl.getBillID());
         CallableStatement cs = null;
@@ -158,12 +160,15 @@ public class Statistics {
         barChartStatistics.getData().add(dataSeries);
     }
 
-    private void cleatBarChart() {
+    private void clearBarChart() {
         barChartStatistics.getData().clear();
         barChartStatistics.setTitle("");
     }
 
-
+    private void showPieChart() {
+        String sql="call showPieChart()";
+        PieChart(sql);
+    }
     //SHOW PIE CHART
     private void showPieChartWithUser(int user){
         String sql="call showPieChartwithUser("+user+")";
@@ -185,7 +190,6 @@ public class Statistics {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         clmBillID.setCellValueFactory(new PropertyValueFactory<Bills, Integer>("billID"));
         clmUser.setCellValueFactory(new PropertyValueFactory<Bills, String>("user"));
         clmBuyer.setCellValueFactory(new PropertyValueFactory<Bills, String>("buyer"));
@@ -194,6 +198,11 @@ public class Statistics {
         tblBills.setItems(dataBills);
         tblBills.getSelectionModel().selectFirst();
         check();
+    }
+
+    public void clearPieChart() {
+        pieChartStatistics.setTitle("");
+        pieChartStatistics.getData().clear();
     }
 
     public void showbillWithExcute(String sql){
@@ -249,12 +258,16 @@ public class Statistics {
     }
 
     public void tblAccounts_Clicked(MouseEvent mouseEvent) {
+        tblAccount_action();
+    }
+
+    private void tblAccount_action() {
         showTableBills();
         Accounts db = (Accounts) tblAccounts.getSelectionModel().getSelectedItem();
         pieChartStatistics.setTitle("Quantity of products sold of "+db.getFullname());
         showPieChartWithUser(db.getId());
         Bills bl = (Bills) tblBills.getSelectionModel().getSelectedItem();
-        cleatBarChart();
+        clearBarChart();
         showBarChart();
     }
 
@@ -271,7 +284,7 @@ public class Statistics {
 
     public void tblBills_Clicked(MouseEvent mouseEvent) {
         Bills bl = (Bills) tblBills.getSelectionModel().getSelectedItem();
-        cleatBarChart();
+        clearBarChart();
         showBarChart();
     }
 
@@ -281,14 +294,26 @@ public class Statistics {
         }else{
             dtpTo.setDisable(true);
         }
-        cleatBarChart();
+        clearBarChart();
         showBarChart();
     }
 
     //DATETIME PICKER
     public void dtpFromSearch(ActionEvent actionEvent) {
+        clearPieChart();
+        showDataDtpFromSearch();
+    }
+
+    private void showDataDtpFromSearch() {
         Accounts db = (Accounts) tblAccounts.getSelectionModel().getSelectedItem();
-        pieChartStatistics.setTitle("Quantity of products sold of "+db.getFullname());
+        if(radallUser.isSelected()) {
+            pieChartStatistics.setTitle("Quantity of products sold");
+            showPieChart();
+        }
+        else {
+            pieChartStatistics.setTitle("Quantity of products sold of " + db.getFullname());
+            showPieChartWithUser(db.getId());
+        }
         String query="";
         if (radDay.isSelected()){
             if(radallUser.isSelected()){
@@ -312,7 +337,7 @@ public class Statistics {
             }
             showbillWithExcute(query);
         }
-        cleatBarChart();
+        clearBarChart();
         showBarChart();
     }
 
@@ -332,6 +357,9 @@ public class Statistics {
             tblAccounts.setDisable(false);
             showTableBills();
         }
+        clearBarChart();
+        showBarChart();
+        showDataDtpFromSearch();
     }
 
     public static class Accounts {
