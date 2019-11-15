@@ -130,8 +130,6 @@ INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price
  VALUES ( 'mouse', 'GM40 - Black', 'MSI ', 'Nhà sản xuất : MSI \n\nTình trạng : Mới 100% - FULLBOX\n\nBảo Hành : 24 tháng.', 'file:/C:/Users/nguye/Pictures/Products/Mouses/ch10.jpg', '740000' );
 
 
-
-
 CREATE TABLE `bill` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `user` INT(10) NOT NULL,

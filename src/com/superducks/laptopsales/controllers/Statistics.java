@@ -5,22 +5,27 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.geometry.Side;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Objects;
@@ -40,10 +45,19 @@ public class Statistics {
     public ImageView btnNonView;
     public ImageView btnView;
     public BarChart barChartStatistics;
+    public RadioButton radBetween;
+    public DatePicker dtpTo;
+    public DatePicker dtpFrom;
+    public RadioButton radDay;
+    public RadioButton radMonth;
+    public RadioButton radYear;
+    public RadioButton radallUser;
     private ObservableList<Accounts> dataAccounts = FXCollections.observableArrayList();
-    ObservableList<PieChart.Data> pieChartData =FXCollections.observableArrayList();
+    private ObservableList<PieChart.Data> pieChartData =FXCollections.observableArrayList();
+    private ObservableList<Bills> dataBills = FXCollections.observableArrayList();
 
     public void initialize() {
+        setdatetimepickerAndRadiobutton();
         showTableAccounts();
         showTableBills();
         check();
@@ -51,29 +65,54 @@ public class Statistics {
         Accounts accounts=(Accounts) tblAccounts.getSelectionModel().getSelectedItem();
         showPieChartWithUser(accounts.getId());
         Bills bl = (Bills) tblBills.getSelectionModel().getSelectedItem();
-        showBarChart(bl.getBillID());
+        int i=1;
+        showBarChart(i);
+    }
+    private void setdatetimepickerAndRadiobutton(){
+        StringConverter<LocalDate> converter = new StringConverter<LocalDate>() {
+            DateTimeFormatter dateFormatter =
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+            @Override
+            public String toString(LocalDate date) {
+                if (date != null) {
+                    return dateFormatter.format(date);
+                } else {
+                    return "";
+                }
+            }
+            @Override
+            public LocalDate fromString(String string) {
+                if (string != null && !string.isEmpty()) {
+                    return LocalDate.parse(string, dateFormatter);
+                } else {
+                    return null;
+                }
+            }
+        };
+        dtpFrom.setConverter(converter);
+        dtpTo.setConverter(converter);
+        dtpFrom.setValue(LocalDate.now());
+        dtpTo.setValue(LocalDate.now());
+        radDay.setSelected(true);
+        ToggleGroup group = new ToggleGroup();
+        radDay.setToggleGroup(group);
+        radYear.setToggleGroup(group);
+        radMonth.setToggleGroup(group);
     }
 
     private void showBarChart(int billID) {
         String sql="call showBarChart("+billID+")";
-        CallableStatement cs = null;
-        XYChart.Series dataSeries = new XYChart.Series();
-        try {
-            cs = Objects.requireNonNull(ConnectDatabase.Connect()).prepareCall(sql);
-            ResultSet rs = cs.executeQuery();
-            while (rs.next()) {
-                dataSeries.getData().add(new XYChart.Data(rs.getString(1), rs.getInt(2)));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        barChartStatistics.getData().clear();
-        barChartStatistics.getData().add(dataSeries);
+        barChartStatistics.setTitle("Quantity of products sold from bill "+billID);
+        search(sql);
     }
 
     private void showPieChartWithUser(int user){
+        String sql="call showPieChartwithUser("+user+")";
+        PieChart(sql);
+    }
+    public void PieChart(String sql){
         pieChartData.clear();
-        String sql="call showPieChart("+user+")";
         try {
             CallableStatement cs = ConnectDatabase.Connect().prepareCall(sql);
             ResultSet rs=cs.executeQuery();
@@ -89,6 +128,7 @@ public class Statistics {
             e.printStackTrace();
         }
     }
+
     private void showTableAccounts() {
         String sql = "select * from accounts";
         try {
@@ -107,29 +147,18 @@ public class Statistics {
     }
 
     private void showTableBills() {
-        ObservableList<Bills> dataBills = FXCollections.observableArrayList();
+        dataBills.clear();
         Accounts db = (Accounts) tblAccounts.getSelectionModel().getSelectedItem();
-        String username = "";
-        String sqlUsername = "select * from accounts where username = '"+db.getUsername()+"';";
-        try {
-            ResultSet us = Objects.requireNonNull(ConnectDatabase.Connect()).createStatement().executeQuery(sqlUsername);
-            if(us.next()) {
-                username = us.getString("id");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         int billID = 0;
         String user = "", buyer = "", datetime = "", totalPrice = "";
-        String sqlBill = "select * from bill where user="+username+";";
+        String sql="call showBillwithUser('"+db.getId()+"')";
+        CallableStatement cs = null;
         try {
-            ResultSet rs = Objects.requireNonNull(ConnectDatabase.Connect()).createStatement().executeQuery(sqlBill);
-            while (rs.next()) {
+            cs = ConnectDatabase.Connect().prepareCall(sql);
+            ResultSet rs=cs.executeQuery();
+            while (rs.next()){
                 billID = rs.getInt("id");
-                String sqlUser = "select * from accounts where id = "+rs.getInt("user")+";";
-                ResultSet rst = Objects.requireNonNull(ConnectDatabase.Connect()).createStatement().executeQuery(sqlUser);
-                if(rst.next())
-                    user = rst.getString("fullname");
+                user = rs.getString("fullname");
                 buyer = rs.getString("customer_name");
                 datetime = rs.getString("date");
                 totalPrice = getFormattedAmount(rs.getInt("total"));
@@ -138,6 +167,37 @@ public class Statistics {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        clmBillID.setCellValueFactory(new PropertyValueFactory<Bills, Integer>("billID"));
+        clmUser.setCellValueFactory(new PropertyValueFactory<Bills, String>("user"));
+        clmBuyer.setCellValueFactory(new PropertyValueFactory<Bills, String>("buyer"));
+        clmDateCreated.setCellValueFactory(new PropertyValueFactory<Bills, String>("datetime"));
+        clmTotalPrice.setCellValueFactory(new PropertyValueFactory<Bills, String>("totalPrice"));
+        tblBills.setItems(dataBills);
+        tblBills.getSelectionModel().selectFirst();
+        check();
+    }
+
+    public void showbillWithExcute(String sql){
+        dataBills.clear();
+        int billID = 0;
+        String user = "", buyer = "", datetime = "", totalPrice = "";
+        CallableStatement cs = null;
+        try {
+            cs = ConnectDatabase.Connect().prepareCall(sql);
+            ResultSet rs=cs.executeQuery();
+            while (rs.next()){
+                billID = rs.getInt("id");
+                user = rs.getString("fullname");
+                buyer = rs.getString("customer_name");
+                datetime = rs.getString("date");
+                totalPrice = getFormattedAmount(rs.getInt("total"));
+                dataBills.add(new Bills(billID,user,buyer,datetime,totalPrice));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         clmBillID.setCellValueFactory(new PropertyValueFactory<Bills, Integer>("billID"));
         clmUser.setCellValueFactory(new PropertyValueFactory<Bills, String>("user"));
         clmBuyer.setCellValueFactory(new PropertyValueFactory<Bills, String>("buyer"));
@@ -175,6 +235,8 @@ public class Statistics {
         Accounts db = (Accounts) tblAccounts.getSelectionModel().getSelectedItem();
         showPieChartWithUser(db.getId());
         Bills bl = (Bills) tblBills.getSelectionModel().getSelectedItem();
+        barChartStatistics.setTitle("");
+        barChartStatistics.getData().clear();
         showBarChart(bl.getBillID());
     }
 
@@ -191,7 +253,95 @@ public class Statistics {
 
     public void tblBills_Clicked(MouseEvent mouseEvent) {
         Bills bl = (Bills) tblBills.getSelectionModel().getSelectedItem();
+        barChartStatistics.getData().clear();
+        barChartStatistics.setTitle("");
         showBarChart(bl.getBillID());
+    }
+
+
+    public void search(String sql){
+        CallableStatement cs = null;
+        XYChart.Series dataSeries = new XYChart.Series();
+        try {
+            cs = Objects.requireNonNull(ConnectDatabase.Connect()).prepareCall(sql);
+            ResultSet rs = cs.executeQuery();
+            while (rs.next()) {
+                dataSeries.getData().add(new XYChart.Data(rs.getString(1), rs.getInt(2)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        barChartStatistics.getData().clear();
+        barChartStatistics.getData().add(dataSeries);
+    }
+
+
+    public void radBetweenClicked(MouseEvent mouseEvent) {
+        if (radBetween.isSelected()) {
+            dtpTo.setDisable(false);
+            radDay.setSelected(false);
+            radMonth.setSelected(false);
+            radYear.setSelected(false);
+        }else{
+            dtpTo.setDisable(true);
+            radDay.setSelected(false);
+            radMonth.setSelected(false);
+            radYear.setSelected(false);
+        }
+
+    }
+    public void dtpFromSearch(ActionEvent actionEvent) {
+        Accounts db = (Accounts) tblAccounts.getSelectionModel().getSelectedItem();
+
+        if (radDay.isSelected()){
+            String sql="call showBarChartwithDay('"+ dtpFrom.getEditor().getText()+"')";
+            search(sql);
+            String query="";
+            if(radallUser.isSelected()){
+                query="call showBillwithDate('"+dtpFrom.getEditor().getText()+"')";
+            }else{
+                query="call showBillwithUserDate('"+db.getId()+"','"+dtpFrom.getEditor().getText()+"')";
+            }
+            showbillWithExcute(query);
+        }else if (radMonth.isSelected()){
+            String sql="call showBarChartwithMonth('"+ dtpFrom.getEditor().getText()+"')";
+            search(sql);
+            String query="";
+            if(radallUser.isSelected()){
+                query="call showBillwithMonth('"+dtpFrom.getEditor().getText()+"')";
+            }else{
+                query="call showBillwithUserMonth('"+db.getId()+"','"+dtpFrom.getEditor().getText()+"')";
+            }
+            showbillWithExcute(query);
+        }else if (radYear.isSelected()){
+            String sql="call showBarChartwithYear('"+ dtpFrom.getEditor().getText()+"')";
+            search(sql);
+            String query="";
+            if(radallUser.isSelected()){
+                query="call showBillwithYear('"+dtpFrom.getEditor().getText()+"')";
+            }else{
+                query="call showBillwithUserYear('"+db.getId()+"','"+dtpFrom.getEditor().getText()+"')";
+            }
+            showbillWithExcute(query);
+
+        }
+
+    }
+    public void radAllUserClicked(MouseEvent mouseEvent) {
+        String sql="select bill.id,accounts.fullname,bill.customer_name,bill.date,bill.total \n" +
+                "from accounts\n" +
+                " INNER JOIN bill ON accounts.id=bill.user";
+        if (radallUser.isSelected()){
+            String query="call showPieChart()";
+            PieChart(query);
+            tblAccounts.setDisable(true);
+            showbillWithExcute(sql);
+        }else {
+            Accounts a=(Accounts)tblAccounts.getSelectionModel().getSelectedItem();
+            showPieChartWithUser(a.getId());
+            tblAccounts.setDisable(false);
+            showTableBills();
+        }
     }
 
     public static class Accounts {
@@ -237,6 +387,7 @@ public class Statistics {
     }
 
     public static class Bills {
+
         private final  SimpleIntegerProperty billID;
         private final SimpleStringProperty user;
         private final SimpleStringProperty buyer;
