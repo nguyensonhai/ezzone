@@ -377,6 +377,3 @@ where Year(bill.date)=Year(date);
 END$$
 
 DELIMITER ;
-
-
-
