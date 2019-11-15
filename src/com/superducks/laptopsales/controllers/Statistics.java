@@ -239,8 +239,6 @@ public class Statistics {
         pieChartStatistics.setTitle("Quantity of products sold of "+db.getFullname());
         showPieChartWithUser(db.getId());
         Bills bl = (Bills) tblBills.getSelectionModel().getSelectedItem();
-        barChartStatistics.setTitle("");
-        barChartStatistics.getData().clear();
         showBarChart(bl.getBillID());
     }
 

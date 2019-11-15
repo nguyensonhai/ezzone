@@ -65,7 +65,7 @@
                 <Image url="@../icons/embems/locallymodified.png" />
             </image>
         </ImageView>
-        <PieChart fx:id="pieChartStatistics" labelLineLength="25.0" layoutX="716.0" layoutY="11.0" prefHeight="626.0" prefWidth="618.0" stylesheets="@../css/styles.css" title="Pie Chart" />
+        <PieChart fx:id="pieChartStatistics" labelLineLength="25.0" layoutX="716.0" layoutY="11.0" prefHeight="618.0" prefWidth="618.0" scaleShape="false" stylesheets="@../css/styles.css" title="Pie Chart" />
         <HBox layoutX="101.0" layoutY="594.0" prefHeight="60.0" prefWidth="564.0">
             <children>
             <HBox prefHeight="60.0" prefWidth="279.0">
