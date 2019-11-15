@@ -239,6 +239,8 @@ public class Statistics {
         pieChartStatistics.setTitle("Quantity of products sold of "+db.getFullname());
         showPieChartWithUser(db.getId());
         Bills bl = (Bills) tblBills.getSelectionModel().getSelectedItem();
+        barChartStatistics.getData().clear();
+        barChartStatistics.setTitle("");
         showBarChart(bl.getBillID());
     }
 
@@ -288,7 +290,7 @@ public class Statistics {
     }
     public void dtpFromSearch(ActionEvent actionEvent) {
         Accounts db = (Accounts) tblAccounts.getSelectionModel().getSelectedItem();
-
+        pieChartStatistics.setTitle("Quantity of products sold of "+db.getFullname());
         if (radDay.isSelected()){
             String sql="call showBarChartwithDay('"+ dtpFrom.getEditor().getText()+"')";
             search(sql);
