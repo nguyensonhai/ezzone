@@ -7,26 +7,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Side;
-import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 import java.sql.CallableStatement;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -57,7 +52,7 @@ public class Statistics {
     private ObservableList<Bills> dataBills = FXCollections.observableArrayList();
 
     public void initialize() {
-        setdatetimepickerAndRadiobutton();
+        setDatetimePickerAndRadiobutton();
         showTableAccounts();
         showTableBills();
         check();
@@ -65,15 +60,14 @@ public class Statistics {
         Accounts accounts=(Accounts) tblAccounts.getSelectionModel().getSelectedItem();
         pieChartStatistics.setTitle("Quantity of products sold of "+accounts.getFullname());
         showPieChartWithUser(accounts.getId());
-        Bills bl = (Bills) tblBills.getSelectionModel().getSelectedItem();
-        showBarChart(bl.getBillID());
+        cleatBarChart();
+        showBarChart();
     }
 
-    private void setdatetimepickerAndRadiobutton(){
+    private void setDatetimePickerAndRadiobutton(){
         StringConverter<LocalDate> converter = new StringConverter<LocalDate>() {
             DateTimeFormatter dateFormatter =
                     DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
             @Override
             public String toString(LocalDate date) {
                 if (date != null) {
@@ -103,34 +97,7 @@ public class Statistics {
         radBetween.setToggleGroup(group);
     }
 
-    private void showBarChart(int billID) {
-        String sql="call showBarChart("+billID+")";
-        barChartStatistics.setTitle("Quantity of products sold from bill "+billID);
-        search(sql);
-    }
-
-    private void showPieChartWithUser(int user){
-        String sql="call showPieChartwithUser("+user+")";
-        PieChart(sql);
-    }
-    public void PieChart(String sql){
-        pieChartData.clear();
-        try {
-            CallableStatement cs = ConnectDatabase.Connect().prepareCall(sql);
-            ResultSet rs=cs.executeQuery();
-            while(rs.next()) {
-                PieChart.Data slice1 = new PieChart.Data(rs.getString(1) +" ("+rs.getInt(2)+")", rs.getInt(2));
-                pieChartData.add(slice1);
-            }
-            pieChartStatistics.getData().clear();
-            pieChartStatistics.getData().addAll(pieChartData);
-            pieChartStatistics.setLegendSide(Side.BOTTOM);
-            pieChartStatistics.setClockwise(true);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
+    //SHOW TABLE ACCOUNT
     private void showTableAccounts() {
         String sql = "select * from accounts";
         try {
@@ -148,24 +115,73 @@ public class Statistics {
         check();
     }
 
+    //SHOW TABLE BILLS
     private void showTableBills() {
         dataBills.clear();
         Accounts db = (Accounts) tblAccounts.getSelectionModel().getSelectedItem();
         int billID = 0;
         String user = "", buyer = "", datetime = "", totalPrice = "";
-        String sql="call showBillwithUser('"+db.getId()+"')";
+        String sql = "call showBillwithUser('" + db.getId() + "')";
         CallableStatement cs = null;
         try {
             cs = ConnectDatabase.Connect().prepareCall(sql);
-            ResultSet rs=cs.executeQuery();
-            while (rs.next()){
+            ResultSet rs = cs.executeQuery();
+            while (rs.next()) {
                 billID = rs.getInt("id");
                 user = rs.getString("fullname");
                 buyer = rs.getString("customer_name");
                 datetime = rs.getString("date");
                 totalPrice = getFormattedAmount(rs.getInt("total"));
-                dataBills.add(new Bills(billID,user,buyer,datetime,totalPrice));
+                dataBills.add(new Bills(billID, user, buyer, datetime, totalPrice));
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //SHOW BAR CHART
+    private void showBarChart() {
+        Bills bl = (Bills) tblBills.getSelectionModel().getSelectedItem();
+        String sql="call showBarChart("+bl.getBillID()+")";
+        barChartStatistics.setTitle("Quantity of products sold from bill "+bl.getBillID());
+        CallableStatement cs = null;
+        XYChart.Series dataSeries = new XYChart.Series();
+        try {
+            cs = Objects.requireNonNull(ConnectDatabase.Connect()).prepareCall(sql);
+            ResultSet rs = cs.executeQuery();
+            while (rs.next()) {
+                dataSeries.getData().add(new XYChart.Data(rs.getString(1), rs.getInt(2)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        barChartStatistics.getData().add(dataSeries);
+    }
+
+    private void cleatBarChart() {
+        barChartStatistics.getData().clear();
+        barChartStatistics.setTitle("");
+    }
+
+
+    //SHOW PIE CHART
+    private void showPieChartWithUser(int user){
+        String sql="call showPieChartwithUser("+user+")";
+        PieChart(sql);
+    }
+    public void PieChart(String sql){
+        pieChartData.clear();
+        try {
+            CallableStatement cs = ConnectDatabase.Connect().prepareCall(sql);
+            ResultSet rs=cs.executeQuery();
+            while(rs.next()) {
+                PieChart.Data slice1 = new PieChart.Data(rs.getString(1) +" ("+rs.getInt(2)+")", rs.getInt(2));
+                pieChartData.add(slice1);
+            }
+            pieChartStatistics.getData().clear();
+            pieChartStatistics.getData().addAll(pieChartData);
+            pieChartStatistics.setLegendSide(Side.BOTTOM);
+            pieChartStatistics.setClockwise(true);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -238,9 +254,8 @@ public class Statistics {
         pieChartStatistics.setTitle("Quantity of products sold of "+db.getFullname());
         showPieChartWithUser(db.getId());
         Bills bl = (Bills) tblBills.getSelectionModel().getSelectedItem();
-        barChartStatistics.getData().clear();
-        barChartStatistics.setTitle("");
-        showBarChart(bl.getBillID());
+        cleatBarChart();
+        showBarChart();
     }
 
     private void check() {
@@ -256,28 +271,9 @@ public class Statistics {
 
     public void tblBills_Clicked(MouseEvent mouseEvent) {
         Bills bl = (Bills) tblBills.getSelectionModel().getSelectedItem();
-        barChartStatistics.getData().clear();
-        barChartStatistics.setTitle("");
-        showBarChart(bl.getBillID());
+        cleatBarChart();
+        showBarChart();
     }
-
-
-    public void search(String sql){
-        CallableStatement cs = null;
-        XYChart.Series dataSeries = new XYChart.Series();
-        try {
-            cs = Objects.requireNonNull(ConnectDatabase.Connect()).prepareCall(sql);
-            ResultSet rs = cs.executeQuery();
-            while (rs.next()) {
-                dataSeries.getData().add(new XYChart.Data(rs.getString(1), rs.getInt(2)));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        barChartStatistics.getData().clear();
-        barChartStatistics.getData().add(dataSeries);
-    }
-
 
     public void radBetweenClicked(MouseEvent mouseEvent) {
         if (radBetween.isSelected()) {
@@ -285,8 +281,11 @@ public class Statistics {
         }else{
             dtpTo.setDisable(true);
         }
-
+        cleatBarChart();
+        showBarChart();
     }
+
+    //DATETIME PICKER
     public void dtpFromSearch(ActionEvent actionEvent) {
         Accounts db = (Accounts) tblAccounts.getSelectionModel().getSelectedItem();
         pieChartStatistics.setTitle("Quantity of products sold of "+db.getFullname());
@@ -313,11 +312,11 @@ public class Statistics {
             }
             showbillWithExcute(query);
         }
-        Bills bl = (Bills) tblBills.getSelectionModel().getSelectedItem();
-        barChartStatistics.getData().clear();
-        barChartStatistics.setTitle("");
-        showBarChart(bl.getBillID());
+        cleatBarChart();
+        showBarChart();
     }
+
+    //RADIO ALL USERS
     public void radAllUserClicked(MouseEvent mouseEvent) {
         String sql="select bill.id,accounts.fullname,bill.customer_name,bill.date,bill.total \n" +
                 "from accounts\n" +

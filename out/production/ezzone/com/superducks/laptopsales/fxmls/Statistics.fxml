@@ -119,7 +119,7 @@
                               <Font size="8.0" />
                            </font>
                                 </RadioButton>
-                              <RadioButton fx:id="radBetween" mnemonicParsing="false" onAction="#dtpFromSearch" onMouseClicked="#radBetweenClicked" styleClass="fn-16" text="During" textFill="#f5eded">
+                              <RadioButton fx:id="radBetween" mnemonicParsing="false" onMouseClicked="#radBetweenClicked" styleClass="fn-16" text="During" textFill="#f5eded">
                            <font>
                               <Font size="8.0" />
                            </font>
