@@ -211,4 +211,172 @@ END$$
 
 call showBarChart(5);
 
+//////////////////////////////////////////////////////////
+
+USE `laptop_sales`;
+DROP procedure IF EXISTS `showBarChartwithDay`;
+
+DELIMITER $$
+USE `laptop_sales`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `showBarChartwithDay`(in date datetime)
+BEGIN
+SELECT products.producer ,sum(bill_info.amount)
+FROM
+    products 
+    INNER JOIN bill_info ON bill_info.product_id = products.id
+    INNER JOIN bill ON bill.id = bill_info.bill_id
+where Date(bill.date) =date(date)
+	group by products.producer;
+END$$
+
+DELIMITER ;
+
+
+
+
+USE `laptop_sales`;
+DROP procedure IF EXISTS `showBarChartwithMonth`;
+
+DELIMITER $$
+USE `laptop_sales`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `showBarChartwithMonth`(in date datetime )
+BEGIN
+SELECT products.producer ,sum(bill_info.amount)
+FROM
+    products 
+    INNER JOIN bill_info ON bill_info.product_id = products.id
+    INNER JOIN bill ON bill.id = bill_info.bill_id
+where MONTH(bill.date) =MONTH(date)  and YEAR(bill.date)=YEAR(date)
+	group by products.producer;
+END$$
+
+DELIMITER ;
+
+
+USE `laptop_sales`;
+DROP procedure IF EXISTS `showBarChartwithYear`;
+
+DELIMITER $$
+USE `laptop_sales`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `showBarChartwithYear`(in date datetime)
+BEGIN
+SELECT products.producer ,sum(bill_info.amount)
+FROM
+    products 
+    INNER JOIN bill_info ON bill_info.product_id = products.id
+    INNER JOIN bill ON bill.id = bill_info.bill_id
+where YEAR(bill.date) =YEAR(date)
+	group by products.producer;
+END$$
+
+DELIMITER ;
+
+
+USE `laptop_sales`;
+DROP procedure IF EXISTS `showBillwithUser`;
+
+DELIMITER $$
+USE `laptop_sales`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `showBillwithUser`(in user int)
+BEGIN
+select bill.id,accounts.fullname,bill.customer_name,bill.date,bill.total 
+from accounts
+ INNER JOIN bill ON accounts.id=bill.user
+where accounts.id=user;
+END$$
+
+DELIMITER ;
+
+USE `laptop_sales`;
+DROP procedure IF EXISTS `showBillwithUserYear`;
+
+DELIMITER $$
+USE `laptop_sales`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `showBillwithUserYear`(in user int,in date datetime)
+BEGIN
+select bill.id,accounts.fullname,bill.customer_name,bill.date,bill.total 
+from accounts
+ INNER JOIN bill ON accounts.id=bill.user
+where accounts.id=user and Year(bill.date)=Year(date);
+END$$
+
+DELIMITER ;
+
+USE `laptop_sales`;
+DROP procedure IF EXISTS `showBillwithUserMonth`;
+
+DELIMITER $$
+USE `laptop_sales`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `showBillwithUserMonth`(in user int,in date datetime)
+BEGIN
+select bill.id,accounts.fullname,bill.customer_name,bill.date,bill.total 
+from accounts
+ INNER JOIN bill ON accounts.id=bill.user
+where accounts.id=user and Month(bill.date)=month(date) and YEAR(bill.date)=YEAR(date) ;
+END$$
+
+DELIMITER ;
+
+USE `laptop_sales`;
+DROP procedure IF EXISTS `showBillwithUserDate`;
+
+DELIMITER $$
+USE `laptop_sales`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `showBillwithUserDate`(in user int,in date datetime)
+BEGIN
+select bill.id,accounts.fullname,bill.customer_name,bill.date,bill.total 
+from accounts
+ INNER JOIN bill ON accounts.id=bill.user
+where accounts.id=user and DATE(bill.date)=DATE(date);
+END$$
+
+DELIMITER ;
+
+
+USE `laptop_sales`;
+DROP procedure IF EXISTS `showBillwithdate`;
+
+DELIMITER $$
+USE `laptop_sales`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `showBillwithdate`(in date datetime)
+BEGIN
+select bill.id,accounts.fullname,bill.customer_name,bill.date,bill.total 
+from accounts
+ INNER JOIN bill ON accounts.id=bill.user
+where DATE(bill.date)=DATE(date);
+END$$
+
+DELIMITER ;
+
+USE `laptop_sales`;
+DROP procedure IF EXISTS `showBillwithMonth`;
+
+DELIMITER $$
+USE `laptop_sales`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `showBillwithMonth`(in date datetime)
+BEGIN
+select bill.id,accounts.fullname,bill.customer_name,bill.date,bill.total 
+from accounts
+ INNER JOIN bill ON accounts.id=bill.user
+where year(bill.date)=year(date) and month(bill.date)=month(date);
+END$$
+
+DELIMITER ;
+
+USE `laptop_sales`;
+DROP procedure IF EXISTS `showBillwithYear`;
+
+DELIMITER $$
+USE `laptop_sales`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `showBillwithYear`(in date datetime)
+BEGIN
+select bill.id,accounts.fullname,bill.customer_name,bill.date,bill.total 
+from accounts
+ INNER JOIN bill ON accounts.id=bill.user
+where Year(bill.date)=Year(date);
+END$$
+
+DELIMITER ;
+
+
 

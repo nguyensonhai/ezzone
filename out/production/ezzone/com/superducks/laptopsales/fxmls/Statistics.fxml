@@ -95,7 +95,7 @@
                     <children>
                         <HBox>
                             <children>
-                                <RadioButton fx:id="radDay" mnemonicParsing="false" styleClass="fn-16" text="Day" textFill="#f5eded">
+                                <RadioButton fx:id="radDay" mnemonicParsing="false" onAction="#dtpFromSearch" onMouseClicked="#radBetweenClicked" styleClass="fn-16" text="Day" textFill="#f5eded">
                                     <HBox.margin>
                                         <Insets bottom="5.0" right="5.0" />
                                     </HBox.margin>
@@ -103,7 +103,7 @@
                               <Font size="10.0" />
                            </font>
                                 </RadioButton>
-                                <RadioButton fx:id="radMonth" mnemonicParsing="false" styleClass="fn-16" text="Month" textFill="#f5eded">
+                                <RadioButton fx:id="radMonth" mnemonicParsing="false" onAction="#dtpFromSearch" onMouseClicked="#radBetweenClicked" styleClass="fn-16" text="Month" textFill="#f5eded">
                                     <HBox.margin>
                                         <Insets bottom="5.0" left="5.0" right="5.0" />
                                     </HBox.margin>
@@ -111,7 +111,7 @@
                               <Font size="8.0" />
                            </font>
                                 </RadioButton>
-                                <RadioButton fx:id="radYear" mnemonicParsing="false" styleClass="fn-16" text="Year" textFill="#f5eded">
+                                <RadioButton fx:id="radYear" mnemonicParsing="false" onAction="#dtpFromSearch" onMouseClicked="#radBetweenClicked" styleClass="fn-16" text="Year" textFill="#f5eded">
                                     <HBox.margin>
                                         <Insets bottom="5.0" left="5.0" right="5.0" />
                                     </HBox.margin>
@@ -119,7 +119,7 @@
                               <Font size="8.0" />
                            </font>
                                 </RadioButton>
-                              <RadioButton fx:id="radBetween" mnemonicParsing="false" onMouseClicked="#radBetweenClicked" styleClass="fn-16" text="During" textFill="#f5eded">
+                              <RadioButton fx:id="radBetween" mnemonicParsing="false" onAction="#dtpFromSearch" onMouseClicked="#radBetweenClicked" styleClass="fn-16" text="During" textFill="#f5eded">
                            <font>
                               <Font size="8.0" />
                            </font>

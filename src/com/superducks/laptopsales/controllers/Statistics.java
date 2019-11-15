@@ -68,6 +68,7 @@ public class Statistics {
         int i=1;
         showBarChart(i);
     }
+
     private void setdatetimepickerAndRadiobutton(){
         StringConverter<LocalDate> converter = new StringConverter<LocalDate>() {
             DateTimeFormatter dateFormatter =
@@ -99,6 +100,7 @@ public class Statistics {
         radDay.setToggleGroup(group);
         radYear.setToggleGroup(group);
         radMonth.setToggleGroup(group);
+        radBetween.setToggleGroup(group);
     }
 
     private void showBarChart(int billID) {
@@ -279,14 +281,8 @@ public class Statistics {
     public void radBetweenClicked(MouseEvent mouseEvent) {
         if (radBetween.isSelected()) {
             dtpTo.setDisable(false);
-            radDay.setSelected(false);
-            radMonth.setSelected(false);
-            radYear.setSelected(false);
         }else{
             dtpTo.setDisable(true);
-            radDay.setSelected(false);
-            radMonth.setSelected(false);
-            radYear.setSelected(false);
         }
 
     }
@@ -323,7 +319,6 @@ public class Statistics {
                 query="call showBillwithUserYear('"+db.getId()+"','"+dtpFrom.getEditor().getText()+"')";
             }
             showbillWithExcute(query);
-
         }
 
     }
