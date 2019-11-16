@@ -11,56 +11,56 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="686.0" prefWidth="1115.0" styleClass="bg7" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.superducks.laptopsales.controllers.Products">
+<BorderPane styleClass="bg7" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.superducks.laptopsales.controllers.Products">
     <top>
         <VBox styleClass="bg-light-grey" BorderPane.alignment="CENTER">
-         <children>
-            <HBox prefHeight="50.0" prefWidth="859.0">
-               <children>
-                  <ComboBox fx:id="cbcategory" onAction="#CbCategoryClick" prefWidth="176.0">
-                     <HBox.margin>
+            <children>
+                <HBox prefHeight="50.0" prefWidth="1084.0">
+                    <children>
+                        <ComboBox fx:id="cbcategory" onAction="#CbCategoryClick" prefWidth="176.0">
+                            <HBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </HBox.margin>
+                        </ComboBox>
+                        <ComboBox fx:id="cbSearch" prefHeight="26.0" prefWidth="176.0" promptText="Sort by Date Created" visible="false">
+                            <HBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </HBox.margin>
+                        </ComboBox>
+                        <HBox prefHeight="30.0" prefWidth="465.0">
+                            <children>
+                                <TextField fx:id="txtFrom" onKeyReleased="#txtFrom_key" prefHeight="25.0" prefWidth="210.0" promptText="From:" style="-fx-alignment: CENTER;">
+                                    <HBox.margin>
+                                        <Insets top="3.0" />
+                                    </HBox.margin>
+                                </TextField>
+                                <TextField fx:id="txtTo" onKeyReleased="#txtFrom_key" prefHeight="25.0" prefWidth="215.0" promptText="To:" style="-fx-alignment: CENTER;">
+                                    <HBox.margin>
+                                        <Insets left="10.0" top="3.0" />
+                                    </HBox.margin>
+                                </TextField>
+                                <ImageView fx:id="btnSearch" fitHeight="25.0" fitWidth="25.0" onMouseClicked="#Search" pickOnBounds="true" preserveRatio="true" visible="false">
+                                    <image>
+                                        <Image url="@../icons/web_ui_color/search.png" />
+                                    </image>
+                                    <HBox.margin>
+                                        <Insets left="10.0" />
+                                    </HBox.margin>
+                                </ImageView>
+                            </children>
+                            <HBox.margin>
+                                <Insets bottom="5.0" left="250.0" right="5.0" top="5.0" />
+                            </HBox.margin>
+                            <padding>
+                                <Insets left="10.0" />
+                            </padding>
+                        </HBox>
+                    </children>
+                    <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </ComboBox>
-                  <ComboBox fx:id="cbSearch" prefHeight="26.0" prefWidth="176.0" promptText="Sort by Date Created" visible="false">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </ComboBox>
-                  <HBox prefHeight="30.0" prefWidth="465.0">
-                     <children>
-                        <TextField fx:id="txtFrom" onKeyReleased="#txtFrom_key" prefHeight="25.0" prefWidth="210.0" promptText="From:" style="-fx-alignment: CENTER;">
-                           <HBox.margin>
-                              <Insets top="3.0" />
-                           </HBox.margin>
-                        </TextField>
-                        <TextField fx:id="txtTo" onKeyReleased="#txtFrom_key" prefHeight="25.0" prefWidth="215.0" promptText="To:" style="-fx-alignment: CENTER;">
-                           <HBox.margin>
-                              <Insets left="10.0" top="3.0" />
-                           </HBox.margin>
-                        </TextField>
-                        <ImageView fx:id="btnSearch" fitHeight="25.0" fitWidth="25.0" onMouseClicked="#Search" pickOnBounds="true" preserveRatio="true" visible="false">
-                           <image>
-                              <Image url="@../icons/web_ui_color/search.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </ImageView>
-                     </children>
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="250.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
-                  </HBox>
-               </children>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </HBox>
-         </children>
+                    </padding>
+                </HBox>
+            </children>
         </VBox>
     </top>
     <left>
