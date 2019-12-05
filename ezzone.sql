@@ -269,6 +269,20 @@ END$$
 
 DELIMITER ;
 
+USE `laptop_sales`;
+DROP procedure IF EXISTS `showBillWithUserDuringTime`;
+
+DELIMITER $$
+USE `laptop_sales`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `showBillWithUserDuringTime`(in user int,in startdate datetime, in enddate datetime)
+BEGIN
+select bill.id,accounts.fullname,bill.customer_name,bill.date,bill.total 
+from accounts
+ INNER JOIN bill ON accounts.id=bill.user
+where accounts.id=user and date(bill.date)>=date(startdate) and date(bill.date)<=date(enddate);
+END$$
+
+DELIMITER ;
 
 USE `laptop_sales`;
 DROP procedure IF EXISTS `showBillWithDate`;
@@ -314,6 +328,40 @@ where Year(bill.date)=Year(date);
 END$$
 
 DELIMITER ;
+
+USE `laptop_sales`;
+DROP procedure IF EXISTS `showBillWithDuringTime`;
+
+DELIMITER $$
+USE `laptop_sales`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `showBillWithDuringTime`(in startdate datetime, in enddate datetime)
+BEGIN
+select bill.id,accounts.fullname,bill.customer_name,bill.date,bill.total 
+from accounts
+ INNER JOIN bill ON accounts.id=bill.user
+where date(bill.date)>=date(startdate) and date(bill.date)<=date(enddate);
+END$$
+
+DELIMITER ;
+
+
+USE `laptop_sales`;
+DROP procedure IF EXISTS `showPieChartWithDuringTimeAndUser`;
+DELIMITER $$
+USE `laptop_sales`$$
+CREATE PROCEDURE `showPieChartWithDuringTimeAndUser` (in id int, in startdate datetime, in enddate datetime)
+BEGIN
+SELECT categories.name,sum(bill_info.amount)
+FROM
+    products 
+    INNER JOIN categories ON products.category_id=categories.id
+    INNER JOIN bill_info ON products.id = bill_info.product_id
+    INNER JOIN bill ON bill_info.bill_id = bill.id
+where bill.user=id and date(bill.date)>=date(startdate) and date(bill.date)<=date(enddate)
+group by categories.name;
+END$$
+DELIMITER ;
+
 
 USE `laptop_sales`;
 DROP procedure IF EXISTS `showPieChartWithDateAndUser`;
@@ -362,6 +410,24 @@ FROM
     INNER JOIN bill_info ON products.id = bill_info.product_id
     INNER JOIN bill ON bill_info.bill_id = bill.id
 where bill.user=id and year(bill.date) = year(date)
+group by categories.name;
+END$$
+DELIMITER ;
+
+
+USE `laptop_sales`;
+DROP procedure IF EXISTS `showPieChartWithDuringTime`;
+DELIMITER $$
+USE `laptop_sales`$$
+CREATE PROCEDURE `showPieChartWithDuringTime` (in startdate datetime, in enddate datetime)
+BEGIN
+SELECT categories.name,sum(bill_info.amount)
+FROM
+    products 
+    INNER JOIN categories ON products.category_id=categories.id
+    INNER JOIN bill_info ON products.id = bill_info.product_id
+    INNER JOIN bill ON bill_info.bill_id = bill.id
+where date(bill.date)>=date(startdate) and date(bill.date)<=date(enddate)
 group by categories.name;
 END$$
 DELIMITER ;
@@ -416,3 +482,6 @@ where year(bill.date) = year(date)
 group by categories.name;
 END$$
 DELIMITER ;
+
+
+

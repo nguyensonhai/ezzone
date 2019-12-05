@@ -306,6 +306,9 @@ public class Statistics {
             } else if (radYear.isSelected()) {
                 showbillWithExcute("call showBillWithUserYear(" + accounts.getId() + ",'" + dtpFrom.getValue().toString() + "')");
                 pieChart = "call showPieChartWithYearAndUser(" + accounts.getId() + ",'" + dtpFrom.getValue().toString() + "')";
+            } else if(radBetween.isSelected()) {
+                showbillWithExcute("call showBillWithUserDuringTime(" + accounts.getId() + ",'" + dtpFrom.getValue().toString() + "','"+dtpTo.getValue().toString()+"')");
+                pieChart = "call showPieChartWithDuringTimeAndUser(" + accounts.getId() + ",'" + dtpFrom.getValue().toString() + "','"+dtpTo.getValue().toString()+"')";
             }
             tblAccounts.setDisable(false);
         } else {
@@ -318,6 +321,9 @@ public class Statistics {
             } else if (radYear.isSelected()) {
                 showbillWithExcute("call showBillWithYear('" + dtpFrom.getValue().toString() + "')");
                 pieChart = "call showPieChartWithYear('" + dtpFrom.getValue().toString() + "')";
+            } else if(radBetween.isSelected()) {
+                showbillWithExcute("call showBillWithDuringTime('" + dtpFrom.getValue().toString() + "','"+dtpTo.getValue().toString()+"')");
+                pieChart = "call showPieChartWithDuringTime('" + dtpFrom.getValue().toString() + "','"+dtpTo.getValue().toString()+"')";
             }
             tblAccounts.setDisable(true);
         }
