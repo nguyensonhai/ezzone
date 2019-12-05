@@ -24,9 +24,6 @@ VALUES ('kha', '1', 'khanguyen1000@gmail.com', 'Nguyễn Ngọc Kha', '1998-04-2
 INSERT INTO `accounts` ( `username`, `password`, `email`, `fullname`, `birthday`, `position`, `address`, `phone`, `avatar`)
 VALUES ('ntho', '1', 'hoangoanh@gmail.com', 'Nguyễn Thị Hoàng Oanh', '1998-03-04', 'admin', 'TP. Hồ Chí Minh', '0766700403', '');
 
-UPDATE `accounts` SET `password` = ?, `email` = ?, `fullname` = ?, `birthday` = ?, `position` = ?, `address` = ?, `phone` = ? WHERE (`username` = ?);
-
-
 select * from accounts;
 select * from categories;
 select * from products;
@@ -180,9 +177,6 @@ CREATE TABLE `warehouse` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
     
-INSERT INTO `warehouse` (`product_id`, `products_remaining`, `products_sold`) VALUES ('15', '10', '0');
-
-///////////////////////////////////////////////////////////////////////////
 
 USE `laptop_sales`;
 DROP procedure IF EXISTS `showPieChart`;
@@ -214,9 +208,6 @@ FROM
 where bill_info.bill_id=bill_id
 group by products.producer;
 END$$
-
-call showBarChart(5);
-
 
 USE `laptop_sales`;
 DROP procedure IF EXISTS `showBillWithUser`;
@@ -341,8 +332,6 @@ group by categories.name;
 END$$
 DELIMITER ;
 
-call showPieChartWithDateAndUser(1, '2019-11-17');
-
 USE `laptop_sales`;
 DROP procedure IF EXISTS `showPieChartWithMonthAndUser`;
 DELIMITER $$
@@ -377,10 +366,6 @@ group by categories.name;
 END$$
 DELIMITER ;
 
-call showPieChartWithYearAndUser(1,'2018-11-17');
-
-/////////////////////////////
-
 USE `laptop_sales`;
 DROP procedure IF EXISTS `showPieChartWithDate`;
 DELIMITER $$
@@ -397,8 +382,6 @@ where DATE(bill.date)=DATE(date)
 group by categories.name;
 END$$
 DELIMITER ;
-
-call showPieChartWithDate('2019-11-15');
 
 USE `laptop_sales`;
 DROP procedure IF EXISTS `showPieChartWithMonth`;
@@ -433,5 +416,3 @@ where year(bill.date) = year(date)
 group by categories.name;
 END$$
 DELIMITER ;
-
-call showBillwithUserDate('1','2019-11-21')

@@ -181,14 +181,6 @@ public class Statistics {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        clmBillID.setCellValueFactory(new PropertyValueFactory<Bills, Integer>("billID"));
-        clmUser.setCellValueFactory(new PropertyValueFactory<Bills, String>("user"));
-        clmBuyer.setCellValueFactory(new PropertyValueFactory<Bills, String>("buyer"));
-        clmDateCreated.setCellValueFactory(new PropertyValueFactory<Bills, String>("datetime"));
-        clmTotalPrice.setCellValueFactory(new PropertyValueFactory<Bills, String>("totalPrice"));
-        tblBills.setItems(dataBills);
-        tblBills.getSelectionModel().selectFirst();
-        check();
     }
 
     public void showbillWithExcute(String sql){
@@ -296,6 +288,8 @@ public class Statistics {
     // SHOW DATA
 
     private void showData() {
+        clearPieChart();
+        clearBarChart();
         String sql = "select bill.id,accounts.fullname,bill.customer_name,bill.date,bill.total \n" +
                 "from accounts\n" +
                 " INNER JOIN bill ON accounts.id=bill.user";
