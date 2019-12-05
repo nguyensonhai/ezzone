@@ -79,7 +79,7 @@
                         <Insets top="5.0" />
                      </HBox.margin>
                         </DatePicker>
-                        <DatePicker fx:id="dtpTo" disable="true" prefHeight="31.0" prefWidth="134.0">
+                        <DatePicker fx:id="dtpTo" disable="true" onAction="#radioClicked" prefHeight="31.0" prefWidth="134.0">
                             <styleClass>
                                 <String fx:value="bg-transparent" />
                                 <String fx:value="fn-16" />
