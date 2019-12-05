@@ -295,38 +295,39 @@ public class Statistics {
                 " INNER JOIN bill ON accounts.id=bill.user";
         Accounts accounts = (Accounts) tblAccounts.getSelectionModel().getSelectedItem();
         pieChartStatistics.setTitle("Quantity of products sold of "+accounts.getFullname());
-        String pieChart = "";
+        String pieChart = "", bill = "";
         if (!radallUser.isSelected()) {
             if (radDay.isSelected()) {
-                showbillWithExcute("call showBillWithUserDate(" + accounts.getId() + ",'" + dtpFrom.getValue().toString() + "')");
+                bill ="call showBillWithUserDate(" + accounts.getId() + ",'" + dtpFrom.getValue().toString() + "')";
                 pieChart = "call showPieChartWithDateAndUser(" + accounts.getId() + ",'" + dtpFrom.getValue().toString() + "')";
             } else if (radMonth.isSelected()) {
-                showbillWithExcute("call showBillWithUserMonth(" + accounts.getId() + ",'" + dtpFrom.getValue().toString() + "')");
+                bill = "call showBillWithUserMonth(" + accounts.getId() + ",'" + dtpFrom.getValue().toString() + "')";
                 pieChart = "call showPieChartWithMonthAndUser(" + accounts.getId() + ",'" + dtpFrom.getValue().toString() + "')";
             } else if (radYear.isSelected()) {
-                showbillWithExcute("call showBillWithUserYear(" + accounts.getId() + ",'" + dtpFrom.getValue().toString() + "')");
+                bill = "call showBillWithUserYear(" + accounts.getId() + ",'" + dtpFrom.getValue().toString() + "')";
                 pieChart = "call showPieChartWithYearAndUser(" + accounts.getId() + ",'" + dtpFrom.getValue().toString() + "')";
             } else if(radBetween.isSelected()) {
-                showbillWithExcute("call showBillWithUserDuringTime(" + accounts.getId() + ",'" + dtpFrom.getValue().toString() + "','"+dtpTo.getValue().toString()+"')");
+                bill = "call showBillWithUserDuringTime(" + accounts.getId() + ",'" + dtpFrom.getValue().toString() + "','"+dtpTo.getValue().toString()+"')";
                 pieChart = "call showPieChartWithDuringTimeAndUser(" + accounts.getId() + ",'" + dtpFrom.getValue().toString() + "','"+dtpTo.getValue().toString()+"')";
             }
             tblAccounts.setDisable(false);
         } else {
             if (radDay.isSelected()) {
-                showbillWithExcute("call showBillWithDate('" + dtpFrom.getValue().toString() + "')");
+                bill = "call showBillWithDate('" + dtpFrom.getValue().toString() + "')";
                 pieChart = "call showPieChartWithDate('" + dtpFrom.getValue().toString() + "')";
             } else if (radMonth.isSelected()) {
-                showbillWithExcute("call showBillWithMonth('" + dtpFrom.getValue().toString() + "')");
+                bill = "call showBillWithMonth('" + dtpFrom.getValue().toString() + "')";
                 pieChart = "call showPieChartWithMonth('" + dtpFrom.getValue().toString() + "')";
             } else if (radYear.isSelected()) {
-                showbillWithExcute("call showBillWithYear('" + dtpFrom.getValue().toString() + "')");
+                bill = "call showBillWithYear('" + dtpFrom.getValue().toString() + "')";
                 pieChart = "call showPieChartWithYear('" + dtpFrom.getValue().toString() + "')";
             } else if(radBetween.isSelected()) {
-                showbillWithExcute("call showBillWithDuringTime('" + dtpFrom.getValue().toString() + "','"+dtpTo.getValue().toString()+"')");
+                bill = "call showBillWithDuringTime('" + dtpFrom.getValue().toString() + "','"+dtpTo.getValue().toString()+"')";
                 pieChart = "call showPieChartWithDuringTime('" + dtpFrom.getValue().toString() + "','"+dtpTo.getValue().toString()+"')";
             }
             tblAccounts.setDisable(true);
         }
+        showbillWithExcute(bill);
         showBarChart();
         PieChart(pieChart);
     }
