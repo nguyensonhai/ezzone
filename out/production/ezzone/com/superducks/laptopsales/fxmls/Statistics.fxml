@@ -21,16 +21,16 @@
     <children>
         <HBox>
             <children>
-                <TableView fx:id="tblAccounts" onMouseClicked="#tblAccounts_Clicked" prefHeight="305.0" prefWidth="345.0">
+                <TableView fx:id="tblAccounts" onMouseClicked="#tblAccounts_Clicked" prefHeight="305.0" prefWidth="294.0">
                     <columns>
-                        <TableColumn fx:id="clmUsername" prefWidth="110.0" style="-fx-alignment: CENTER;" text="Username" />
-                        <TableColumn fx:id="clmFullname" prefWidth="234.0" style="-fx-alignment: CENTER;" text="Fullname" />
+                        <TableColumn fx:id="clmUsername" prefWidth="86.0" style="-fx-alignment: CENTER;" text="Username" />
+                        <TableColumn fx:id="clmFullname" prefWidth="204.0" style="-fx-alignment: CENTER;" text="Fullname" />
                     </columns>
                     <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
                     </HBox.margin>
                 </TableView>
-                <BarChart fx:id="barChartStatistics" animated="false" legendVisible="false" prefHeight="305.0" prefWidth="321.0" style="-fx-background-color: white;" title="Bar Chart">
+                <BarChart fx:id="barChartStatistics" animated="false" legendVisible="false" prefHeight="305.0" prefWidth="371.0" style="-fx-background-color: white;" title="Bar Chart">
                     <xAxis>
                         <CategoryAxis side="BOTTOM" />
                     </xAxis>
