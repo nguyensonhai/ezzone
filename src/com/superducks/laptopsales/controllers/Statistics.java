@@ -137,23 +137,25 @@ public class Statistics {
 
     //SHOW BAR CHART
     private void showBarChart() {
-        Bills bl;
-        bl = (Bills) tblBills.getSelectionModel().getSelectedItem();
-        String sql="call showBarChart("+bl.getBillID()+")";
-        barChartStatistics.setTitle("Quantity of products sold from bill "+bl.getBillID());
-        CallableStatement cs = null;
-        XYChart.Series dataSeries = new XYChart.Series();
-        try {
-            cs = Objects.requireNonNull(ConnectDatabase.Connect()).prepareCall(sql);
-            ResultSet rs = cs.executeQuery();
-            while (rs.next()) {
-                dataSeries.getData().add(new XYChart.Data(rs.getString(1), rs.getInt(2)));
+        if(tblBills.getItems().size()>0) {
+            Bills bl;
+            bl = (Bills) tblBills.getSelectionModel().getSelectedItem();
+            String sql = "call showBarChart(" + bl.getBillID() + ")";
+            barChartStatistics.setTitle("Quantity chart of products sold from bill " + bl.getBillID());
+            CallableStatement cs = null;
+            XYChart.Series dataSeries = new XYChart.Series();
+            try {
+                cs = Objects.requireNonNull(ConnectDatabase.Connect()).prepareCall(sql);
+                ResultSet rs = cs.executeQuery();
+                while (rs.next()) {
+                    dataSeries.getData().add(new XYChart.Data(rs.getString(1), rs.getInt(2)));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            barChartStatistics.getData().clear();
+            barChartStatistics.getData().add(dataSeries);
         }
-        barChartStatistics.getData().clear();
-        barChartStatistics.getData().add(dataSeries);
     }
 
     private void clearBarChart() {
@@ -242,7 +244,7 @@ public class Statistics {
     private void tblAccount_action() {
         showTableBills();
         Accounts db = (Accounts) tblAccounts.getSelectionModel().getSelectedItem();
-        pieChartStatistics.setTitle("Quantity of products sold of "+db.getFullname());
+        pieChartStatistics.setTitle("Quantity chart of products sold of "+db.getFullname());
         Bills bl = (Bills) tblBills.getSelectionModel().getSelectedItem();
         showData();
     }
@@ -294,9 +296,9 @@ public class Statistics {
                 "from accounts\n" +
                 " INNER JOIN bill ON accounts.id=bill.user";
         Accounts accounts = (Accounts) tblAccounts.getSelectionModel().getSelectedItem();
-        pieChartStatistics.setTitle("Quantity of products sold of "+accounts.getFullname());
         String pieChart = "", bill = "";
         if (!radallUser.isSelected()) {
+            pieChartStatistics.setTitle("Quantity chart of products sold of "+accounts.getFullname());
             if (radDay.isSelected()) {
                 bill ="call showBillWithUserDate(" + accounts.getId() + ",'" + dtpFrom.getValue().toString() + "')";
                 pieChart = "call showPieChartWithDateAndUser(" + accounts.getId() + ",'" + dtpFrom.getValue().toString() + "')";
@@ -312,6 +314,7 @@ public class Statistics {
             }
             tblAccounts.setDisable(false);
         } else {
+            pieChartStatistics.setTitle("Quantity chart of products sold");
             if (radDay.isSelected()) {
                 bill = "call showBillWithDate('" + dtpFrom.getValue().toString() + "')";
                 pieChart = "call showPieChartWithDate('" + dtpFrom.getValue().toString() + "')";
