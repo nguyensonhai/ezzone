@@ -90,9 +90,9 @@ INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price
 VALUES ('gpu', 'ROG Strix GeForce® GTX 1650 Advance 4GB', 'Asus', '', 'file:/D:/Pictures/Products/GPU/1650.jpg', '4770000');
 
 INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
- VALUES ( 'keyboard', 'Asus ROG Strix Scope', 'Asus ROG', 'Nhà Sản Xuất : Asus ROG\n\nTình Trạng : Mới 100%- Fullbox\n\nBảo Hành : 36 tháng', 'file:/D:/Pictures/Products/Keyboards/bp1.png', '300000' );
+ VALUES ( 'keyboard', 'Asus ROG Strix Scope', 'Asus', 'Nhà Sản Xuất : Asus ROG\n\nTình Trạng : Mới 100%- Fullbox\n\nBảo Hành : 36 tháng', 'file:/D:/Pictures/Products/Keyboards/bp1.png', '300000' );
 INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
- VALUES ( 'keyboard', 'Asus ROG Claymore Numpad', 'Asus ', 'Nhà Sản Xuất : Asus\nTình Trạng : Mới 100% - Fullbox\nBảo Hành : 24 tháng', 'file:/D:/Pictures/Products/Keyboards/bp2.jpg', '300000' );
+ VALUES ( 'keyboard', 'Asus ROG Claymore Numpad', 'Asus', 'Nhà Sản Xuất : Asus\nTình Trạng : Mới 100% - Fullbox\nBảo Hành : 24 tháng', 'file:/D:/Pictures/Products/Keyboards/bp2.jpg', '300000' );
 INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
  VALUES ( 'keyboard', 'Asus Cerberus', 'Asus', 'Nhà Sản Xuất : Asus\nTình Trạng : Mới 100% - Fullbox\nBảo Hành : 24 tháng', 'file:/D:/Pictures/Products/Keyboards/bp3.jpg', '250000' );
 INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
@@ -122,7 +122,7 @@ INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price
 INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
  VALUES ( 'mouse', 'DS B1', 'MSI', '·Nhà Sản Xuất : MSI\n\n· Tình Trạng : Mới 100% - Fullbox\n· Bảo Hành : 6 Tháng\n· Led : Đỏ\n· Trọng lượng: 108g\n· Số nút: 6 nút', 'file:/D:/Pictures/Products/Mouses/ch6.jpg', '600000' );
 INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`) 
-VALUES ( 'mouse', 'Asus Cerberus', 'Asus ', 'Nhà Sản Xuất: ASUS\n\nTình Trạng : Mới 100% - Fullbox\n\nBảo Hành : 24 Tháng', 'file:/D:/Pictures/Products/Mouses/ch7.png', '500000' );
+VALUES ( 'mouse', 'Asus Cerberus', 'Asus', 'Nhà Sản Xuất: ASUS\n\nTình Trạng : Mới 100% - Fullbox\n\nBảo Hành : 24 Tháng', 'file:/D:/Pictures/Products/Mouses/ch7.png', '500000' );
 INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)
 VALUES ( 'mouse', 'I-Rock M35 RGB', 'COUGAR', 'Nhà sản xuất : COUGAR\n\nTình trạng : Mới 100%\n\nBảo Hành : 12 tháng', 'file:/D:/Pictures/Products/Mouses/ch8.png', '500000' );
 INSERT INTO `products` (`category_id`, `name`, `producer`, `info`, `img`, `price`)

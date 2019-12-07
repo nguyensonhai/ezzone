@@ -16,27 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `categories`
+-- Table structure for table `accounts`
 --
 
-DROP TABLE IF EXISTS `categories`;
+DROP TABLE IF EXISTS `accounts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `categories` (
-  `id` varchar(50) NOT NULL,
-  `name` varchar(50) NOT NULL,
+CREATE TABLE `accounts` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `fullname` varchar(50) DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
+  `position` varchar(20) NOT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `phone` varchar(11) DEFAULT NULL,
+  `avatar` longtext,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `categories`
+-- Dumping data for table `accounts`
 --
 
-LOCK TABLES `categories` WRITE;
-/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES ('cpu','CPU'),('gpu','Card đồ hoạ'),('harddrive','Ổ đĩa cứng'),('keyboard','Bàn Phím'),('laptop','Laptop'),('mouse','Chuột');
-/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
+LOCK TABLES `accounts` WRITE;
+/*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
+INSERT INTO `accounts` VALUES (1,'nsh','1','nguyensonhai1009@gmail.com','Nguyễn Sơn Hải','1995-09-10','admin','TP. Hồ Chí Minh','0766701009',''),(2,'kha','1','khanguyen1000@gmail.com','Nguyễn Ngọc Kha','1998-04-29','admin','TP. Hồ Chí Minh','',''),(3,'ntho','1','hoangoanh@gmail.com','Nguyễn Thị Hoàng Oanh','1998-03-04','admin','TP. Hồ Chí Minh','0766700403','');
+/*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-05 22:40:37
+-- Dump completed on 2019-12-07 22:05:31

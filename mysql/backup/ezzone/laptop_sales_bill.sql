@@ -16,32 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `bill_info`
+-- Table structure for table `bill`
 --
 
-DROP TABLE IF EXISTS `bill_info`;
+DROP TABLE IF EXISTS `bill`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `bill_info` (
-  `bill_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `amount` int(11) NOT NULL,
-  `total` int(50) NOT NULL,
-  PRIMARY KEY (`bill_id`,`product_id`),
-  KEY `FK_billinfo_products_idx` (`product_id`),
-  CONSTRAINT `FK_billinfo_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  CONSTRAINT `FX_billinfo_bill` FOREIGN KEY (`bill_id`) REFERENCES `bill` (`id`)
+CREATE TABLE `bill` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` int(10) NOT NULL,
+  `customer_name` varchar(50) NOT NULL,
+  `customer_phone` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  `total` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_bill_accounts_idx` (`user`),
+  CONSTRAINT `FK_bill_accounts` FOREIGN KEY (`user`) REFERENCES `accounts` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `bill_info`
+-- Dumping data for table `bill`
 --
 
-LOCK TABLES `bill_info` WRITE;
-/*!40000 ALTER TABLE `bill_info` DISABLE KEYS */;
-INSERT INTO `bill_info` VALUES (1,1,1,39990000),(1,22,1,890000),(1,31,1,600000),(2,6,1,8990000),(2,15,1,8390000),(2,17,1,300000),(2,19,1,250000),(3,10,1,10290000),(3,13,1,16590000),(3,17,1,300000),(3,19,1,250000),(3,31,1,600000),(4,1,1,39990000),(4,4,1,41990000),(4,6,1,8990000),(4,11,1,13090000),(4,12,1,54990000),(4,17,1,300000),(4,27,1,200000),(5,6,1,8990000),(5,11,1,13090000),(5,12,1,54990000),(5,15,1,8390000),(5,20,2,540000),(5,27,5,1000000);
-/*!40000 ALTER TABLE `bill_info` ENABLE KEYS */;
+LOCK TABLES `bill` WRITE;
+/*!40000 ALTER TABLE `bill` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bill` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-05 22:40:36
+-- Dump completed on 2019-12-07 22:05:31

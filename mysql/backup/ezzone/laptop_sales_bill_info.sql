@@ -16,33 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `bill`
+-- Table structure for table `bill_info`
 --
 
-DROP TABLE IF EXISTS `bill`;
+DROP TABLE IF EXISTS `bill_info`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `bill` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user` int(10) NOT NULL,
-  `customer_name` varchar(50) NOT NULL,
-  `customer_phone` int(11) NOT NULL,
-  `date` datetime NOT NULL,
-  `total` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_bill_accounts_idx` (`user`),
-  CONSTRAINT `FK_bill_accounts` FOREIGN KEY (`user`) REFERENCES `accounts` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `bill_info` (
+  `bill_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `total` int(50) NOT NULL,
+  PRIMARY KEY (`bill_id`,`product_id`),
+  KEY `FK_billinfo_products_idx` (`product_id`),
+  CONSTRAINT `FK_billinfo_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+  CONSTRAINT `FX_billinfo_bill` FOREIGN KEY (`bill_id`) REFERENCES `bill` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `bill`
+-- Dumping data for table `bill_info`
 --
 
-LOCK TABLES `bill` WRITE;
-/*!40000 ALTER TABLE `bill` DISABLE KEYS */;
-INSERT INTO `bill` VALUES (1,1,'Lê Phương Anh',976443211,'2019-12-05 11:23:03',41480000),(2,1,'Nguyễn Đức Minh',956772182,'2019-12-06 11:24:10',17930000),(3,1,'Nguyễn Hoàng Bách',923456786,'2020-01-01 11:25:23',28030000),(4,2,'Nguyễn Khánh An',956789324,'2019-12-05 13:30:29',159550000),(5,3,'Mai Hồng Ngọc',987456123,'2019-12-05 14:14:09',87000000);
-/*!40000 ALTER TABLE `bill` ENABLE KEYS */;
+LOCK TABLES `bill_info` WRITE;
+/*!40000 ALTER TABLE `bill_info` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bill_info` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-05 22:40:37
+-- Dump completed on 2019-12-07 22:05:31
