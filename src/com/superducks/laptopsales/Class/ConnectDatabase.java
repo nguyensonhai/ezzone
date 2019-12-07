@@ -29,7 +29,7 @@ public class ConnectDatabase {
 
             return conn;
         } catch (Exception e) {
-            AlertMessage.showAlert("No data from the server. Check your internet!", "error");
+            AlertMessage.showAlert("No data from the server. Check your connect!", "error");
             return null;
         }
     }

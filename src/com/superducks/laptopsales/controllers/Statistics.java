@@ -298,7 +298,10 @@ public class Statistics {
         Accounts accounts = (Accounts) tblAccounts.getSelectionModel().getSelectedItem();
         String pieChart = "", bill = "";
         if (!radallUser.isSelected()) {
-            pieChartStatistics.setTitle("Quantity chart of products sold of "+accounts.getFullname());
+            if(accounts.getFullname().equals(""))
+                pieChartStatistics.setTitle("Quantity chart of products sold of "+accounts.getUsername());
+            else
+                pieChartStatistics.setTitle("Quantity chart of products sold of "+accounts.getFullname());
             if (radDay.isSelected()) {
                 bill ="call showBillWithUserDate(" + accounts.getId() + ",'" + dtpFrom.getValue().toString() + "')";
                 pieChart = "call showPieChartWithDateAndUser(" + accounts.getId() + ",'" + dtpFrom.getValue().toString() + "')";
